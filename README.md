@@ -1,3 +1,5 @@
-# Andy's Blog
+# AIMUCH
 
-This is Andy's blog.
+- 2019-01-24 开启
+- 2019-03-17 完善个人网站并升级DNS
+- 2019-03-17 第一篇文章

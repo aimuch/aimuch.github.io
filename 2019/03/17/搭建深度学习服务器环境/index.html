@@ -104,24 +104,44 @@
 
 
 
-  <meta name="description" content="Engineer. Runner. Music">
-<meta name="keywords" content="AI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AIMUCH">
-<meta property="og:url" content="https://aimuch.com/index.html">
+  <meta name="description" content="安装Ubuntu和Windows双系统详细的安装双系统就不过多介绍了，可以参考这篇文章，但是在安装过程中有几个问题需要说明：        安装Ubuntu之前首先要把BIOS的security boot关闭，否则会出现NVIDIA驱动安装完以后重启电脑会反复进入登录界面。  硬盘分区的时候可以只分为swap、UEFI、\和\home四个分区，不分\home也可以，在挂在\分区的时候会自动生成\h">
+<meta name="keywords" content="AI,Ubuntu,NVIDIA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建深度学习服务器环境">
+<meta property="og:url" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="Engineer. Runner. Music">
+<meta property="og:description" content="安装Ubuntu和Windows双系统详细的安装双系统就不过多介绍了，可以参考这篇文章，但是在安装过程中有几个问题需要说明：        安装Ubuntu之前首先要把BIOS的security boot关闭，否则会出现NVIDIA驱动安装完以后重启电脑会反复进入登录界面。  硬盘分区的时候可以只分为swap、UEFI、\和\home四个分区，不分\home也可以，在挂在\分区的时候会自动生成\h">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/nvidia-driver.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/nvidia-smi.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda_finished.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-version.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-error.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-error1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cudnn1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cudnn2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-version.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/conda1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/conda2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/conda3.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/opencv-error1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/opencv-error2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/tensorrt_error.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/caffe_install.png">
+<meta property="og:updated_time" content="2019-03-17T14:50:55.624Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AIMUCH">
-<meta name="twitter:description" content="Engineer. Runner. Music">
+<meta name="twitter:title" content="搭建深度学习服务器环境">
+<meta name="twitter:description" content="安装Ubuntu和Windows双系统详细的安装双系统就不过多介绍了，可以参考这篇文章，但是在安装过程中有几个问题需要说明：        安装Ubuntu之前首先要把BIOS的security boot关闭，否则会出现NVIDIA驱动安装完以后重启电脑会反复进入登录界面。  硬盘分区的时候可以只分为swap、UEFI、\和\home四个分区，不分\home也可以，在挂在\分区的时候会自动生成\h">
+<meta name="twitter:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/nvidia-driver.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://aimuch.com/">
+  <link rel="canonical" href="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/">
 
 
 
@@ -131,7 +151,7 @@
   };
 </script>
 
-  <title>AIMUCH</title>
+  <title>搭建深度学习服务器环境 | AIMUCH</title>
   
 
 
@@ -179,8 +199,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -218,7 +237,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -357,9 +376,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -367,6 +386,8 @@
   
   
 
+  
+    <div class="reading-progress-bar"></div>
   
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
@@ -391,10 +412,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/17/搭建深度学习服务器环境/" class="post-title-link" itemprop="url">搭建深度学习服务器环境</a>
+          <h1 class="post-title" itemprop="name headline">搭建深度学习服务器环境
+
               
             
           </h1>
@@ -476,9 +495,7 @@
       
 
       
-        
-          
-            <h1 id="安装Ubuntu和Windows双系统"><a href="#安装Ubuntu和Windows双系统" class="headerlink" title="安装Ubuntu和Windows双系统"></a>安装Ubuntu和Windows双系统</h1><p>详细的安装双系统就不过多介绍了，可以参考<a href="https://blog.csdn.net/s717597589/article/details/79117112/" target="_blank" rel="noopener">这篇文章</a>，但是在安装过程中有几个问题需要说明：      </p>
+        <h1 id="安装Ubuntu和Windows双系统"><a href="#安装Ubuntu和Windows双系统" class="headerlink" title="安装Ubuntu和Windows双系统"></a>安装Ubuntu和Windows双系统</h1><p>详细的安装双系统就不过多介绍了，可以参考<a href="https://blog.csdn.net/s717597589/article/details/79117112/" target="_blank" rel="noopener">这篇文章</a>，但是在安装过程中有几个问题需要说明：      </p>
 <ul>
 <li><p>安装Ubuntu之前首先要把BIOS的<code>security boot</code>关闭，否则会出现NVIDIA驱动安装完以后重启电脑会反复进入登录界面。</p>
 </li>
@@ -845,8 +862,6 @@
 <p><a href="https://blog.csdn.net/m0_37775034/article/details/80876362">linux安装MATLAB R2018a步骤</a>    </p>
 </blockquote>
 -->
-          
-        
       
     </div>
 
@@ -867,14 +882,24 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          
+            <a href="/tags/NVIDIA/" rel="tag"># NVIDIA</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -884,14 +909,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -911,8 +937,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1056,6 +1091,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Ubuntu和Windows双系统"><span class="nav-number">1.</span> <span class="nav-text">安装Ubuntu和Windows双系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装NVIDIA驱动"><span class="nav-number">2.</span> <span class="nav-text">安装NVIDIA驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装驱动NVIDIA所需的依赖包"><span class="nav-number">2.1.</span> <span class="nav-text">安装驱动NVIDIA所需的依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用Ubuntu自带的显卡驱动"><span class="nav-number">2.2.</span> <span class="nav-text">禁用Ubuntu自带的显卡驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装NVIDIA官方显卡驱动"><span class="nav-number">2.3.</span> <span class="nav-text">安装NVIDIA官方显卡驱动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置NVIDIA环境变量"><span class="nav-number">2.4.</span> <span class="nav-text">配置NVIDIA环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看NVIDIA驱动版本"><span class="nav-number">2.5.</span> <span class="nav-text">查看NVIDIA驱动版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装CUDA"><span class="nav-number">3.</span> <span class="nav-text">安装CUDA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CUDA步骤"><span class="nav-number">3.1.</span> <span class="nav-text">安装CUDA步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">3.2.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看CUDA版本"><span class="nav-number">3.3.</span> <span class="nav-text">查看CUDA版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载CUDA的方法"><span class="nav-number">3.4.</span> <span class="nav-text">卸载CUDA的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CUDA过程中遇到的问题"><span class="nav-number">3.5.</span> <span class="nav-text">安装CUDA过程中遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装cuDNN"><span class="nav-number">4.</span> <span class="nav-text">安装cuDNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载安装cuDNN"><span class="nav-number">4.1.</span> <span class="nav-text">下载安装cuDNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cuDNN常见问题"><span class="nav-number">4.2.</span> <span class="nav-text">cuDNN常见问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA多版本问题"><span class="nav-number">5.</span> <span class="nav-text">CUDA多版本问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda"><span class="nav-number">6.</span> <span class="nav-text">Anaconda</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Anaconda"><span class="nav-number">6.1.</span> <span class="nav-text">安装Anaconda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#屏蔽Anaconda"><span class="nav-number">6.2.</span> <span class="nav-text">屏蔽Anaconda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重建Anaconda软连接"><span class="nav-number">6.3.</span> <span class="nav-text">重建Anaconda软连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anaconda虚拟环境"><span class="nav-number">6.4.</span> <span class="nav-text">Anaconda虚拟环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装opencv"><span class="nav-number">7.</span> <span class="nav-text">安装opencv</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载OpenCV"><span class="nav-number">7.1.</span> <span class="nav-text">下载OpenCV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译OpenCV"><span class="nav-number">7.2.</span> <span class="nav-text">编译OpenCV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装OpenCV"><span class="nav-number">7.3.</span> <span class="nav-text">安装OpenCV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卸载OpenCV"><span class="nav-number">7.4.</span> <span class="nav-text">卸载OpenCV</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorRT"><span class="nav-number">8.</span> <span class="nav-text">TensorRT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装TensorRT"><span class="nav-number">8.1.</span> <span class="nav-text">安装TensorRT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-TensorRT环境变量设置"><span class="nav-number">8.1.1.</span> <span class="nav-text">1. TensorRT环境变量设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Python的TensorRT包"><span class="nav-number">8.1.2.</span> <span class="nav-text">2. 安装Python的TensorRT包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装uff"><span class="nav-number">8.1.3.</span> <span class="nav-text">3. 安装uff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-验证TensorRT是否安装成功"><span class="nav-number">8.1.4.</span> <span class="nav-text">4. 验证TensorRT是否安装成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-TensorRT安装过程中遇到的问题以及解决方法"><span class="nav-number">8.1.5.</span> <span class="nav-text">5. TensorRT安装过程中遇到的问题以及解决方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorRT生成Engine"><span class="nav-number">8.2.</span> <span class="nav-text">TensorRT生成Engine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Caffe模型用TensorRT生成Engine"><span class="nav-number">8.2.1.</span> <span class="nav-text">Caffe模型用TensorRT生成Engine</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#将UFF文件转为Engine"><span class="nav-number">8.2.1.0.1.</span> <span class="nav-text">将UFF文件转为Engine</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置CUDA-及-CUDNN"><span class="nav-number">8.2.2.</span> <span class="nav-text">2. 配置CUDA 及 CUDNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装OpenCV，方法同-安装OpenCV"><span class="nav-number">8.2.3.</span> <span class="nav-text">3. 安装OpenCV，方法同: 安装OpenCV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-然后按照前面的方法屏蔽Anaconda"><span class="nav-number">8.2.4.</span> <span class="nav-text">4. 然后按照前面的方法屏蔽Anaconda</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-配置Caffe"><span class="nav-number">8.2.5.</span> <span class="nav-text">5. 配置Caffe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-修改-Makefile-config-文件内容："><span class="nav-number">8.2.6.</span> <span class="nav-text">5.1 修改 Makefile.config 文件内容：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-配置好的完整的Makefile-config文件"><span class="nav-number">8.2.7.</span> <span class="nav-text">5.2 配置好的完整的Makefile.config文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-修改caffe-目录下的Makefile文件"><span class="nav-number">8.2.8.</span> <span class="nav-text">5.3 修改caffe 目录下的Makefile文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-编译安装Caffe"><span class="nav-number">8.2.9.</span> <span class="nav-text">6. 编译安装Caffe</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1212,6 +1264,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -1230,33 +1286,16 @@
   
 
   
-    
-      
-    
-  
 
   
   
-  
-    <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
-    <script>
-      
-        window.addEventListener('load', () => {
-      
-        quicklink({
-          timeout: 3000,
-          priority: true,
-          ignores: [uri => uri.includes('#'),uri => uri == 'https://aimuch.com/',]
-        });
-      
-        });
-      
-    </script>
   
 
 
   
 
+
+  
 
 
   
@@ -1292,7 +1331,7 @@
   <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1/bookmark.min.js"></script>
   <script>
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#更多");
   
   </script>
 
