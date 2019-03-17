@@ -616,7 +616,7 @@
 <p>2）<strong>配置</strong>，输入：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ld.so.conf.d/cuda.conf</span><br></pre></td></tr></table></figure></p>
 <p><strong>编辑状态</strong>下，输入：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/cuda/lib64</span><br></pre></td></tr></table></figure></p>
 <p>保存退出，输入下面代码使其<strong>生效</strong>：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure></p>
-<p>安装完成后可用<code>nvcc -V</code>命令验证是否安装成功，若出现以下信息则表示安装成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2017 NVIDIA Corporation</span><br><span class="line">Built on Fri_Nov__3_21:07:56_CDT_2017</span><br><span class="line">Cuda compilation tools, release 9.0, V9.0.85</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后可用<code>nvcc -V</code>命令验证是否安装成功，若出现以下信息则表示安装成功：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nvcc</span>: <span class="selector-tag">NVIDIA</span> (<span class="selector-tag">R</span>) <span class="selector-tag">Cuda</span> <span class="selector-tag">compiler</span> <span class="selector-tag">driver</span></span><br><span class="line"><span class="selector-tag">Copyright</span> (<span class="selector-tag">c</span>) 2005<span class="selector-tag">-2017</span> <span class="selector-tag">NVIDIA</span> <span class="selector-tag">Corporation</span></span><br><span class="line"><span class="selector-tag">Built</span> <span class="selector-tag">on</span> <span class="selector-tag">Fri_Nov__3_21</span><span class="selector-pseudo">:07</span><span class="selector-pseudo">:56_CDT_2017</span></span><br><span class="line"><span class="selector-tag">Cuda</span> <span class="selector-tag">compilation</span> <span class="selector-tag">tools</span>, <span class="selector-tag">release</span> 9<span class="selector-class">.0</span>, <span class="selector-tag">V9</span><span class="selector-class">.0</span><span class="selector-class">.85</span></span><br></pre></td></tr></table></figure></p>
 <p>查看<code>cuDNN</code>版本:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure></p>
 <p><img src="2019-03-17-搭建深度学习服务器/cudnn2.png" alt="cudnn2">     </p>
 <h3 id="cuDNN常见问题"><a href="#cuDNN常见问题" class="headerlink" title="cuDNN常见问题"></a>cuDNN常见问题</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Error : Failed to get convolution algorithm. </span><br><span class="line">This is probably because cuDNN failed to initialize, </span><br><span class="line">so try looking to see if a warning log message was printed above.</span><br></pre></td></tr></table></figure>
@@ -867,7 +867,7 @@
 <p><img src="2019-03-17-搭建深度学习服务器/img7.png" alt="下载界面"></p>
 <p>不知怎地，wget无法下载途中的<code>protobuf-c-0.15.tar.gz</code>文件。</p>
 <p>怎么办呢，我们可以点击上图中的Export to GitHub，将代码导入到GitHub（当然你得有并登录自己的github账号），不过只有源码，没有release版。我们先wget下载源码，解包。由于是源码，所以没有configure文件，但是可以通过执行<code>autogen.sh</code>来生成configure文件，之后的操作就和安装protobuf类似了，这里就不细说了。<br>安装完成后会在<code>/usr/local/bin</code>目录下便会生成一个可执行文件 protoc-c</p>
-<p>在安装完protobuf-c后，我们来检验一下protobuf-c是否安装成功。到 protobuf-c-0.15/src/test 目录下，执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc-c --c_out=. test.proto</span><br></pre></td></tr></table></figure></p>
+<p>在安装完protobuf-c后，我们来检验一下protobuf-c是否安装成功。到 protobuf-c-0.15/src/test 目录下，执行如下命令：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc-c <span class="attribute">--c_out</span>=. test.proto</span><br></pre></td></tr></table></figure></p>
 <p>（c_out 标志是用来指定编译后所生成文件的输出路径，这里c_out指定的是当前目录。）<br>如果在c_out指定目录下能够生成 test.pb-c.c 和 test.pb-c.h 这两个文件则说明安装成功了。</p>
 <h3 id="Protobuf的使用示例"><a href="#Protobuf的使用示例" class="headerlink" title="Protobuf的使用示例"></a>Protobuf的使用示例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch person.proto</span><br></pre></td></tr></table></figure>
 <p>输入如下内容：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line">  required string name = 1;</span><br><span class="line">  required int32 id = 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -903,7 +903,7 @@
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/Crack</span><br><span class="line">sudo cp license_standalone.lic /usr/loca/MATLAB/R2018a/licenses</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>复制<code>Crack</code>中的<code>R2018a</code>到<code>安装目录</code></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/Crack</span><br><span class="line">sudo cp -r R2018a /usr/local/MATLAB</span><br></pre></td></tr></table></figure>
+ <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~<span class="string">/Crack</span></span><br><span class="line">sudo cp -r R2018a <span class="string">/usr/local/MATLAB</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>至此激活完成!    </p>
@@ -1301,6 +1301,15 @@
   
 
   
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.loadBookmark();
+  
+  </script>
+
 
   
 
