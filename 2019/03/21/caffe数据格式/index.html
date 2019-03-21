@@ -104,18 +104,18 @@
 
 
 
-  <meta name="description" content="[转] Google Protocol Buffers 概述概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buf">
+  <meta name="description" content="概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之">
 <meta name="keywords" content="AI,Ubuntu,NVIDIA,Caffe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="caffe数据格式">
 <meta property="og:url" content="https://aimuch.com/2019/03/21/caffe数据格式/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="[转] Google Protocol Buffers 概述概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buf">
+<meta property="og:description" content="概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-21T03:42:34.593Z">
+<meta property="og:updated_time" content="2019-03-21T03:45:01.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="caffe数据格式">
-<meta name="twitter:description" content="[转] Google Protocol Buffers 概述概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buf">
+<meta name="twitter:description" content="概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之">
 
 
 
@@ -419,7 +419,7 @@
                 
               
 
-              <time title="创建时间：2019-03-21 11:20:09 / 修改时间：11:42:34" itemprop="dateCreated datePublished" datetime="2019-03-21T11:20:09+08:00">2019-03-21</time>
+              <time title="创建时间：2019-03-21 11:20:09 / 修改时间：11:45:01" itemprop="dateCreated datePublished" datetime="2019-03-21T11:20:09+08:00">2019-03-21</time>
             
 
             
@@ -476,7 +476,7 @@
       
 
       
-        <h1 id="转-Google-Protocol-Buffers-概述"><a href="#转-Google-Protocol-Buffers-概述" class="headerlink" title="[转] Google Protocol Buffers 概述"></a>[转] Google Protocol Buffers 概述</h1><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。</p>
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。</p>
 <p>本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之旅，本系列主要以Java为主(虽然超想看Python的，无奈学的还不够…)。</p>
 <p>以下Protocol Buffers简称PB。</p>
 <h1 id="Protocol-Buffers是什么"><a href="#Protocol-Buffers是什么" class="headerlink" title="Protocol Buffers是什么"></a>Protocol Buffers是什么</h1><p>Protocol Buffers提供了一种灵活，高效，自动序列化结构数据的机制，可以联想XML，但是比XML更小，更快，更简单。仅需要自定义一次你所需的数据格式， 然后用户就可以使用Protocol Buffers自动生成的特定的源码，方便的读写用户自定义的格式化的数据。不限语言，不限平台。还可以在不破坏原数据格式的基础上，依据老的数据格式， 更新现有的数据格式。</p>
@@ -768,7 +768,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#转-Google-Protocol-Buffers-概述"><span class="nav-number">1.</span> <span class="nav-text">[转] Google Protocol Buffers 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffers是什么"><span class="nav-number">3.</span> <span class="nav-text">Protocol Buffers是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffers如何工作的"><span class="nav-number">4.</span> <span class="nav-text">Protocol Buffers如何工作的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么不直接使用XML呢？"><span class="nav-number">5.</span> <span class="nav-text">为什么不直接使用XML呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一点历史"><span class="nav-number">6.</span> <span class="nav-text">一点历史</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffers是什么"><span class="nav-number">2.</span> <span class="nav-text">Protocol Buffers是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffers如何工作的"><span class="nav-number">3.</span> <span class="nav-text">Protocol Buffers如何工作的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么不直接使用XML呢？"><span class="nav-number">4.</span> <span class="nav-text">为什么不直接使用XML呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一点历史"><span class="nav-number">5.</span> <span class="nav-text">一点历史</span></a></li></ol></div>
             
 
           </div>
