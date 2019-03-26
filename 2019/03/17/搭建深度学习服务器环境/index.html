@@ -116,6 +116,8 @@
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/nvidia-smi.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda_finished.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda9-pass.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda10.1-pass.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda9.0-version.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-version.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-error.png">
@@ -142,7 +144,7 @@
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/img7.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/matlab1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/matlab2.png">
-<meta property="og:updated_time" content="2019-03-26T06:57:46.975Z">
+<meta property="og:updated_time" content="2019-03-26T07:07:31.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建深度学习服务器环境">
 <meta name="twitter:description" content="安装Ubuntu和Windows双系统详细的安装双系统就不过多介绍了，可以参考这篇文章，但是在安装过程中有几个问题需要说明：        安装Ubuntu之前首先要把BIOS的security boot关闭，否则会出现NVIDIA驱动安装完以后重启电脑会反复进入登录界面。  硬盘分区的时候可以只分为swap、UEFI、\和\home四个分区，不分\home也可以，在挂在\分区的时候会自动生成\h">
@@ -467,7 +469,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-26 14:57:46" itemprop="dateModified" datetime="2019-03-26T14:57:46+08:00">2019-03-26</time>
+                <time title="修改时间：2019-03-26 15:07:31" itemprop="dateModified" datetime="2019-03-26T15:07:31+08:00">2019-03-26</time>
               
             
           </span>
@@ -578,7 +580,13 @@
 </code></pre><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>安装完成后配置<code>CUDA</code>环境变量，使用<code>vim</code>配置文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></table></figure></p>
 <p>在该文件最后加入以下两行并保存：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> CUDA</span></span><br><span class="line">export PATH=/usr/local/cuda/bin:$PATH    #/usr/local/cuda和/usr/local/cuda-10.1是同一个文件夹，两者通过软连接相连</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></p>
 <p><strong>使该配置生效：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source  ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<p>检验CUDA 是否安装成功，输入：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda/samples/1_Utilities/deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure></p>
+<p><strong>检验CUDA 是否安装成功</strong>，输入：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda/samples/1_Utilities/deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p><strong>CUDA 9.0 PASS</strong>:<br>  <img src="/2019/03/17/搭建深度学习服务器环境/cuda9-pass.png" alt="CUDA 9.0 PASS">    </p>
+</li>
+<li><p><strong>CUDA 10.1 PASS</strong>:<br>  <img src="/2019/03/17/搭建深度学习服务器环境/cuda10.1-pass.png" alt="CUDA 10.1 PASS">    </p>
+</li>
+</ul>
 <h2 id="查看CUDA版本"><a href="#查看CUDA版本" class="headerlink" title="查看CUDA版本"></a>查看CUDA版本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure>
 <!-- ![cuda](cuda.png)     -->
 <ul>
