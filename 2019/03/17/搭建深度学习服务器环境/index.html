@@ -116,13 +116,14 @@
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/nvidia-smi.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda_finished.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda9.0-version.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-version.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-error.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-error1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cudnn1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cudnn2.png">
-<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda2.png">
-<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda-version.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda10.1-success.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/cuda9.0-version.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/conda1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/conda2.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/conda3.png">
@@ -141,7 +142,7 @@
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/img7.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/matlab1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/matlab2.png">
-<meta property="og:updated_time" content="2019-03-26T06:25:29.782Z">
+<meta property="og:updated_time" content="2019-03-26T06:57:46.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建深度学习服务器环境">
 <meta name="twitter:description" content="安装Ubuntu和Windows双系统详细的安装双系统就不过多介绍了，可以参考这篇文章，但是在安装过程中有几个问题需要说明：        安装Ubuntu之前首先要把BIOS的security boot关闭，否则会出现NVIDIA驱动安装完以后重启电脑会反复进入登录界面。  硬盘分区的时候可以只分为swap、UEFI、\和\home四个分区，不分\home也可以，在挂在\分区的时候会自动生成\h">
@@ -466,7 +467,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-26 14:25:29" itemprop="dateModified" datetime="2019-03-26T14:25:29+08:00">2019-03-26</time>
+                <time title="修改时间：2019-03-26 14:57:46" itemprop="dateModified" datetime="2019-03-26T14:57:46+08:00">2019-03-26</time>
               
             
           </span>
@@ -569,14 +570,23 @@
 ![CUDA 1O.1](cuda10.1_install1.png)    
 安装成功后提示:    
 ![CUDA success](cuda10.1-finished.png)      
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">===========</span><br><span class="line">= Summary =</span><br><span class="line">===========</span><br><span class="line"></span><br><span class="line">Driver:   Not Selected</span><br><span class="line">Toolkit:  Installed in /usr/local/cuda-10.1/</span><br><span class="line">Samples:  Installed in /home/andy/, but missing recommended libraries</span><br><span class="line"></span><br><span class="line">Please make sure that</span><br><span class="line">-   PATH includes /usr/local/cuda-10.1/bin</span><br><span class="line">-   LD_LIBRARY_PATH includes /usr/local/cuda-10.1/lib64, or, add /usr/local/cuda-10.1/lib64 to /etc/ld.so.conf and run ldconfig as root</span><br><span class="line"></span><br><span class="line">To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-10.1/bin</span><br><span class="line"></span><br><span class="line">Please see CUDA_Installation_Guide_Linux.pdf in /usr/local/cuda-10.1/doc/pdf for detailed information on setting up CUDA.</span><br><span class="line">***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 418.00 is required for CUDA 10.1 functionality to work.</span><br><span class="line">To install the driver using this installer, run the following command, replacing &lt;CudaInstaller&gt; with the name of this run file:</span><br><span class="line">    sudo &lt;CudaInstaller&gt;.run --silent --driver</span><br><span class="line"></span><br><span class="line">Logfile is /var/log/cuda-installer.log</span><br></pre></td></tr></table></figure>
+
+安装成功以后在`/usr/local/`目录下查看，可以看到不但生成对应版本的`cuda-10.1`文件夹，还生成一个相应`软连接`文件夹`cuda`或者将之前cuda9.0生成的**cuda软连接**重新指向cuda10.1文件夹:    
+![CUDA 10.1 Sucessful](cuda10.1-success.png)     
 </code></pre><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>安装完成后配置<code>CUDA</code>环境变量，使用<code>vim</code>配置文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<p>在该文件最后加入以下两行并保存：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> CUDA</span></span><br><span class="line">export PATH=/usr/local/cuda/bin:$PATH    #/usr/local/cuda和/usr/local/cuda-9.0是同一个文件夹，两者通过软连接相连</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></p>
+<p>在该文件最后加入以下两行并保存：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> CUDA</span></span><br><span class="line">export PATH=/usr/local/cuda/bin:$PATH    #/usr/local/cuda和/usr/local/cuda-10.1是同一个文件夹，两者通过软连接相连</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></p>
 <p><strong>使该配置生效：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source  ~/.bashrc</span><br></pre></td></tr></table></figure></p>
 <p>检验CUDA 是否安装成功，输入：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda/samples/1_Utilities/deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure></p>
 <h2 id="查看CUDA版本"><a href="#查看CUDA版本" class="headerlink" title="查看CUDA版本"></a>查看CUDA版本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure>
 <!-- ![cuda](cuda.png)     -->
-<p><img src="/2019/03/17/搭建深度学习服务器环境/cuda-version.png" alt="cuda">     </p>
+<ul>
+<li><p>CUDA 9.0<br>  <img src="/2019/03/17/搭建深度学习服务器环境/cuda9.0-version.png" alt="CUDA 9.0">     </p>
+</li>
+<li><p>CUDA 10.1<br>  <img src="/2019/03/17/搭建深度学习服务器环境/cuda-version.png" alt="CUDA 10.1">     </p>
+</li>
+</ul>
 <h2 id="卸载CUDA的方法"><a href="#卸载CUDA的方法" class="headerlink" title="卸载CUDA的方法"></a>卸载CUDA的方法</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda/bin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> CUDA 9.0</span></span><br><span class="line">sudo ./uninstall_cuda_9.0.pl</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> CUDA 10.1</span></span><br><span class="line">sudo ./cuda-uninstaller</span><br></pre></td></tr></table></figure>
 <p>卸载完成后如果显示：<code>Not removing directory, it is not empty: /usr/local/cuda-9.0</code> ，假如需要重装<code>CUDA 9.0</code>的话就把这个文件夹删除。在<code>/usr/local/</code>路径下输入：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> CUDA 9.0</span></span><br><span class="line">sudo rm -rf cuda-9.0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> CUDA 10.1</span></span><br><span class="line">sudo rm -rf cuda-10.1</span><br></pre></td></tr></table></figure></p>
 <h2 id="安装CUDA过程中遇到的问题"><a href="#安装CUDA过程中遇到的问题" class="headerlink" title="安装CUDA过程中遇到的问题"></a>安装CUDA过程中遇到的问题</h2><p><code>CUDA 10.1</code>提示安装失败:<br><img src="/2019/03/17/搭建深度学习服务器环境/cuda-error.png" alt="CUDA Error"><br>查看<code>vim /var/log/cuda-installer.log</code>显示:<br><img src="/2019/03/17/搭建深度学习服务器环境/cuda-error1.png" alt="Error Detail"><br><code>ERROR: You appear to be running an X server; please exit X</code>，是在安装<code>CUDA</code>的时候选择的安装<code>CUDA</code>自带的<code>NVIDIA</code>显卡驱动导致的，解决方法是:<br>(1)在安装<code>CUDA</code>的时候不要选择安装<code>CUDA</code>自带的<code>NVIDIA</code>驱动；<br>(2)若要用<code>CUDA</code>自带的<code>NVIDIA</code>显卡驱动，则<code>Ctrl + Alt + F1</code>在终端命令行进行安装:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo service lightdm stop</span><br><span class="line">bash # Switch from zsh environment to bash environment</span><br><span class="line">sudo apt-get purge nvidia*</span><br><span class="line">sudo sh ./cuda_10.1.105_418.39_linux.run</span><br></pre></td></tr></table></figure></p>
@@ -603,10 +613,10 @@
 <h1 id="CUDA多版本问题"><a href="#CUDA多版本问题" class="headerlink" title="CUDA多版本问题"></a>CUDA多版本问题</h1><p>在实验的时候有些算法跟当前生效(安装)的<code>CUDA</code>和<code>cuDNN</code>版本不一致，所以需要同时安装多个版本，这里就是解决同时管理多个<code>CUDA</code>版本问题.   </p>
 <ol>
 <li>首先按照上述介绍的<a href="#安装cuda">安装CUDA</a>和对应版本的<a href="#安装cudnn">安装cuDNN</a>，安装实验环境依赖的版本；</li>
-<li>默认<code>/usr/local/cuda</code>是<strong>软连接</strong>到<strong>最新安装的<code>CUDA</code>文件夹</strong>上的:<br> <img src="/2019/03/17/搭建深度学习服务器环境/cuda2.png" alt="cuda2">    </li>
-<li><p>删除已经软连接的<code>/usr/local/cuda</code>，将需要的<code>CUDA-X.0安装文件夹</code>软连接到<code>/usr/local/cuda</code>上, 例如需要<code>CUDA 8.0</code>这个版本:      </p>
- <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    cd /usr/local/</span><br><span class="line">    sudo rm cuda</span><br><span class="line">    sudo ln -s /usr/local/cuda-8.0 /usr/local/cuda</span><br><span class="line">    ```    </span><br><span class="line">    ![cuda3](cuda3.png)       </span><br><span class="line">4. 由于在安装`CUDA`的时候已经将`cuda`加入了环境变量，所以不用再加入了。   </span><br><span class="line">5. 查看`CUDA`版本   </span><br><span class="line">    ```shell</span><br><span class="line">    cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure>
-<p> <img src="/2019/03/17/搭建深度学习服务器环境/cuda-version.png" alt="cuda">     </p>
+<li>默认<code>/usr/local/cuda</code>是<strong>软连接</strong>到<strong>最新安装的<code>CUDA</code>文件夹</strong>上的:<br> <img src="/2019/03/17/搭建深度学习服务器环境/cuda10.1-success.png" alt="cuda2">    </li>
+<li><p>删除已经软连接的<code>/usr/local/cuda</code>，将需要的<code>CUDA-X.0安装文件夹</code>软连接到<code>/usr/local/cuda</code>上, 例如需要<code>CUDA 9.0</code>这个版本:      </p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    cd /usr/local/</span><br><span class="line">    sudo rm cuda</span><br><span class="line">    sudo ln -s /usr/local/cuda-9.0 /usr/local/cuda</span><br><span class="line">    ```    </span><br><span class="line">    ![cuda3](cuda9-cuda10.1.png)       </span><br><span class="line">4. 由于在安装`CUDA`的时候已经将`cuda`加入了环境变量，所以不用再加入了。   </span><br><span class="line">5. 查看`CUDA`版本   </span><br><span class="line">    ```shell</span><br><span class="line">    cat /usr/local/cuda/version.txt</span><br></pre></td></tr></table></figure>
+<p> <img src="/2019/03/17/搭建深度学习服务器环境/cuda9.0-version.png" alt="cuda">     </p>
 </li>
 </ol>
 <hr>
