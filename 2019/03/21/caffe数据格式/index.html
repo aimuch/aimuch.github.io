@@ -104,18 +104,18 @@
 
 
 
-  <meta name="description" content="概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之">
+  <meta name="description" content="Google Protocol Buffers 概述概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC(Remote Procedure Call) 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。">
 <meta name="keywords" content="Caffe,AI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="caffe数据格式">
 <meta property="og:url" content="https://aimuch.com/2019/03/21/caffe数据格式/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之">
+<meta property="og:description" content="Google Protocol Buffers 概述概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC(Remote Procedure Call) 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-21T08:50:06.838Z">
+<meta property="og:updated_time" content="2019-03-22T06:20:21.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="caffe数据格式">
-<meta name="twitter:description" content="概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。 本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之">
+<meta name="twitter:description" content="Google Protocol Buffers 概述概述Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC(Remote Procedure Call) 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。">
 
 
 
@@ -419,12 +419,24 @@
                 
               
 
-              <time title="创建时间：2019-03-21 11:20:09 / 修改时间：16:50:06" itemprop="dateCreated datePublished" datetime="2019-03-21T11:20:09+08:00">2019-03-21</time>
+              <time title="创建时间：2019-03-21 11:20:09" itemprop="dateCreated datePublished" datetime="2019-03-21T11:20:09+08:00">2019-03-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-22 14:20:21" itemprop="dateModified" datetime="2019-03-22T14:20:21+08:00">2019-03-22</time>
               
             
           </span>
@@ -476,17 +488,17 @@
       
 
       
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 C++、Java、Python 三种语言的 API。</p>
-<p>本文概述介绍Protocol Buffers，以及开始如何开始Protocol Buffers之旅，本系列主要以Java为主(虽然超想看Python的，无奈学的还不够…)。</p>
-<p>以下Protocol Buffers简称PB。</p>
-<h1 id="Protocol-Buffers是什么"><a href="#Protocol-Buffers是什么" class="headerlink" title="Protocol Buffers是什么"></a>Protocol Buffers是什么</h1><p>Protocol Buffers提供了一种灵活，高效，自动序列化结构数据的机制，可以联想XML，但是比XML更小，更快，更简单。仅需要自定义一次你所需的数据格式， 然后用户就可以使用Protocol Buffers自动生成的特定的源码，方便的读写用户自定义的格式化的数据。不限语言，不限平台。还可以在不破坏原数据格式的基础上，依据老的数据格式， 更新现有的数据格式。</p>
-<h1 id="Protocol-Buffers如何工作的"><a href="#Protocol-Buffers如何工作的" class="headerlink" title="Protocol Buffers如何工作的"></a>Protocol Buffers如何工作的</h1><p>在PB中，有一种.proto类型的文件，用户 在.proto文件中定义PB “Message”来指定所需要序列化的数据的格式。每一个PB Message都是一个小的信息逻辑单元，包含了一些列的name-value对。下面举例说明一个简单地.proto文件，他定义了一条包含一个 Person信息的Message：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line">  required <span class="built_in">string</span> name = <span class="number">1</span>;</span><br><span class="line">  required int32 id = <span class="number">2</span>;</span><br><span class="line">  optional <span class="built_in">string</span> email = <span class="number">3</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">enum</span> PhoneType &#123;</span><br><span class="line">    MOBILE = <span class="number">0</span>;</span><br><span class="line">    HOME = <span class="number">1</span>;</span><br><span class="line">    WORK = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  message PhoneNumber &#123;</span><br><span class="line">    required <span class="built_in">string</span> number = <span class="number">1</span>;</span><br><span class="line">    optional PhoneType type = <span class="number">2</span> [<span class="keyword">default</span> = HOME];</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  repeated PhoneNumber phone = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="Google-Protocol-Buffers-概述"><a href="#Google-Protocol-Buffers-概述" class="headerlink" title="Google Protocol Buffers 概述"></a>Google Protocol Buffers 概述</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><strong>Protocol Buffers</strong> 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做<strong>数据存储</strong>或 <strong>RPC(Remote Procedure Call)</strong> 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。目前提供了 <code>C++</code>、<code>Java</code>、<code>Python</code> 三种语言的 API。</p>
+<p>本文概述介绍<strong>Protocol Buffers</strong>，以及开始如何开始<strong>Protocol Buffers</strong>之旅，本系列主要以Java为主。</p>
+<p>以下<strong>Protocol Buffers</strong>简称PB。</p>
+<h2 id="Protocol-Buffers是什么"><a href="#Protocol-Buffers是什么" class="headerlink" title="Protocol Buffers是什么"></a>Protocol Buffers是什么</h2><p>Protocol Buffers提供了一种灵活，高效，自动序列化结构数据的机制，可以联想XML，但是比XML更小，更快，更简单。仅需要自定义一次你所需的数据格式， 然后用户就可以使用Protocol Buffers自动生成的特定的源码，方便的读写用户自定义的格式化的数据。不限语言，不限平台。还可以在不破坏原数据格式的基础上，依据老的数据格式， 更新现有的数据格式。</p>
+<h2 id="Protocol-Buffers如何工作的"><a href="#Protocol-Buffers如何工作的" class="headerlink" title="Protocol Buffers如何工作的"></a>Protocol Buffers如何工作的</h2><p>在PB中，有一种.proto类型的文件，用户 在.proto文件中定义PB “Message”来指定所需要序列化的数据的格式。每一个PB Message都是一个小的信息逻辑单元，包含了一些列的name-value对。下面举例说明一个简单地.proto文件，他定义了一条包含一个 Person信息的Message：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line">  required <span class="built_in">string</span> name = <span class="number">1</span>;</span><br><span class="line">  required int32 id = <span class="number">2</span>;</span><br><span class="line">  optional <span class="built_in">string</span> email = <span class="number">3</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">enum</span> PhoneType &#123;</span><br><span class="line">    MOBILE = <span class="number">0</span>;</span><br><span class="line">    HOME = <span class="number">1</span>;</span><br><span class="line">    WORK = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  message PhoneNumber &#123;</span><br><span class="line">    required <span class="built_in">string</span> number = <span class="number">1</span>;</span><br><span class="line">    optional PhoneType type = <span class="number">2</span> [<span class="keyword">default</span> = HOME];</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  repeated PhoneNumber phone = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如上代码所示，PB message 格式非常简单。每种类型的message包含一个或者多个唯一编码字段，每个字段由名称和值类型组成，值类型可以使数字(整形或者浮点型)，布尔值，字符 串，原始字节，甚至是其他的PB message。PB允许message中包含message，已达到分层嵌套。可以定义可选字段，必填字段以及重复字段。想要了解更多如何 写.proto 文件，可以访问：Protocol Buffer Language Guide</p>
 <p>定 义好PB message后，选择合适语言的PB编译器，编译.proto文件，就可以生成存取数据的相关类。这些类包括简单的设置及读取字段的方法，也包括对整个 数据结构的message与二进制之间的转换。举个例子，如果你使用的语言是java，运行编译器编译上例.proto文件后，生成的类中包含一个 Person类。使用该类，就可以计算，序列化以及检索PB message。如下代码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws IOException </span>&#123;</span><br><span class="line">    Person john = Person</span><br><span class="line">            .newBuilder()</span><br><span class="line">            .setId(<span class="number">1</span>)</span><br><span class="line">            .setName(<span class="string">"john"</span>)</span><br><span class="line">            .setEmail(<span class="string">"john@youku.com"</span>)</span><br><span class="line">            .addPhone(</span><br><span class="line">                PhoneNumber</span><br><span class="line">                    .newBuilder()</span><br><span class="line">                    .setNumber(<span class="string">"1861xxxxxxx"</span>)</span><br><span class="line">                    .setType(PhoneType.WORK)</span><br><span class="line">                    .build())</span><br><span class="line">            .build();</span><br><span class="line">    FileOutputStream output = <span class="keyword">new</span> FileOutputStream(<span class="string">"abc.txt"</span>);</span><br><span class="line">    john.writeTo(output);</span><br><span class="line">    output.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>接下来，你可以用如下代码读取：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws IOException </span>&#123;</span><br><span class="line">    FileInputStream input = <span class="keyword">new</span> FileInputStream(<span class="string">"abc.txt"</span>);</span><br><span class="line">    Person person = Person.parseFrom(input);</span><br><span class="line">    System.out.println(person.getId());</span><br><span class="line">    System.out.println(person.getName());</span><br><span class="line">    System.out.println(person.getEmail());</span><br><span class="line">    System.out.println(person.getPhoneCount());</span><br><span class="line">    System.out.println(person.getPhone(<span class="number">0</span>).getNumber());</span><br><span class="line">    System.out.println(person.getPhone(<span class="number">0</span>).getType());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>PB是易于扩展的，可以向后兼容的，我们可以在PB message中添加新的字段，这样，在parse的时候，老版本的数据就会简单的忽略新增加的字段。因此，如果现有通信协议使用了PB作为其数据格式，我们可以直接扩展该通信协议，而不必担心这将会破坏现有的代码。</p>
 <p>对于使用.proto文件生成PB 客户端代码，可以参看这方面的完整教程：API Reference section。想要学习了解PB message是如何编码的，可以参见：Protocol Buffer Encoding。</p>
-<h1 id="为什么不直接使用XML呢？"><a href="#为什么不直接使用XML呢？" class="headerlink" title="为什么不直接使用XML呢？"></a>为什么不直接使用XML呢？</h1><p>如果要序列化结构化数据，比起XML，PB实在是有许多的优点可以道道~</p>
+<h2 id="为什么不直接使用XML呢？"><a href="#为什么不直接使用XML呢？" class="headerlink" title="为什么不直接使用XML呢？"></a>为什么不直接使用XML呢？</h2><p>如果要序列化结构化数据，比起XML，PB实在是有许多的优点可以道道~</p>
 <p>更简单<br>比XML小3~10倍<br>比XML快20~100倍<br>语义定义明确<br>自动生成数据存取类，更容易使用<br>假如我们要模拟一个Person，该对象包含name和email属性，如果用XML，我们定义如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">person</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>John Doe<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">email</span>&gt;</span>jdoe@example.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>对应的，PB如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person &#123;</span><br><span class="line">  name: "John Doe"</span><br><span class="line">  email: "jdoe@example.com"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>请注意：这里仅是PB格式的一种直观表示，真实的PB并非这样存储，实际上，在链路中，PB数据时二进制格式的。</p>
@@ -495,14 +507,17 @@
 <p>而用XML的话：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">personNode.getElementsByTagName("name")</span><br><span class="line">personNode.getElementsByTagName("email")</span><br></pre></td></tr></table></figure></p>
 <p>相比起来，PB更直接，而且不需要遍历节点等XML操作。</p>
 <p>但是，金无足赤，人无完人，PB也一样。对于有很多标签的，基于文本的数据(例如HTML)，XML就完胜PB。XML是子描述的，可以随机且交错读取读取文本节点。XML是自描述的，而PB不是，PB必须要有格式定义文件(.proto 文件)</p>
-<h1 id="一点历史"><a href="#一点历史" class="headerlink" title="一点历史"></a>一点历史</h1><p>PB由Google开发，最初是用于处理索引服务器的请求/响应协议。在有PB之前，Google使用手动编组和解组的方式来处理请求/相应协议。这种方式需要支持许多版本的协议，这就导致一些代码非常的丑陋，例如：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (version == <span class="number">3</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (version &gt; <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (version == <span class="number">5</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="一点历史"><a href="#一点历史" class="headerlink" title="一点历史"></a>一点历史</h2><p>PB由Google开发，最初是用于处理索引服务器的请求/响应协议。在有PB之前，Google使用手动编组和解组的方式来处理请求/相应协议。这种方式需要支持许多版本的协议，这就导致一些代码非常的丑陋，例如：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (version == <span class="number">3</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (version &gt; <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (version == <span class="number">5</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>另外，这种显示格式的协议同样将新发布的协议版本也搞得非常复杂，因为开发者必须在启用新的协议之前，确认所有的服务器，包括请求的发起者以及实际处理请求者，他们都能够理解新的协议。</p>
 <p>PB即被设计来解决这些问题：</p>
 <p>要可以非常容易的引入新字段，不需要检查数据的中间服务器 能够简单地解析数据，并且无须知道数据所有的字段就可以传输数据。<br>格式能够更加的自描述一些，并且可以被多用语言处理(C ++， Java，Python等)<br>至此，虽然解决了诸多问题，但用户依然需要手写他们的解析及编码代码。</p>
 <p>随着系统的发展，PB逐渐形成了许多新的特性及用法：</p>
 <p> 自动生成序列化及反序列化代码，避免手动解析<br>除了被用在短生命周期的RPC请求，也开始将PB作为一种方便的自描述格式去存储持久化数据。<br>Server RPC interfaces 开始被声明为协议文件的一部分，使用PB compiler 生成stub类，用户可以使用自己实现的服务器接口来覆盖他们。<br>Google Protocol Buffer( 简称 Protobuf) 是 Google 公司内部的混合语言数据标准，目前已经正在使用的有超过 48,162 种报文格式定义和超过 12,183 个 .proto 文件。他们用于 RPC 系统和持续数据存储系统。</p>
 <p>译自：<a href="https://developers.google.com/protocol-buffers/docs/overview" target="_blank" rel="noopener">https://developers.google.com/protocol-buffers/docs/overview</a></p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<hr>
+<h1 id="Google-Protocol-Buffers-入门"><a href="#Google-Protocol-Buffers-入门" class="headerlink" title="Google Protocol Buffers 入门"></a>Google Protocol Buffers 入门</h1><hr>
+<h1 id="Protocol-Buffers-语法指南"><a href="#Protocol-Buffers-语法指南" class="headerlink" title="Protocol Buffers 语法指南"></a>Protocol Buffers 语法指南</h1><hr>
+<h1 id="Google-Protocol-Buffers-编码-Encoding"><a href="#Google-Protocol-Buffers-编码-Encoding" class="headerlink" title="Google Protocol Buffers 编码(Encoding)"></a>Google Protocol Buffers 编码(Encoding)</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
 <p><a href="http://www.cnblogs.com/shitouer/archive/2013/04/08/google-protocol-buffers-overview.html" target="_blank" rel="noopener">Google Protocol Buffers 概述</a></p>
 </blockquote>
 
@@ -626,7 +641,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -649,7 +664,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -676,7 +693,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -772,7 +791,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffers是什么"><span class="nav-number">2.</span> <span class="nav-text">Protocol Buffers是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffers如何工作的"><span class="nav-number">3.</span> <span class="nav-text">Protocol Buffers如何工作的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么不直接使用XML呢？"><span class="nav-number">4.</span> <span class="nav-text">为什么不直接使用XML呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一点历史"><span class="nav-number">5.</span> <span class="nav-text">一点历史</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Protocol-Buffers-概述"><span class="nav-number">1.</span> <span class="nav-text">Google Protocol Buffers 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol-Buffers是什么"><span class="nav-number">1.2.</span> <span class="nav-text">Protocol Buffers是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol-Buffers如何工作的"><span class="nav-number">1.3.</span> <span class="nav-text">Protocol Buffers如何工作的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么不直接使用XML呢？"><span class="nav-number">1.4.</span> <span class="nav-text">为什么不直接使用XML呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一点历史"><span class="nav-number">1.5.</span> <span class="nav-text">一点历史</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Protocol-Buffers-入门"><span class="nav-number">2.</span> <span class="nav-text">Google Protocol Buffers 入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Protocol-Buffers-语法指南"><span class="nav-number">3.</span> <span class="nav-text">Protocol Buffers 语法指南</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Protocol-Buffers-编码-Encoding"><span class="nav-number">4.</span> <span class="nav-text">Google Protocol Buffers 编码(Encoding)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
