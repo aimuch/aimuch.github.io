@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/fancybox@3.0.0/dist/css/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: true,
+    fastclick: true,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="硬件清单 CPU: I5 7200U 网卡: 6个Intel 82583V 10/100/1000以太网 内存: 金士顿 DDR4 2400 8G SSD: 三星 EVO850 USB: 3.0x4个 电源: 技嘉12V  网络拓扑图     ESXi下载ESXi到VMWare官方网站下载ESXi 6.7版本，下载的时候需要注册账号，然后申请试用，序列号请自行购买正版(或Google)。 制作启动">
+<meta name="keywords" content="软路由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESXi下安装iKuai和LEDE双软路由">
+<meta property="og:url" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/index.html">
+<meta property="og:site_name" content="AIMUCH">
+<meta property="og:description" content="硬件清单 CPU: I5 7200U 网卡: 6个Intel 82583V 10/100/1000以太网 内存: 金士顿 DDR4 2400 8G SSD: 三星 EVO850 USB: 3.0x4个 电源: 技嘉12V  网络拓扑图     ESXi下载ESXi到VMWare官方网站下载ESXi 6.7版本，下载的时候需要注册账号，然后申请试用，序列号请自行购买正版(或Google)。 制作启动">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/network-topology.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao3.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO3.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO4.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao4.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao5.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao6.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install-Local.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install-finished.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting3.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting4.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting5.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting6.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-PC-IP.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-web-login.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-activate.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-NetCard-Setting.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-networkcard.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-networkcard1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install3.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install4.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install5.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install6.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install7.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install-error.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-feizhitong.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-zhitong.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-lan.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-lan1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-lan2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-finished.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-web1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-web2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/lede1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install3.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install4.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install5.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-feizhitong.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-zhitong.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install6.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install7.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install8.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web1.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web2.png">
+<meta property="og:updated_time" content="2019-03-28T15:12:08.048Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ESXi下安装iKuai和LEDE双软路由">
+<meta name="twitter:description" content="硬件清单 CPU: I5 7200U 网卡: 6个Intel 82583V 10/100/1000以太网 内存: 金士顿 DDR4 2400 8G SSD: 三星 EVO850 USB: 3.0x4个 电源: 技嘉12V  网络拓扑图     ESXi下载ESXi到VMWare官方网站下载ESXi 6.7版本，下载的时候需要注册账号，然后申请试用，序列号请自行购买正版(或Google)。 制作启动">
+<meta name="twitter:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/network-topology.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ESXi下安装iKuai和LEDE双软路由 | AIMUCH</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AIMUCH</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/aimuch" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Liu">
+      <meta itemprop="description" content="Engineer. Runner. Music">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AIMUCH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ESXi下安装iKuai和LEDE双软路由
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-26 14:08:17" itemprop="dateCreated datePublished" datetime="2019-03-26T14:08:17+08:00">2019-03-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-28 23:12:08" itemprop="dateModified" datetime="2019-03-28T23:12:08+08:00">2019-03-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/路由/" itemprop="url" rel="index"><span itemprop="name">路由</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="硬件清单"><a href="#硬件清单" class="headerlink" title="硬件清单"></a>硬件清单</h1><ul>
+<li>CPU: I5 7200U</li>
+<li>网卡: 6个Intel 82583V 10/100/1000以太网</li>
+<li>内存: 金士顿 DDR4 2400 8G</li>
+<li>SSD: 三星 EVO850</li>
+<li>USB: 3.0x4个</li>
+<li>电源: 技嘉12V</li>
+</ul>
+<h1 id="网络拓扑图"><a href="#网络拓扑图" class="headerlink" title="网络拓扑图"></a>网络拓扑图</h1><p><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/network-topology.png" alt="网络拓扑图">    </p>
+<h1 id="ESXi"><a href="#ESXi" class="headerlink" title="ESXi"></a>ESXi</h1><h2 id="下载ESXi"><a href="#下载ESXi" class="headerlink" title="下载ESXi"></a>下载ESXi</h2><p>到VMWare官方网站<a href="https://my.vmware.com/cn/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7" target="_blank" rel="noopener">下载ESXi 6.7版本</a>，下载的时候需要注册账号，然后申请试用，序列号请自行购买正版(或Google)。</p>
+<h2 id="制作启动U盘"><a href="#制作启动U盘" class="headerlink" title="制作启动U盘"></a>制作启动U盘</h2><ul>
+<li><p><strong>用老毛桃工具</strong><br>到老毛桃官网下载<a href="http://www.laomaotao.org/" target="_blank" rel="noopener">装机版老毛桃软件</a>:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao.png" alt="下载装机版老毛桃"><br>然后用老毛桃烧写U盘:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao1.png" alt="老毛桃烧写U盘"><br>在烧写好的U盘根目录中创建一个名字为<strong>MYEXT</strong>的文件夹，将下载的ESXi的ISO镜像放入该文件夹下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao2.png" alt="创建MYEXT文件夹"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao3.png" alt="MYEXT文件夹放入镜像">    </p>
+</li>
+<li><p><strong>用软碟通UltraISO</strong><br>到软碟通官网下载UltraISO，然后启动并试用:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO.png" alt="启动UltraISO"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO1.png" alt="导入ISO镜像"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO2.png" alt="写入U盘"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO3.png" alt="启动烧写"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/UltraISO4.png" alt="烧写完成">     </p>
+</li>
+</ul>
+<h2 id="软路由U盘启动安装ESXi"><a href="#软路由U盘启动安装ESXi" class="headerlink" title="软路由U盘启动安装ESXi"></a>软路由U盘启动安装ESXi</h2><ul>
+<li><p><strong>UltraISO</strong>: U盘启动，按照提示安装即可。</p>
+</li>
+<li><p><strong>老毛桃</strong>: 用U盘启动软路由，进入PE，选在老毛桃PE中运行<strong>自定义镜像</strong>选项，选择刚刚放入MYEXT文件夹中的ESXi镜像，按照提示安装ESXi即可。<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao4.png" alt="老毛桃PE启界面"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao5.png" alt="运行自定义镜像"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao6.png" alt="选择镜像">    </p>
+</li>
+</ul>
+<p>进入安装界面:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install1.png" alt="ESXi"><br>选择安装位置(我这里为了截图方便，我安装在VMWare虚拟机里)，多块硬盘已经要注意选择安装在哪块硬盘以及别安装在U盘上:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install-Local.png" alt="选择安装ESXi的位置"><br>设置好密码(默认用户名为:root)，按照提示安装即可，注意安装结束的时候会提示<strong>先移除安装介质/U盘</strong>，然后按下回车重启:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install2.png" alt="移除安装介质重启"><br>若启动前已经将网线插入则ESXi默认会根据网络动态获取IP，若启动前没有插网线则IP会为0.0.0.0:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-install-finished.png" alt="安装完成后重启界面">    </p>
+<h2 id="设置ESXi"><a href="#设置ESXi" class="headerlink" title="设置ESXi"></a>设置ESXi</h2><p>安装完ESXi后重启，然后按<strong>F2</strong>进入ESXi设置界面:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting1.png" alt="进入设置界面"><br>选择<strong>Configure Management Network</strong>进入设置:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting2.png" alt="Configure Management Network"><br>选择<strong>IPv4 Configuration</strong>选项卡，然后回车:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting3.png" alt="IPv4 Configuration"><br>光标移动到<strong>Set Static IPv4 address and network configuration</strong>，然后用空格键选择，并设置：<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting4.png" alt="Set Static IPv4 address and network configuration">     </p>
+<ul>
+<li><strong>IPv4 Address</strong>: <strong>10.10.10.100</strong>    </li>
+<li><strong>Subnet Mask</strong>: <strong>255.255.255.0</strong>    </li>
+<li><strong>Default Gateway</strong>: <strong>10.10.10.10</strong>    </li>
+<li>这里设置的默认网关<code>10.10.10.10</code>是给<code>iKuai</code>的后台地址</li>
+</ul>
+<p>按下回车键，然后按ESC键并输入Y保存设置:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting5.png" alt="保存设置"><br>设置生效后的界面如下，可以看出IP变为静态的了:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-setting6.png" alt="设置生效后的界面">    </p>
+<h2 id="ESXi的web端设置"><a href="#ESXi的web端设置" class="headerlink" title="ESXi的web端设置"></a>ESXi的web端设置</h2><h3 id="设置笔记本网卡IP"><a href="#设置笔记本网卡IP" class="headerlink" title="设置笔记本网卡IP"></a>设置笔记本网卡IP</h3><p>将笔记本的网口用网线连接到软路由的<strong>LAN1</strong>口，并将笔记本有线网卡的IPv4设置为:    </p>
+<ul>
+<li><strong>IPv4</strong>: <strong>10.10.10.111</strong></li>
+<li><strong>子网掩码</strong>: <strong>255.255.255.0</strong></li>
+<li><strong>默认网关/路由器</strong>: <strong>10.10.10.10</strong><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-PC-IP.png" alt="笔记本IP设置">    </li>
+</ul>
+<p>浏览器打开<strong>10.10.10.100</strong>，然后输入设置的密码进入ESXi后台(用户名为root，密码为安装ESXi时候设置的密码):<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-web-login.png" alt="ESXI WEB login">    </p>
+<h3 id="激活ESXi"><a href="#激活ESXi" class="headerlink" title="激活ESXi"></a>激活ESXi</h3><p>默认ESXi有试用期限制，解除限制需要用序列号激活ESXi:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-activate.png" alt="ESXi activate">    </p>
+<h3 id="打开虚拟机交换机的混杂模式"><a href="#打开虚拟机交换机的混杂模式" class="headerlink" title="打开虚拟机交换机的混杂模式"></a>打开虚拟机交换机的混杂模式</h3><p>网络 -&gt; 虚拟交换机 -&gt; vSwitcho -&gt; 编辑设置 -&gt; 安全 -&gt; 混杂模式 -&gt; 接受<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-NetCard-Setting.png" alt="打开虚拟机的混杂模式">    </p>
+<h3 id="网卡非直通情况"><a href="#网卡非直通情况" class="headerlink" title="网卡非直通情况"></a>网卡非直通情况</h3><ul>
+<li>网络 -&gt; 虚拟交换机 -&gt; 添加交换机(多少个网口添加多少个) -&gt; 安全 -&gt; 全部接受</li>
+<li>网络 -&gt; 端口组 -&gt; 添加端口组(多少个网口添加多少个) -&gt; 安全 -&gt; 全部接受</li>
+</ul>
+<h3 id="网卡直通情况"><a href="#网卡直通情况" class="headerlink" title="网卡直通情况"></a>网卡直通情况</h3><p>主机 -&gt; 硬件 -&gt; PCI设备 -&gt; 下拉选择<code>支持直通</code>来筛选网卡 -&gt; 选中后5个(共6个)端口。<br><strong>这里要注意不要将第一个(第一个好记)端口/LAN1设置为直通，否则导致进不去ESXi后台。</strong>    </p>
+<p><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-networkcard.png" alt="网卡直通激活前"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/ESXi-networkcard1.png" alt="网卡直通激活后">     </p>
+<p>设置好以后要单机<strong>重新引导主机</strong>，否则可能导致进不去ESXi的后台。    </p>
+<h1 id="iKuai"><a href="#iKuai" class="headerlink" title="iKuai"></a>iKuai</h1><h2 id="安装iKuai"><a href="#安装iKuai" class="headerlink" title="安装iKuai"></a>安装iKuai</h2><p>下载iKuai的ISO文件，然后<strong>创建iKuai虚拟机的流程为</strong>:<br>存储-&gt;数据存储浏览器-&gt;创建文件夹-&gt;iKuai-&gt;将iKuai的ISO镜像上传到该文件夹下-&gt;虚拟机-&gt;新建虚拟机-&gt;客户机操作系统linux-&gt;客户机操作系统版本-&gt;其他64位-&gt;CD/DVD选择刚刚上传的iKuai的ISO文件-&gt;内存要勾选<strong>预留所有客户机内存(全部锁定)</strong><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install1.png" alt="安装iKuai step1"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install2.png" alt="安装iKuai step2"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install3.png" alt="安装iKuai step3"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install4.png" alt="安装iKuai step4"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install5.png" alt="安装iKuai step5"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install6.png" alt="安装iKuai step6"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install7.png" alt="安装iKuai step7">     </p>
+<p><strong>这里要特别注意iKuai虚拟机的内存&gt;=4G</strong> ，否则会出现以下错误:    </p>
+<p><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-install-error.png" alt="iKuai install error">    </p>
+<h3 id="网卡非直通情况-1"><a href="#网卡非直通情况-1" class="headerlink" title="网卡非直通情况"></a>网卡非直通情况</h3><p>重新编辑iKuai虚拟机设 -&gt; 添加网络适配器并选择第6块虚拟网卡<strong>VM Network5</strong> ，配置好的界面如下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-feizhitong.png" alt="网卡非直通">   </p>
+<h3 id="网卡直通情况-1"><a href="#网卡直通情况-1" class="headerlink" title="网卡直通情况"></a>网卡直通情况</h3><p>重新编辑iKuai虚拟机设 -&gt; 添加PCI设备并选择对应的第6块网卡，配置好的界面如下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-zhitong.png" alt="网卡直通">   </p>
+<h2 id="设置iKuai"><a href="#设置iKuai" class="headerlink" title="设置iKuai"></a>设置iKuai</h2><p>启动iKuai虚拟机会自动安装iKuai，安装完以后按下回车键，显示:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-lan.png" alt="iKuai finished"><br>输入数字2，然后设置LAN1的IP地址:10.10.10.10:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-lan1.png" alt="iKuai finished"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-lan2.png" alt="iKuai finished"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-finished.png" alt="iKuai 设置IP">    </p>
+<h2 id="iKuai的web端设置"><a href="#iKuai的web端设置" class="headerlink" title="iKuai的web端设置"></a>iKuai的web端设置</h2><p>电脑浏览器打开<strong>10.10.10.10</strong>，默认用户名<code>admin</code>，默认密码<code>admin</code>，进入iKuai的web客户端绑定WAN口:<br>网络设置 -&gt; 内外网设置 -&gt; 在接口状态会有一个空闲的wan1口 -&gt; 外网网口单击一下绑定上述空闲的wan1口即可:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-web1.png" alt="iKuai WEB1"><br>开启一条DHCP服务: 网络设置 -&gt; DHCP服务端 -&gt; 添加DCHP服务:   </p>
+<ul>
+<li>客户端地址: 10.10.10.101 - 10.10.10.254</li>
+<li>子网掩码: 255.255.255.0</li>
+<li>网关: 10.10.10.1   这里的网关是LEDE后台的地址</li>
+<li>首选DNS: 114.114.114.114</li>
+<li>备选DNS: 223.5.5.5<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/iKuai-web2.png" alt="iKuai DHCP">    </li>
+</ul>
+<p><strong>然后重启DHCP服务</strong>    </p>
+<h1 id="LEDE"><a href="#LEDE" class="headerlink" title="LEDE"></a>LEDE</h1><h2 id="安装LEDE"><a href="#安装LEDE" class="headerlink" title="安装LEDE"></a>安装LEDE</h2><p>到KoolShare官网下载LEDE的固件，虚拟机转盘或PE下写盘专用-&gt;要选择combined格式，因为uefi格式下LEDE编辑的时候硬盘显示错误:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/lede1.png" alt="LEDE Download"><br>下载完成后解压到本地，然后用<strong>StarWind Converte</strong>将LEDE的.img格式转换为ESXi虚拟机文件。    </p>
+<p><strong>创建LEDE虚拟机的流程为</strong>:<br>存储-&gt;数据存储浏览器-&gt;创建文件夹-&gt;LEDE-&gt;将上述转化后的两个文件上传到该目录下-&gt;虚拟机-&gt;新建虚拟机-&gt;客户机操作系统linux-&gt;客户机操作系统版本-&gt;其他64位-&gt;删除默认硬盘-&gt;添加现有硬盘-&gt;选择LEDE文件夹下上传的文件-&gt;内存要勾选<strong>预留所有客户机内存(全部锁定)</strong>:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install1.png" alt="LEDE step1"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install2.png" alt="LEDE step2"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install3.png" alt="LEDE step3"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install4.png" alt="LEDE step4"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install5.png" alt="LEDE step5">    </p>
+<h3 id="网卡非直通情况-2"><a href="#网卡非直通情况-2" class="headerlink" title="网卡非直通情况"></a>网卡非直通情况</h3><p>重新编辑配置LEDE虚拟机-&gt;设置添加除了最后一块虚拟网卡外的其余虚拟网卡，配置好的界面如下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-feizhitong.png" alt="网卡非直通">    </p>
+<h3 id="网卡直通情况-2"><a href="#网卡直通情况-2" class="headerlink" title="网卡直通情况"></a>网卡直通情况</h3><p>重新编辑配置LEDE虚拟机-&gt;设置添加除了最后一块PCI设备以外的其余PCI设备，并对应其编号(最后一块给iKuai用了，假如错误的将所有PCI设备都加上了同时启动iKuai和LDDE的时候会提示设备错误)，配置好的界面如下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-zhitong.png" alt="网卡直通">   </p>
+<h2 id="设置LEDE"><a href="#设置LEDE" class="headerlink" title="设置LEDE"></a>设置LEDE</h2><p>启动iKuai虚拟机会自动安装iKuai，安装好以后按下回车:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install6.png" alt="LEDE step6"><br>设置IP地址为:<strong>10.10.10.1</strong> ，在虚拟机终端输入以下命令:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/config/network</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install7.png" alt="LEDE step7">    </p>
+<p>然后将<strong>option ipaddr 192.168.1.1</strong>改为<strong>option ipaddr 10.10.10.1</strong> :<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install8.png" alt="LEDE step8">    </p>
+<p>然后重启LEDE虚拟机。    </p>
+<h2 id="LEDE的web端设置"><a href="#LEDE的web端设置" class="headerlink" title="LEDE的web端设置"></a>LEDE的web端设置</h2><p>电脑浏览器打开<strong>10.10.10.10</strong>，默认密码<code>koolshare</code>，进入iKuai的web客户端:<br>网络 -&gt; 接口 -&gt; 关闭WAN -&gt; 关闭WAN6 -&gt; 编辑LAN:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web1.png" alt="LEDE WEB1">    </p>
+<p>LAN -&gt; 物理接口 -&gt; 接口 -&gt; <strong>选中erspan0</strong>以及<strong>选中eth0-echo3</strong>:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web2.png" alt="LEDE WEB2">    </p>
+<p>所要外接路由器作为AP，则需要将DHCP服务器-&gt;高级设置-&gt;强制勾选上。  </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/软路由/" rel="tag"># 软路由</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/21/git教程/" rel="next" title="git教程">
+                <i class="fa fa-chevron-left"></i> git教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Andy Liu">
+            
+              <p class="site-author-name" itemprop="name">Andy Liu</p>
+              <div class="site-description motion-element" itemprop="description">Engineer. Runner. Music</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/aimuch" title="GitHub &rarr; https://github.com/aimuch" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="mailto:liuvay@gmail.com" title="E-Mail &rarr; mailto:liuvay@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/207896500" title="Weibo &rarr; https://weibo.com/207896500" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/liugreat" title="Twitter &rarr; https://twitter.com/liugreat" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://stackoverflow.com/aimuch" title="StackOverflow &rarr; https://stackoverflow.com/aimuch" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://instagram.com/liugreat" title="Instagram &rarr; https://instagram.com/liugreat" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件清单"><span class="nav-number">1.</span> <span class="nav-text">硬件清单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络拓扑图"><span class="nav-number">2.</span> <span class="nav-text">网络拓扑图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ESXi"><span class="nav-number">3.</span> <span class="nav-text">ESXi</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载ESXi"><span class="nav-number">3.1.</span> <span class="nav-text">下载ESXi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#制作启动U盘"><span class="nav-number">3.2.</span> <span class="nav-text">制作启动U盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软路由U盘启动安装ESXi"><span class="nav-number">3.3.</span> <span class="nav-text">软路由U盘启动安装ESXi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置ESXi"><span class="nav-number">3.4.</span> <span class="nav-text">设置ESXi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESXi的web端设置"><span class="nav-number">3.5.</span> <span class="nav-text">ESXi的web端设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置笔记本网卡IP"><span class="nav-number">3.5.1.</span> <span class="nav-text">设置笔记本网卡IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活ESXi"><span class="nav-number">3.5.2.</span> <span class="nav-text">激活ESXi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打开虚拟机交换机的混杂模式"><span class="nav-number">3.5.3.</span> <span class="nav-text">打开虚拟机交换机的混杂模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡非直通情况"><span class="nav-number">3.5.4.</span> <span class="nav-text">网卡非直通情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡直通情况"><span class="nav-number">3.5.5.</span> <span class="nav-text">网卡直通情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iKuai"><span class="nav-number">4.</span> <span class="nav-text">iKuai</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装iKuai"><span class="nav-number">4.1.</span> <span class="nav-text">安装iKuai</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡非直通情况-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">网卡非直通情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡直通情况-1"><span class="nav-number">4.1.2.</span> <span class="nav-text">网卡直通情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置iKuai"><span class="nav-number">4.2.</span> <span class="nav-text">设置iKuai</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iKuai的web端设置"><span class="nav-number">4.3.</span> <span class="nav-text">iKuai的web端设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LEDE"><span class="nav-number">5.</span> <span class="nav-text">LEDE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装LEDE"><span class="nav-number">5.1.</span> <span class="nav-text">安装LEDE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡非直通情况-2"><span class="nav-number">5.1.1.</span> <span class="nav-text">网卡非直通情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网卡直通情况-2"><span class="nav-number">5.1.2.</span> <span class="nav-text">网卡直通情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置LEDE"><span class="nav-number">5.2.</span> <span class="nav-text">设置LEDE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LEDE的web端设置"><span class="nav-number">5.3.</span> <span class="nav-text">LEDE的web端设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <!--<i class="fa fa-user"></i>-->
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy Liu</span>
+
+  
+
+  
+</div>
+
+<!--
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div>
+
+
+
+-->
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/fancybox@3.0.0/dist/js/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+  
+  
+    
+  
+
+  
+
+  
+  
+  
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+    
+  
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1/bookmark.min.js"></script>
+  <script>
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
