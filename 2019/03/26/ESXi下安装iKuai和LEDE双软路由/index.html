@@ -170,10 +170,11 @@
 <meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install8.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web2.png">
+<meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web3.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/auto-start.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/auto-start1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/26/ESXi下安装iKuai和LEDE双软路由/auto-start2.png">
-<meta property="og:updated_time" content="2019-03-29T14:21:12.164Z">
+<meta property="og:updated_time" content="2019-03-31T11:02:08.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ESXi下安装iKuai和LEDE双软路由">
 <meta name="twitter:description" content="硬件清单 CPU: I5 7200U 网卡: 6个Intel 82583V 10/100/1000以太网 内存: 金士顿 DDR4 2400 8G SSD: 三星 EVO850 USB: 3.0x4个 电源: 技嘉12V  网络拓扑图     ESXi下载ESXi到VMWare官方网站下载ESXi 6.7版本，下载的时候需要注册账号，然后申请试用，序列号请自行购买正版(或Google)。 制作启动">
@@ -498,7 +499,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-29 22:21:12" itemprop="dateModified" datetime="2019-03-29T22:21:12+08:00">2019-03-29</time>
+                <time title="修改时间：2019-03-31 19:02:08" itemprop="dateModified" datetime="2019-03-31T19:02:08+08:00">2019-03-31</time>
               
             
           </span>
@@ -623,6 +624,7 @@
 <h2 id="LEDE的web端设置"><a href="#LEDE的web端设置" class="headerlink" title="LEDE的web端设置"></a>LEDE的web端设置</h2><p>电脑浏览器打开<strong>10.10.10.10</strong>，默认密码<code>koolshare</code>，进入iKuai的web客户端:<br>网络 -&gt; 接口 -&gt; 关闭WAN -&gt; 关闭WAN6 -&gt; 编辑LAN:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web1.png" alt="LEDE WEB1">    </p>
 <p>LAN -&gt; 物理接口 -&gt; 接口 -&gt; <strong>选中erspan0</strong>以及<strong>选中eth0-echo3</strong>:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web2.png" alt="LEDE WEB2">    </p>
 <p>所要外接路由器作为AP，则需要将DHCP服务器-&gt;高级设置-&gt;强制勾选上。     </p>
+<p><strong>LAN-&gt;基本设置-&gt;IPv4网关-&gt;10.10.10.10-&gt;使用自定义的DNS服务器-&gt;114.114.114.114</strong>:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web3.png" alt="LEDE WEB3">    </p>
 <h1 id="设置iKuai和LEDE开机自动启动"><a href="#设置iKuai和LEDE开机自动启动" class="headerlink" title="设置iKuai和LEDE开机自动启动"></a>设置iKuai和LEDE开机自动启动</h1><h2 id="iKuai和LEDE虚拟机里设置"><a href="#iKuai和LEDE虚拟机里设置" class="headerlink" title="iKuai和LEDE虚拟机里设置"></a>iKuai和LEDE虚拟机里设置</h2><p>在ESXi的WEB客户端-&gt;虚拟机-&gt;分别在iKuai和LEDE虚拟机上右键-&gt;自动启动 :<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/auto-start.png" alt="iKuai LEDE开启自动启动">     </p>
 <h2 id="ESXi中设置自动启动"><a href="#ESXi中设置自动启动" class="headerlink" title="ESXi中设置自动启动"></a>ESXi中设置自动启动</h2><p>管理-&gt;系统-&gt;自动启动-&gt;编辑设置-&gt;是 :<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/auto-start1.png" alt="ESXi 中设置自动启动"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/auto-start2.png" alt="ESXi 中设置自动启动">    </p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
