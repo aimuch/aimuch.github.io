@@ -58,10 +58,6 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-  
-  
-  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
-
 
 
   
@@ -617,7 +613,9 @@
 <p><strong>创建LEDE虚拟机的流程为</strong>:<br>存储-&gt;数据存储浏览器-&gt;创建文件夹-&gt;LEDE-&gt;将上述转化后的两个文件上传到该目录下-&gt;虚拟机-&gt;新建虚拟机-&gt;客户机操作系统linux-&gt;客户机操作系统版本-&gt;其他64位-&gt;删除默认硬盘-&gt;添加现有硬盘-&gt;选择LEDE文件夹下上传的文件-&gt;内存要勾选<strong>预留所有客户机内存(全部锁定)</strong>:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install1.png" alt="LEDE step1"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install2.png" alt="LEDE step2"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install3.png" alt="LEDE step3"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install4.png" alt="LEDE step4"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install5.png" alt="LEDE step5">    </p>
 <h3 id="网卡非直通情况-2"><a href="#网卡非直通情况-2" class="headerlink" title="网卡非直通情况"></a>网卡非直通情况</h3><p>重新编辑配置LEDE虚拟机-&gt;设置添加除了最后一块虚拟网卡外的其余虚拟网卡，配置好的界面如下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-feizhitong.png" alt="网卡非直通">    </p>
 <h3 id="网卡直通情况-2"><a href="#网卡直通情况-2" class="headerlink" title="网卡直通情况"></a>网卡直通情况</h3><p>重新编辑配置LEDE虚拟机-&gt;设置添加除了最后一块PCI设备以外的其余PCI设备，并对应其编号(最后一块给iKuai用了，假如错误的将所有PCI设备都加上了同时启动iKuai和LDDE的时候会提示设备错误)，配置好的界面如下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-zhitong.png" alt="网卡直通">   </p>
-<h2 id="设置LEDE"><a href="#设置LEDE" class="headerlink" title="设置LEDE"></a>设置LEDE</h2><p>启动iKuai虚拟机会自动安装iKuai，安装好以后按下回车:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install6.png" alt="LEDE step6"><br>设置IP地址为:<strong>10.10.10.1</strong> ，在虚拟机终端输入以下命令:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/config/network</span><br></pre></td></tr></table></figure></p>
+<h2 id="设置LEDE"><a href="#设置LEDE" class="headerlink" title="设置LEDE"></a>设置LEDE</h2><p>启动iKuai虚拟机会自动安装iKuai，安装好以后按下回车:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install6.png" alt="LEDE step6"><br>设置IP地址为:<strong>10.10.10.1</strong> ，在虚拟机终端输入以下命令:    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/config/network</span><br></pre></td></tr></table></figure>
+
 <p><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install7.png" alt="LEDE step7">    </p>
 <p>然后将<strong>option ipaddr 192.168.1.1</strong>改为<strong>option ipaddr 10.10.10.1</strong> :<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install8.png" alt="LEDE step8">    </p>
 <p>然后重启LEDE虚拟机。    </p>
@@ -696,12 +694,31 @@
           
           <div class="social_share">
             
+              
+
+<script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.css">
+
+
+  
+
+
+<div class="likely">
+  
+    <div class="twitter">Tweet</div>
+  
+    <div class="facebook">Share</div>
+  
+    <div class="linkedin">Link</div>
+  
+    <div class="telegram">Send</div>
+  
+</div>
+
             
-              <div id="needsharebutton-postbottom">
-                <span class="btn">
-                  <i class="fa fa-share-alt" aria-hidden="true"></i>
-                </span>
-              </div>
             
           </div>
         
@@ -1013,46 +1030,8 @@
     
 
     
-      <div id="needsharebutton-float">
-        <span class="btn">
-          <i class="fa fa-share-alt" aria-hidden="true"></i>
-        </span>
-      </div>
-    
 
     
-  
-  
-  <script src="/lib/needsharebutton/needsharebutton.js"></script>
-  <script>
-    
-      pbOptions = {};
-      
-        pbOptions.iconStyle = "box";
-      
-        pbOptions.boxForm = "horizontal";
-      
-        pbOptions.position = "bottomCenter";
-      
-        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      
-      new needShareButton('#needsharebutton-postbottom', pbOptions);
-    
-    
-      flOptions = {};
-      
-        flOptions.iconStyle = "box";
-      
-        flOptions.boxForm = "horizontal";
-      
-        flOptions.position = "middleRight";
-      
-        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      
-      new needShareButton('#needsharebutton-float', flOptions);
-    
-  </script>
-
 
     
 

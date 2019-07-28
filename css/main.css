@@ -1802,7 +1802,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff0aba;
+  background: #373733;
 }
 .feed-link,
 .chat {
@@ -2111,29 +2111,6 @@ pre .javascript .function {
   50%, 70% {
     transform: scale(1.1);
   }
-}
-#needsharebutton-postbottom {
-  position: relative;
-  cursor: pointer;
-  height: 26px;
-}
-#needsharebutton-postbottom .btn {
-  display: initial;
-  padding: 1px 4px;
-  border: 1px solid #555;
-  border-radius: 3px;
-}
-#needsharebutton-float {
-  position: fixed;
-  bottom: 88px;
-  left: -8px;
-  z-index: 9999;
-  cursor: pointer;
-}
-#needsharebutton-float .btn {
-  padding: 0 10px 0 14px;
-  border: 1px solid #555;
-  border-radius: 4px;
 }
 .popular-posts-header {
   margin-top: 60px;

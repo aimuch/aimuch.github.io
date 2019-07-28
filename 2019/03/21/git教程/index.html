@@ -58,10 +58,6 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-  
-  
-  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
-
 
 
   
@@ -109,13 +105,13 @@
   };
 </script>
 
-  <meta name="description" content="添加配置12git config [--local | --global | --system] user.name &apos;Your name&apos;git config [--local | --global | --system] user.email &apos;Your email&apos; 查看配置1git config --list [--local | --global | --system] 区别123loc">
+  <meta name="description" content="添加配置12git config [--local | --global | --system] user.name &apos;Your name&apos;git config [--local | --global | --system] user.email &apos;Your email&apos;  查看配置1git config --list [--local | --global | --system]  区别123l">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git教程">
 <meta property="og:url" content="https://aimuch.com/2019/03/21/git教程/index.html">
 <meta property="og:site_name" content="风里刀">
-<meta property="og:description" content="添加配置12git config [--local | --global | --system] user.name &apos;Your name&apos;git config [--local | --global | --system] user.email &apos;Your email&apos; 查看配置1git config --list [--local | --global | --system] 区别123loc">
+<meta property="og:description" content="添加配置12git config [--local | --global | --system] user.name &apos;Your name&apos;git config [--local | --global | --system] user.email &apos;Your email&apos;  查看配置1git config --list [--local | --global | --system]  区别123l">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://aimuch.com/2019/03/21/git教程/img1.jpg">
 <meta property="og:image" content="https://aimuch.com/2019/03/21/git教程/img2.jpg">
@@ -125,7 +121,7 @@
 <meta property="og:updated_time" content="2019-03-21T09:37:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git教程">
-<meta name="twitter:description" content="添加配置12git config [--local | --global | --system] user.name &apos;Your name&apos;git config [--local | --global | --system] user.email &apos;Your email&apos; 查看配置1git config --list [--local | --global | --system] 区别123loc">
+<meta name="twitter:description" content="添加配置12git config [--local | --global | --system] user.name &apos;Your name&apos;git config [--local | --global | --system] user.email &apos;Your email&apos;  查看配置1git config --list [--local | --global | --system]  区别123l">
 <meta name="twitter:image" content="https://aimuch.com/2019/03/21/git教程/img1.jpg">
 
 
@@ -485,67 +481,130 @@
 
       
         <h1 id="添加配置"><a href="#添加配置" class="headerlink" title="添加配置"></a>添加配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config [--<span class="built_in">local</span> | --global | --system] user.name <span class="string">'Your name'</span></span><br><span class="line">git config [--<span class="built_in">local</span> | --global | --system] user.email <span class="string">'Your email'</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="查看配置"><a href="#查看配置" class="headerlink" title="查看配置"></a>查看配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list [--<span class="built_in">local</span> | --global | --system]</span><br></pre></td></tr></table></figure>
+
 <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span>：区域为本仓库</span><br><span class="line">global: 当前用户的所有仓库</span><br><span class="line">system: 本系统的所有用户</span><br></pre></td></tr></table></figure>
+
 <h1 id="git-add-和-git-add-u区别"><a href="#git-add-和-git-add-u区别" class="headerlink" title="git add . 和 git add -u区别"></a><code>git add .</code> 和 <code>git add -u</code>区别</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git add . ：将工作空间新增和被修改的文件添加的暂存区</span><br><span class="line">git add -u :将工作空间被修改和被删除的文件添加到暂存区(不包含没有纳入Git管理的新增文件)</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建仓库</span></span><br><span class="line">```bash</span><br><span class="line">git init [project folder name]  初始化 git 仓库</span><br><span class="line">git add [fileName]  把文件从工作目录添加到暂存区</span><br><span class="line">git commit -m<span class="string">'some information'</span>  用于提交暂存区的文件</span><br><span class="line">git commit -am<span class="string">'Some information'</span> 用于提交跟踪过的文件</span><br><span class="line">git <span class="built_in">log</span>  查看历史</span><br><span class="line">git status  查看状态</span><br></pre></td></tr></table></figure>
+
 <p><strong>额外</strong><br>git add -u 可以添加所有已经被 git 控制的文件到暂存区<br>以前删除文件夹只会用 「-rf」，今天学到了 「-r」，并得知它们两个区别：「-r」 有时候会提示是否确认删除。    </p>
 <h1 id="给文件重命名的简便方法"><a href="#给文件重命名的简便方法" class="headerlink" title="给文件重命名的简便方法"></a>给文件重命名的简便方法</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git  mv  [old file name]  [new file name]</span><br><span class="line">git commit -m <span class="string">'some information'</span></span><br></pre></td></tr></table></figure>
-<h1 id="Tag标签"><a href="#Tag标签" class="headerlink" title="Tag标签"></a>Tag标签</h1><p><strong>显示已有标签</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure></p>
-<p><strong>新建标签</strong><br><em>创建一个含附注类型的标签非常简单，用 -a （译注：取 annotated 的首字母）指定标签名字即可</em><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a tag_name -m 'Some Messages'</span><br></pre></td></tr></table></figure></p>
-<p><strong>删除标签</strong><br>删除本地标签:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d tag_name</span><br></pre></td></tr></table></figure></p>
-<p>删除<code>remote</code>标签    :<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --delete origin tag_name</span><br></pre></td></tr></table></figure></p>
-<p><strong>推送标签到github</strong><br>将本地<strong>所有</strong>标签推送到<code>remote</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure></p>
+
+<h1 id="Tag标签"><a href="#Tag标签" class="headerlink" title="Tag标签"></a>Tag标签</h1><p><strong>显示已有标签</strong>   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+
+<p><strong>新建标签</strong><br><em>创建一个含附注类型的标签非常简单，用 -a （译注：取 annotated 的首字母）指定标签名字即可</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a tag_name -m 'Some Messages'</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除标签</strong><br>删除本地标签:    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d tag_name</span><br></pre></td></tr></table></figure>
+
+<p>删除<code>remote</code>标签    :</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --delete origin tag_name</span><br></pre></td></tr></table></figure>
+
+<p><strong>推送标签到github</strong><br>将本地<strong>所有</strong>标签推送到<code>remote</code>:    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --tags</span><br></pre></td></tr></table></figure>
+
 <h1 id="通过git-log查看版本演变历史"><a href="#通过git-log查看版本演变历史" class="headerlink" title="通过git log查看版本演变历史"></a>通过git log查看版本演变历史</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --all 查看所有分支的历史</span><br><span class="line">git <span class="built_in">log</span> --all --graph 查看图形化的 <span class="built_in">log</span> 地址</span><br><span class="line">git <span class="built_in">log</span> --oneline 查看单行的简洁历史。</span><br><span class="line">git <span class="built_in">log</span> --oneline -n4 查看最近的4条简洁历史。</span><br><span class="line">git <span class="built_in">log</span> --oneline --all -n4 --graph 查看所有分支最近4条单行的图形化历史。</span><br><span class="line">git <span class="built_in">help</span> --web <span class="built_in">log</span> 跳转到git <span class="built_in">log</span> 的帮助文档网页</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -v 查看本地有多少分支</span><br></pre></td></tr></table></figure>
+
 <h1 id="通过图形界面工具来查看版本历史"><a href="#通过图形界面工具来查看版本历史" class="headerlink" title="通过图形界面工具来查看版本历史"></a>通过图形界面工具来查看版本历史</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitk</span><br></pre></td></tr></table></figure>
-<h1 id="探密-git目录"><a href="#探密-git目录" class="headerlink" title="探密.git目录"></a>探密<code>.git</code>目录</h1><p>查看<code>.git</code>文件夹下的内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls .git/ -al</span><br></pre></td></tr></table></figure></p>
-<p>如下:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 17 22:38 ./</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 17 21:50 ../</span><br><span class="line">-rw-r--r-- 1 Andy 197609   7 12月 17 22:38 COMMIT_EDITMSG</span><br><span class="line">-rw-r--r-- 1 Andy 197609 301 12月 12 22:55 config</span><br><span class="line">-rw-r--r-- 1 Andy 197609  73 12月 12 22:55 description</span><br><span class="line">-rw-r--r-- 1 Andy 197609  96 12月 19 00:00 FETCH_HEAD</span><br><span class="line">-rw-r--r-- 1 Andy 197609  23 12月 12 22:55 HEAD</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 hooks/</span><br><span class="line">-rw-r--r-- 1 Andy 197609 249 12月 17 22:38 index</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 info/</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 logs/</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 17 22:38 objects/</span><br><span class="line">-rw-r--r-- 1 Andy 197609 114 12月 12 22:55 packed-refs</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 refs/</span><br></pre></td></tr></table></figure></p>
+
+<h1 id="探密-git目录"><a href="#探密-git目录" class="headerlink" title="探密.git目录"></a>探密<code>.git</code>目录</h1><p>查看<code>.git</code>文件夹下的内容：    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls .git/ -al</span><br></pre></td></tr></table></figure>
+
+<p>如下:   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 17 22:38 ./</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 17 21:50 ../</span><br><span class="line">-rw-r--r-- 1 Andy 197609   7 12月 17 22:38 COMMIT_EDITMSG</span><br><span class="line">-rw-r--r-- 1 Andy 197609 301 12月 12 22:55 config</span><br><span class="line">-rw-r--r-- 1 Andy 197609  73 12月 12 22:55 description</span><br><span class="line">-rw-r--r-- 1 Andy 197609  96 12月 19 00:00 FETCH_HEAD</span><br><span class="line">-rw-r--r-- 1 Andy 197609  23 12月 12 22:55 HEAD</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 hooks/</span><br><span class="line">-rw-r--r-- 1 Andy 197609 249 12月 17 22:38 index</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 info/</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 logs/</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 17 22:38 objects/</span><br><span class="line">-rw-r--r-- 1 Andy 197609 114 12月 12 22:55 packed-refs</span><br><span class="line">drwxr-xr-x 1 Andy 197609   0 12月 12 22:55 refs/</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat命令主要用来查看文件内容，创建文件，文件合并，追加文件内容等功能。</span><br><span class="line">cat HEAD 查看HEAD文件的内容</span><br><span class="line">git cat-file 命令 显示版本库对象的内容、类型及大小信息。</span><br><span class="line">git cat-file -t b44dd71d62a5a8ed3 显示版本库对象的类型</span><br><span class="line">git cat-file -s b44dd71d62a5a8ed3 显示版本库对象的大小</span><br><span class="line">git cat-file -p b44dd71d62a5a8ed3 显示版本库对象的内容</span><br></pre></td></tr></table></figure>
-<p><code>.git</code>里几个常用的如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HEAD：指向当前的工作路径</span><br><span class="line">config：存放本地仓库（<span class="built_in">local</span>）相关的配置信息。</span><br><span class="line">refs/heads: 存放分支</span><br><span class="line">refs/heads/master/: 指向master分支最后一次commit</span><br><span class="line">refs/tags: 存放tag，又叫里程牌 （当这次commit是具有里程碑意义的 比如项目1.0的时候 就可以打tag）</span><br><span class="line">objects：核心文件，存储文件</span><br></pre></td></tr></table></figure></p>
+
+<p><code>.git</code>里几个常用的如下：    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HEAD：指向当前的工作路径</span><br><span class="line">config：存放本地仓库（<span class="built_in">local</span>）相关的配置信息。</span><br><span class="line">refs/heads: 存放分支</span><br><span class="line">refs/heads/master/: 指向master分支最后一次commit</span><br><span class="line">refs/tags: 存放tag，又叫里程牌 （当这次commit是具有里程碑意义的 比如项目1.0的时候 就可以打tag）</span><br><span class="line">objects：核心文件，存储文件</span><br></pre></td></tr></table></figure>
+
 <p>.git/objects/ 存放所有的 git 对象，对象哈希值前 2 位作为文件夹名称，后 38 位作为对象文件名, 可通过 git cat-file -p 命令，拼接文件夹名称+文件名查看。    </p>
 <h1 id="commit、tree和blob三个对象之间的关系"><a href="#commit、tree和blob三个对象之间的关系" class="headerlink" title="commit、tree和blob三个对象之间的关系"></a><code>commit</code>、<code>tree</code>和<code>blob</code>三个对象之间的关系</h1><p><img src="/2019/03/21/git教程/img1.jpg" alt="tree">     </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">commit: 提交时的镜像</span><br><span class="line">tree: 文件夹</span><br><span class="line">blob: 文件</span><br></pre></td></tr></table></figure>
+
 <p><strong>【同学问题】</strong> 每次commit，git 都会将当前项目的所有文件夹及文件快照保存到objects目录，如果项目文件比较大，不断迭代，commit无数次后，objects目录中文件大小是不是会变得无限大？<br><strong>【老师解答】</strong> Git对于内容相同的文件只会存一个blob，不同的commit的区别是commit、tree和有差异的blob，多数未变更的文件对应的blob都是相同的，这么设计对于版本管理系统来说可以省很多存储空间。其次，Git还有增量存储的机制，我估计是对于差异很小的blob设计的吧。    </p>
 <h1 id="分离头指针情况下的注意事项"><a href="#分离头指针情况下的注意事项" class="headerlink" title="分离头指针情况下的注意事项"></a>分离头指针情况下的注意事项</h1><p>detached HEAD   </p>
 <h1 id="进一步理解HEAD和branch"><a href="#进一步理解HEAD和branch" class="headerlink" title="进一步理解HEAD和branch"></a>进一步理解<code>HEAD</code>和<code>branch</code></h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_branch [具体分支 或 commit] 创建新分支并切换到新分支</span><br><span class="line">git diff HEAD HEAD~1 比较最近两次提交</span><br><span class="line">git diff HEAD HEAD~2 比较最近和倒数第三次提交</span><br><span class="line">git diff HEAD HEAD^  比较最近两次提交</span><br><span class="line">git diff HEAD HEAD^^ 比较最近和倒数第三次提交</span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 怎么删除不需要的分支？</span></span><br><span class="line">查看分支：   </span><br><span class="line">```bash</span><br><span class="line">git branch -av</span><br></pre></td></tr></table></figure>
-<p>删除分支命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d [branch name]  <span class="comment">#删除</span></span><br><span class="line">git branch -D [branch name]  <span class="comment">#强制删除</span></span><br></pre></td></tr></table></figure></p>
+
+<p>删除分支命令：    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d [branch name]  <span class="comment">#删除</span></span><br><span class="line">git branch -D [branch name]  <span class="comment">#强制删除</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="怎么修改最新commit的message"><a href="#怎么修改最新commit的message" class="headerlink" title="怎么修改最新commit的message"></a>怎么修改最新commit的message</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend  对最近一次的commit信息进行修改</span><br></pre></td></tr></table></figure>
+
 <h1 id="怎么修改老旧commit的message"><a href="#怎么修改老旧commit的message" class="headerlink" title="怎么修改老旧commit的message"></a>怎么修改老旧commit的message</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i [要更改的commit的上一级commit]</span><br></pre></td></tr></table></figure>
+
 <p>接下来就是一个交互过程…<br>这期间会产生一个detached HEAD，然后将改好的commit指向该detached HEAD，如下图所示：<br><img src="/2019/03/21/git教程/img2.jpg" alt="rebase">    </p>
 <p><strong>git rebase工作的过程中，就是用了分离头指针。rebase意味着基于新base的commit来变更部分commits。它处理的时候，把HEAD指向base的commit，此时如果该commit没有对应branch，就处于分离头指针的状态，然后重新一个一个生成新的commit，当rebase创建完最后一个commit后，结束分离头状态，Git让变完基的分支名指向HEAD。</strong>    </p>
 <h1 id="怎样把连续的多个commit整理成1个"><a href="#怎样把连续的多个commit整理成1个" class="headerlink" title="怎样把连续的多个commit整理成1个"></a>怎样把连续的多个commit整理成1个</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i [要更改的commit的上一级commit]</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> --graph</span><br><span class="line">* commit 7d3386842a2168ae630b65f687364243139c893c (HEAD -&gt; master, origin/master, origin/HEAD)</span><br><span class="line">| Author: aimuch &lt;liuvay@gmail.com&gt;</span><br><span class="line">| Date:   Thu Dec 20 23:34:18 2018 +0800</span><br><span class="line">|</span><br><span class="line">|     update</span><br><span class="line">|</span><br><span class="line">* commit 9eb3188bbc63cae1bfed5f9dfc1593019e360a6a</span><br><span class="line">| Author: aimuch &lt;liuvay@gmail.com&gt;</span><br><span class="line">| Date:   Wed Dec 19 20:30:14 2018 +0800</span><br><span class="line">|</span><br><span class="line">|     update</span><br><span class="line">|</span><br><span class="line">* commit bbe6d53e2b477f2d2aa402af7f315ecdfc63459e</span><br><span class="line">| Author: aimuch &lt;liuvay@gmail.com&gt;</span><br><span class="line">| Date:   Wed Dec 19 20:12:29 2018 +0800</span><br><span class="line">|</span><br><span class="line">|     update</span><br><span class="line">|</span><br><span class="line">* commit 7735d66ded7f98adeca93d96fb7be12ffb67c76a</span><br><span class="line">| Author: aimuch &lt;liuvay@gmail.com&gt;</span><br><span class="line">| Date:   Wed Dec 19 00:27:00 2018 +0800</span><br><span class="line">|</span><br><span class="line">|     update</span><br><span class="line">|</span><br><span class="line">* commit d9f9d115fab425b5654f8ccfec6a996aef35b76b</span><br><span class="line">| Author: aimuch &lt;liuvay@gmail.com&gt;</span><br><span class="line">| Date:   Wed Dec 19 00:23:36 2018 +0800</span><br><span class="line">|</span><br><span class="line">|     update</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">pick   7735d66 update <span class="comment">#合并到该commit上</span></span><br><span class="line">squash bbe6d53 update</span><br><span class="line">squash 9eb3188 update</span><br><span class="line">squash 7d33868 update</span><br><span class="line"><span class="comment"># Rebase d9f9d11..7d33868 onto d9f9d11 (4 commands)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment"># p, pick &lt;commit&gt; = use commit</span></span><br><span class="line"><span class="comment"># r, reword &lt;commit&gt; = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment"># e, edit &lt;commit&gt; = use commit, but stop for amending</span></span><br><span class="line"><span class="comment"># s, squash &lt;commit&gt; = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment"># f, fixup &lt;commit&gt; = like "squash", but discard this commit's log message</span></span><br><span class="line"><span class="comment"># x, exec &lt;command&gt; = run command (the rest of the line) using shell</span></span><br><span class="line"><span class="comment"># b, break = stop here (continue rebase later with 'git rebase --continue')</span></span><br><span class="line"><span class="comment"># d, drop &lt;commit&gt; = remove commit</span></span><br><span class="line"><span class="comment"># l, label &lt;label&gt; = label current HEAD with a name</span></span><br><span class="line"><span class="comment"># t, reset &lt;label&gt; = reset HEAD to a label</span></span><br><span class="line"><span class="comment"># m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span></span><br><span class="line"><span class="comment"># .       create a merge commit using the original merge commit's</span></span><br><span class="line"><span class="comment"># .       message (or the oneline, if no original merge commit was</span></span><br><span class="line"><span class="comment"># .       specified). Use -c &lt;commit&gt; to reword the commit message.</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This is a combination of 4 commits.</span></span><br><span class="line"><span class="comment"># This is the 1st commit message:</span></span><br><span class="line"></span><br><span class="line">update</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the commit message #2:</span></span><br><span class="line"></span><br><span class="line">update</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the commit message #3:</span></span><br><span class="line"></span><br><span class="line">update</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is the commit message #4:</span></span><br><span class="line"></span><br><span class="line">update</span><br></pre></td></tr></table></figure>
+
 <h1 id="git修改gitignore后生效"><a href="#git修改gitignore后生效" class="headerlink" title="git修改gitignore后生效"></a>git修改gitignore后生效</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .    <span class="comment">#清除缓存</span></span><br><span class="line">git add .               <span class="comment">#重新trace file</span></span><br><span class="line">git commit -m <span class="string">"update .gitignore"</span> <span class="comment">#提交和注释</span></span><br><span class="line">git push origin master  <span class="comment">#可选，如果需要同步到remote上的话</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="怎么比较暂存区和HEAD所含文件的差异？"><a href="#怎么比较暂存区和HEAD所含文件的差异？" class="headerlink" title="怎么比较暂存区和HEAD所含文件的差异？"></a>怎么比较暂存区和HEAD所含文件的差异？</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure>
-<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --staged</span><br></pre></td></tr></table></figure></p>
+
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --staged</span><br></pre></td></tr></table></figure>
+
 <h1 id="怎么比较工作区和暂存区所含文件的差异？"><a href="#怎么比较工作区和暂存区所含文件的差异？" class="headerlink" title="怎么比较工作区和暂存区所含文件的差异？"></a>怎么比较工作区和暂存区所含文件的差异？</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff -- [filename/pathname] <span class="comment">#比较具体的文件或者路径</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="如何让暂存区恢复成和HEAD的一样？"><a href="#如何让暂存区恢复成和HEAD的一样？" class="headerlink" title="如何让暂存区恢复成和HEAD的一样？"></a>如何让暂存区恢复成和HEAD的一样？</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset 有三个参数</span><br><span class="line">--soft 这个只是把 HEAD 指向的 commit 恢复到你指定的 commit，暂存区 工作区不变</span><br><span class="line">--hard 这个是 把 HEAD， 暂存区， 工作区 都修改为 你指定的 commit 的时候的文件状态</span><br><span class="line">--mixed 这个是不加时候的默认参数，把 HEAD，暂存区 修改为 你指定的 commit 的时候的文件状态，工作区保持不变</span><br></pre></td></tr></table></figure>
+
 <h1 id="如何让工作区的文件恢复为和暂存区一样？"><a href="#如何让工作区的文件恢复为和暂存区一样？" class="headerlink" title="如何让工作区的文件恢复为和暂存区一样？"></a>如何让工作区的文件恢复为和暂存区一样？</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;file&gt;...</span><br></pre></td></tr></table></figure>
+
 <p><strong>恢复工作区用checkout，恢复暂存区用reset。</strong>   </p>
 <h1 id="怎样取消暂存区部分文件的更改？"><a href="#怎样取消暂存区部分文件的更改？" class="headerlink" title="怎样取消暂存区部分文件的更改？"></a>怎样取消暂存区部分文件的更改？</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD -- &lt;file&gt;...</span><br></pre></td></tr></table></figure>
+
 <h1 id="看看不同提交的指定文件的差异"><a href="#看看不同提交的指定文件的差异" class="headerlink" title="看看不同提交的指定文件的差异"></a>看看不同提交的指定文件的差异</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff commit-id1 commit-id2 -- &lt;file&gt;...</span><br></pre></td></tr></table></figure>
+
 <h1 id="正确删除文件的方法"><a href="#正确删除文件的方法" class="headerlink" title="正确删除文件的方法"></a>正确删除文件的方法</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
 <h1 id="开发中临时加塞了紧急任务怎么处理？"><a href="#开发中临时加塞了紧急任务怎么处理？" class="headerlink" title="开发中临时加塞了紧急任务怎么处理？"></a>开发中临时加塞了紧急任务怎么处理？</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash list <span class="comment">#查看stash中存放的信息</span></span><br><span class="line">git stash <span class="comment">#将当前工作区内容存放到"堆栈"中</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply <span class="comment">#把"堆栈"里面的内容弹出到工作区中，同时"堆栈"中信息还在</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop <span class="comment">#把"堆栈"里面的内容弹出到工作区中，同时丢弃"堆栈"中最新的信息</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="如何指定不需要Git管理的文件？"><a href="#如何指定不需要Git管理的文件？" class="headerlink" title="如何指定不需要Git管理的文件？"></a>如何指定不需要Git管理的文件？</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.gitignore</span><br></pre></td></tr></table></figure>
+
 <p><strong>【同学提问】</strong> 如果提交commit后，想再忽略一些已经提交的文件，怎么处理。<br><strong>【老师回答】</strong> The problem is that .gitignore ignores just files that weren’t tracked before (by git add). Run git reset name_of_file to unstage the file and keep it. In case you want to also remove given file from the repository (after pushing), use git rm –cached name_of_file.<br>把想忽略的文件添加到 .gitignore ；然后通过 git rm – cached name_of_file 的方式删除掉git仓库里面无需跟踪的文件。    </p>
 <h1 id="添加远程仓库"><a href="#添加远程仓库" class="headerlink" title="添加远程仓库"></a>添加远程仓库</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add [shortname] [url]</span><br></pre></td></tr></table></figure>
-<h1 id="配置公私钥"><a href="#配置公私钥" class="headerlink" title="配置公私钥"></a>配置公私钥</h1><h2 id="检查是否已存在相应的ssh-key"><a href="#检查是否已存在相应的ssh-key" class="headerlink" title="检查是否已存在相应的ssh key:"></a>检查是否已存在相应的<code>ssh key</code>:</h2><p>打开终端, 输入:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al ~/.ssh</span><br></pre></td></tr></table></figure></p>
+
+<h1 id="配置公私钥"><a href="#配置公私钥" class="headerlink" title="配置公私钥"></a>配置公私钥</h1><h2 id="检查是否已存在相应的ssh-key"><a href="#检查是否已存在相应的ssh-key" class="headerlink" title="检查是否已存在相应的ssh key:"></a>检查是否已存在相应的<code>ssh key</code>:</h2><p>打开终端, 输入:   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al ~/.ssh</span><br></pre></td></tr></table></figure>
+
 <p>核对列出来的ssh key是否有已存在的，假如你没有看到列出的公私钥对，或是不想再用之前的公私钥对，你可以选择下面的步骤生成新的公私钥对.    </p>
 <h2 id="生成新的ssh-key-并添加至ssh-agent"><a href="#生成新的ssh-key-并添加至ssh-agent" class="headerlink" title="生成新的ssh key,并添加至ssh-agent:"></a>生成新的<code>ssh key</code>,并添加至<code>ssh-agent</code>:</h2><h3 id="2-1-打开终端-使用ssh-key生成命令："><a href="#2-1-打开终端-使用ssh-key生成命令：" class="headerlink" title="2.1 打开终端, 使用ssh key生成命令："></a>2.1 打开终端, 使用<code>ssh key</code>生成命令：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong> ：后面的邮箱对应相应账号的邮箱，假如是github的账号，且注册账号的邮箱为<a href="mailto:`xxx@gmail.com" target="_blank" rel="noopener">`xxx@gmail.com</a>`，则命令行为：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C "xxx@gmail.com"`。    </span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## 接下来会提示你保存的`ssh key`的名称以及路径。    </span></span></span><br><span class="line">默认路径是`/home/you/.ssh/id_rsa`(`you`为用户个人目录)即`~/.ssh/id_rsa`。这一步很重要，如果你使用默认的，且下一个账号也是使用默认的路径和文件名，那么之前的`ssh key`就会被后来生成的`ssh key`重写，从而导致之前的账号不可用。因此，正确的做法是给它命名，最后以应用名进行命名，因为更容易区分。以下是我个人配的：    </span><br><span class="line">```shell</span><br><span class="line">/home/andy/.ssh/github_rsa</span><br></pre></td></tr></table></figure></p>
+
+<p><strong>注意</strong> ：后面的邮箱对应相应账号的邮箱，假如是github的账号，且注册账号的邮箱为<code>xxx@gmail.com</code>，则命令行为：    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C "xxx@gmail.com"`。    </span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">## 接下来会提示你保存的`ssh key`的名称以及路径。    </span></span></span><br><span class="line">默认路径是`/home/you/.ssh/id_rsa`(`you`为用户个人目录)即`~/.ssh/id_rsa`。这一步很重要，如果你使用默认的，且下一个账号也是使用默认的路径和文件名，那么之前的`ssh key`就会被后来生成的`ssh key`重写，从而导致之前的账号不可用。因此，正确的做法是给它命名，最后以应用名进行命名，因为更容易区分。以下是我个人配的：    </span><br><span class="line">```shell</span><br><span class="line">/home/andy/.ssh/github_rsa</span><br></pre></td></tr></table></figure>
+
 <h3 id="接下来会提示设置ssh安全密码。"><a href="#接下来会提示设置ssh安全密码。" class="headerlink" title="接下来会提示设置ssh安全密码。"></a>接下来会提示设置ssh安全密码。</h3><p>这一步可以使用默认的（即不设置密码），直接按回车即可。<br>这里会生成<code>xxx_rsa</code>和<code>xxx_rsa.pub</code>两个文件,<code>xxx_rsa</code>是生成的<code>ssh key</code>的私钥名，<code>xxx_rsa.pub</code>是生成的<code>ssh key</code>的公钥名，私钥要放在本地，公钥要放在服务器或github的Settings-&gt;SSHand GPG keys-&gt;New SSH key上。<br><img src="/2019/03/21/git教程/git-key.png" alt="git key">     </p>
-<h3 id="ssh-key生成后，接下来需要为ssh-key添加代理。"><a href="#ssh-key生成后，接下来需要为ssh-key添加代理。" class="headerlink" title="ssh key生成后，接下来需要为ssh key添加代理。"></a><code>ssh key</code>生成后，接下来需要为<code>ssh key</code>添加代理。</h3><p>这是为了让请求自动对应相应的账号。网上很多文章写到需要另外配置<code>config</code>文件，经本人亲测，其实是不需要的，在生成了<code>ssh key</code>后，通过为生成的<code>ssh key</code>添加代理即可，为<code>ssh key</code>添加代理命令:<strong><code>ssh-add ~/.ssh/xxx_rsa</code></strong>， <code>xxx_rsa</code>是你生成的<code>ssh key</code>的私钥名，我的设置为:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/github_rsa</span><br></pre></td></tr></table></figure></p>
+<h3 id="ssh-key生成后，接下来需要为ssh-key添加代理。"><a href="#ssh-key生成后，接下来需要为ssh-key添加代理。" class="headerlink" title="ssh key生成后，接下来需要为ssh key添加代理。"></a><code>ssh key</code>生成后，接下来需要为<code>ssh key</code>添加代理。</h3><p>这是为了让请求自动对应相应的账号。网上很多文章写到需要另外配置<code>config</code>文件，经本人亲测，其实是不需要的，在生成了<code>ssh key</code>后，通过为生成的<code>ssh key</code>添加代理即可，为<code>ssh key</code>添加代理命令:<strong><code>ssh-add ~/.ssh/xxx_rsa</code></strong>， <code>xxx_rsa</code>是你生成的<code>ssh key</code>的私钥名，我的设置为:    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/github_rsa</span><br></pre></td></tr></table></figure>
+
 <h2 id="将生成的xxx-rsa-pub公钥内容添加到GitHub的SSH-keys页面上。"><a href="#将生成的xxx-rsa-pub公钥内容添加到GitHub的SSH-keys页面上。" class="headerlink" title="将生成的xxx_rsa.pub公钥内容添加到GitHub的SSH keys页面上。"></a>将生成的<code>xxx_rsa.pub</code>公钥内容添加到GitHub的SSH keys页面上。</h2><p><img src="/2019/03/21/git教程/github-ssh.png" alt="github ssh">    </p>
-<h2 id="连接测试"><a href="#连接测试" class="headerlink" title="连接测试"></a>连接测试</h2><p>接下来我们测试是否配置成功，打开终端，输入:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+<h2 id="连接测试"><a href="#连接测试" class="headerlink" title="连接测试"></a>连接测试</h2><p>接下来我们测试是否配置成功，打开终端，输入:    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
 <p><img src="/2019/03/21/git教程/git-test.png" alt="git test">    </p>
 <h1 id="怎么快速淘到感兴趣的开源项目"><a href="#怎么快速淘到感兴趣的开源项目" class="headerlink" title="怎么快速淘到感兴趣的开源项目"></a>怎么快速淘到感兴趣的开源项目</h1><p><strong>UI界面高级搜索</strong>： <a href="https://github.com/search/advanced" target="_blank" rel="noopener">https://github.com/search/advanced</a>     </p>
-<p><strong>命令高级搜索</strong>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git 最好 学习 资料 <span class="keyword">in</span>:readme stars:&gt;1000 language:c</span><br></pre></td></tr></table></figure></p>
+<p><strong>命令高级搜索</strong>：   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git 最好 学习 资料 <span class="keyword">in</span>:readme stars:&gt;1000 language:c</span><br></pre></td></tr></table></figure>
+
 <p>上述命令的意思是搜索reademe中包含<code>git、最好、学习、资料</code>”且<code>star大于1000</code>的，用<code>C语言编写</code>的仓库。    </p>
 
       
@@ -597,12 +656,31 @@
           
           <div class="social_share">
             
+              
+
+<script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.css">
+
+
+  
+
+
+<div class="likely">
+  
+    <div class="twitter">Tweet</div>
+  
+    <div class="facebook">Share</div>
+  
+    <div class="linkedin">Link</div>
+  
+    <div class="telegram">Send</div>
+  
+</div>
+
             
-              <div id="needsharebutton-postbottom">
-                <span class="btn">
-                  <i class="fa fa-share-alt" aria-hidden="true"></i>
-                </span>
-              </div>
             
           </div>
         
@@ -914,46 +992,8 @@
     
 
     
-      <div id="needsharebutton-float">
-        <span class="btn">
-          <i class="fa fa-share-alt" aria-hidden="true"></i>
-        </span>
-      </div>
-    
 
     
-  
-  
-  <script src="/lib/needsharebutton/needsharebutton.js"></script>
-  <script>
-    
-      pbOptions = {};
-      
-        pbOptions.iconStyle = "box";
-      
-        pbOptions.boxForm = "horizontal";
-      
-        pbOptions.position = "bottomCenter";
-      
-        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      
-      new needShareButton('#needsharebutton-postbottom', pbOptions);
-    
-    
-      flOptions = {};
-      
-        flOptions.iconStyle = "box";
-      
-        flOptions.boxForm = "horizontal";
-      
-        flOptions.position = "middleRight";
-      
-        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      
-      new needShareButton('#needsharebutton-float', flOptions);
-    
-  </script>
-
 
     
 

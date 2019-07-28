@@ -58,10 +58,6 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
-  
-  
-  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
-
 
 
   
@@ -492,22 +488,38 @@
 <p>本文概述介绍<strong>Protocol Buffers</strong>，以及开始如何开始<strong>Protocol Buffers</strong>之旅，本系列主要以Java为主。</p>
 <p>以下<strong>Protocol Buffers</strong>简称PB。</p>
 <h2 id="Protocol-Buffers是什么"><a href="#Protocol-Buffers是什么" class="headerlink" title="Protocol Buffers是什么"></a>Protocol Buffers是什么</h2><p>Protocol Buffers提供了一种灵活，高效，自动序列化结构数据的机制，可以联想XML，但是比XML更小，更快，更简单。仅需要自定义一次你所需的数据格式， 然后用户就可以使用Protocol Buffers自动生成的特定的源码，方便的读写用户自定义的格式化的数据。不限语言，不限平台。还可以在不破坏原数据格式的基础上，依据老的数据格式， 更新现有的数据格式。</p>
-<h2 id="Protocol-Buffers如何工作的"><a href="#Protocol-Buffers如何工作的" class="headerlink" title="Protocol Buffers如何工作的"></a>Protocol Buffers如何工作的</h2><p>在PB中，有一种.proto类型的文件，用户 在.proto文件中定义PB “Message”来指定所需要序列化的数据的格式。每一个PB Message都是一个小的信息逻辑单元，包含了一些列的name-value对。下面举例说明一个简单地.proto文件，他定义了一条包含一个 Person信息的Message：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line">  required <span class="built_in">string</span> name = <span class="number">1</span>;</span><br><span class="line">  required int32 id = <span class="number">2</span>;</span><br><span class="line">  optional <span class="built_in">string</span> email = <span class="number">3</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">enum</span> PhoneType &#123;</span><br><span class="line">    MOBILE = <span class="number">0</span>;</span><br><span class="line">    HOME = <span class="number">1</span>;</span><br><span class="line">    WORK = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  message PhoneNumber &#123;</span><br><span class="line">    required <span class="built_in">string</span> number = <span class="number">1</span>;</span><br><span class="line">    optional PhoneType type = <span class="number">2</span> [<span class="keyword">default</span> = HOME];</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  repeated PhoneNumber phone = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Protocol-Buffers如何工作的"><a href="#Protocol-Buffers如何工作的" class="headerlink" title="Protocol Buffers如何工作的"></a>Protocol Buffers如何工作的</h2><p>在PB中，有一种.proto类型的文件，用户 在.proto文件中定义PB “Message”来指定所需要序列化的数据的格式。每一个PB Message都是一个小的信息逻辑单元，包含了一些列的name-value对。下面举例说明一个简单地.proto文件，他定义了一条包含一个 Person信息的Message：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line">  required <span class="built_in">string</span> name = <span class="number">1</span>;</span><br><span class="line">  required int32 id = <span class="number">2</span>;</span><br><span class="line">  optional <span class="built_in">string</span> email = <span class="number">3</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">enum</span> PhoneType &#123;</span><br><span class="line">    MOBILE = <span class="number">0</span>;</span><br><span class="line">    HOME = <span class="number">1</span>;</span><br><span class="line">    WORK = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  message PhoneNumber &#123;</span><br><span class="line">    required <span class="built_in">string</span> number = <span class="number">1</span>;</span><br><span class="line">    optional PhoneType type = <span class="number">2</span> [<span class="keyword">default</span> = HOME];</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  repeated PhoneNumber phone = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>如上代码所示，PB message 格式非常简单。每种类型的message包含一个或者多个唯一编码字段，每个字段由名称和值类型组成，值类型可以使数字(整形或者浮点型)，布尔值，字符 串，原始字节，甚至是其他的PB message。PB允许message中包含message，已达到分层嵌套。可以定义可选字段，必填字段以及重复字段。想要了解更多如何 写.proto 文件，可以访问：Protocol Buffer Language Guide</p>
-<p>定 义好PB message后，选择合适语言的PB编译器，编译.proto文件，就可以生成存取数据的相关类。这些类包括简单的设置及读取字段的方法，也包括对整个 数据结构的message与二进制之间的转换。举个例子，如果你使用的语言是java，运行编译器编译上例.proto文件后，生成的类中包含一个 Person类。使用该类，就可以计算，序列化以及检索PB message。如下代码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws IOException </span>&#123;</span><br><span class="line">    Person john = Person</span><br><span class="line">            .newBuilder()</span><br><span class="line">            .setId(<span class="number">1</span>)</span><br><span class="line">            .setName(<span class="string">"john"</span>)</span><br><span class="line">            .setEmail(<span class="string">"john@youku.com"</span>)</span><br><span class="line">            .addPhone(</span><br><span class="line">                PhoneNumber</span><br><span class="line">                    .newBuilder()</span><br><span class="line">                    .setNumber(<span class="string">"1861xxxxxxx"</span>)</span><br><span class="line">                    .setType(PhoneType.WORK)</span><br><span class="line">                    .build())</span><br><span class="line">            .build();</span><br><span class="line">    FileOutputStream output = <span class="keyword">new</span> FileOutputStream(<span class="string">"abc.txt"</span>);</span><br><span class="line">    john.writeTo(output);</span><br><span class="line">    output.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来，你可以用如下代码读取：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws IOException </span>&#123;</span><br><span class="line">    FileInputStream input = <span class="keyword">new</span> FileInputStream(<span class="string">"abc.txt"</span>);</span><br><span class="line">    Person person = Person.parseFrom(input);</span><br><span class="line">    System.out.println(person.getId());</span><br><span class="line">    System.out.println(person.getName());</span><br><span class="line">    System.out.println(person.getEmail());</span><br><span class="line">    System.out.println(person.getPhoneCount());</span><br><span class="line">    System.out.println(person.getPhone(<span class="number">0</span>).getNumber());</span><br><span class="line">    System.out.println(person.getPhone(<span class="number">0</span>).getType());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定 义好PB message后，选择合适语言的PB编译器，编译.proto文件，就可以生成存取数据的相关类。这些类包括简单的设置及读取字段的方法，也包括对整个 数据结构的message与二进制之间的转换。举个例子，如果你使用的语言是java，运行编译器编译上例.proto文件后，生成的类中包含一个 Person类。使用该类，就可以计算，序列化以及检索PB message。如下代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws IOException </span>&#123;</span><br><span class="line">    Person john = Person</span><br><span class="line">            .newBuilder()</span><br><span class="line">            .setId(<span class="number">1</span>)</span><br><span class="line">            .setName(<span class="string">"john"</span>)</span><br><span class="line">            .setEmail(<span class="string">"john@youku.com"</span>)</span><br><span class="line">            .addPhone(</span><br><span class="line">                PhoneNumber</span><br><span class="line">                    .newBuilder()</span><br><span class="line">                    .setNumber(<span class="string">"1861xxxxxxx"</span>)</span><br><span class="line">                    .setType(PhoneType.WORK)</span><br><span class="line">                    .build())</span><br><span class="line">            .build();</span><br><span class="line">    FileOutputStream output = <span class="keyword">new</span> FileOutputStream(<span class="string">"abc.txt"</span>);</span><br><span class="line">    john.writeTo(output);</span><br><span class="line">    output.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，你可以用如下代码读取：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws IOException </span>&#123;</span><br><span class="line">    FileInputStream input = <span class="keyword">new</span> FileInputStream(<span class="string">"abc.txt"</span>);</span><br><span class="line">    Person person = Person.parseFrom(input);</span><br><span class="line">    System.out.println(person.getId());</span><br><span class="line">    System.out.println(person.getName());</span><br><span class="line">    System.out.println(person.getEmail());</span><br><span class="line">    System.out.println(person.getPhoneCount());</span><br><span class="line">    System.out.println(person.getPhone(<span class="number">0</span>).getNumber());</span><br><span class="line">    System.out.println(person.getPhone(<span class="number">0</span>).getType());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>PB是易于扩展的，可以向后兼容的，我们可以在PB message中添加新的字段，这样，在parse的时候，老版本的数据就会简单的忽略新增加的字段。因此，如果现有通信协议使用了PB作为其数据格式，我们可以直接扩展该通信协议，而不必担心这将会破坏现有的代码。</p>
 <p>对于使用.proto文件生成PB 客户端代码，可以参看这方面的完整教程：API Reference section。想要学习了解PB message是如何编码的，可以参见：Protocol Buffer Encoding。</p>
 <h2 id="为什么不直接使用XML呢？"><a href="#为什么不直接使用XML呢？" class="headerlink" title="为什么不直接使用XML呢？"></a>为什么不直接使用XML呢？</h2><p>如果要序列化结构化数据，比起XML，PB实在是有许多的优点可以道道~</p>
-<p>更简单<br>比XML小3~10倍<br>比XML快20~100倍<br>语义定义明确<br>自动生成数据存取类，更容易使用<br>假如我们要模拟一个Person，该对象包含name和email属性，如果用XML，我们定义如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">person</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>John Doe<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">email</span>&gt;</span>jdoe@example.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>对应的，PB如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person &#123;</span><br><span class="line">  name: "John Doe"</span><br><span class="line">  email: "jdoe@example.com"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>更简单<br>比XML小3<del>10倍<br>比XML快20</del>100倍<br>语义定义明确<br>自动生成数据存取类，更容易使用<br>假如我们要模拟一个Person，该对象包含name和email属性，如果用XML，我们定义如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">person</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>John Doe<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">email</span>&gt;</span>jdoe@example.com<span class="tag">&lt;/<span class="name">email</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">person</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对应的，PB如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person &#123;</span><br><span class="line">  name: "John Doe"</span><br><span class="line">  email: "jdoe@example.com"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>请注意：这里仅是PB格式的一种直观表示，真实的PB并非这样存储，实际上，在链路中，PB数据时二进制格式的。</p>
-<p>当这段数据编码为PB二进制格式时，其实际大小大概是28bytes，编码时间为100~200纳秒。如果用XML的话，即使去除空格，大小也至少为69bytes，编码时间大概需要5000~10,000纳秒。</p>
-<p>同样，解析这段代码，PB比XML要方便许多。用PB的话：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">person.getName();</span><br><span class="line">person.getEmail();</span><br></pre></td></tr></table></figure></p>
-<p>而用XML的话：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">personNode.getElementsByTagName("name")</span><br><span class="line">personNode.getElementsByTagName("email")</span><br></pre></td></tr></table></figure></p>
+<p>当这段数据编码为PB二进制格式时，其实际大小大概是28bytes，编码时间为100<del>200纳秒。如果用XML的话，即使去除空格，大小也至少为69bytes，编码时间大概需要5000</del>10,000纳秒。</p>
+<p>同样，解析这段代码，PB比XML要方便许多。用PB的话：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">person.getName();</span><br><span class="line">person.getEmail();</span><br></pre></td></tr></table></figure>
+
+<p>而用XML的话：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">personNode.getElementsByTagName("name")</span><br><span class="line">personNode.getElementsByTagName("email")</span><br></pre></td></tr></table></figure>
+
 <p>相比起来，PB更直接，而且不需要遍历节点等XML操作。</p>
 <p>但是，金无足赤，人无完人，PB也一样。对于有很多标签的，基于文本的数据(例如HTML)，XML就完胜PB。XML是子描述的，可以随机且交错读取读取文本节点。XML是自描述的，而PB不是，PB必须要有格式定义文件(.proto 文件)</p>
-<h2 id="一点历史"><a href="#一点历史" class="headerlink" title="一点历史"></a>一点历史</h2><p>PB由Google开发，最初是用于处理索引服务器的请求/响应协议。在有PB之前，Google使用手动编组和解组的方式来处理请求/相应协议。这种方式需要支持许多版本的协议，这就导致一些代码非常的丑陋，例如：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (version == <span class="number">3</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (version &gt; <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (version == <span class="number">5</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="一点历史"><a href="#一点历史" class="headerlink" title="一点历史"></a>一点历史</h2><p>PB由Google开发，最初是用于处理索引服务器的请求/响应协议。在有PB之前，Google使用手动编组和解组的方式来处理请求/相应协议。这种方式需要支持许多版本的协议，这就导致一些代码非常的丑陋，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (version == <span class="number">3</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (version &gt; <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (version == <span class="number">5</span>) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>另外，这种显示格式的协议同样将新发布的协议版本也搞得非常复杂，因为开发者必须在启用新的协议之前，确认所有的服务器，包括请求的发起者以及实际处理请求者，他们都能够理解新的协议。</p>
 <p>PB即被设计来解决这些问题：</p>
 <p>要可以非常容易的引入新字段，不需要检查数据的中间服务器 能够简单地解析数据，并且无须知道数据所有的字段就可以传输数据。<br>格式能够更加的自描述一些，并且可以被多用语言处理(C ++， Java，Python等)<br>至此，虽然解决了诸多问题，但用户依然需要手写他们的解析及编码代码。</p>
@@ -572,12 +584,31 @@
           
           <div class="social_share">
             
+              
+
+<script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.css">
+
+
+  
+
+
+<div class="likely">
+  
+    <div class="twitter">Tweet</div>
+  
+    <div class="facebook">Share</div>
+  
+    <div class="linkedin">Link</div>
+  
+    <div class="telegram">Send</div>
+  
+</div>
+
             
-              <div id="needsharebutton-postbottom">
-                <span class="btn">
-                  <i class="fa fa-share-alt" aria-hidden="true"></i>
-                </span>
-              </div>
             
           </div>
         
@@ -889,46 +920,8 @@
     
 
     
-      <div id="needsharebutton-float">
-        <span class="btn">
-          <i class="fa fa-share-alt" aria-hidden="true"></i>
-        </span>
-      </div>
-    
 
     
-  
-  
-  <script src="/lib/needsharebutton/needsharebutton.js"></script>
-  <script>
-    
-      pbOptions = {};
-      
-        pbOptions.iconStyle = "box";
-      
-        pbOptions.boxForm = "horizontal";
-      
-        pbOptions.position = "bottomCenter";
-      
-        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      
-      new needShareButton('#needsharebutton-postbottom', pbOptions);
-    
-    
-      flOptions = {};
-      
-        flOptions.iconStyle = "box";
-      
-        flOptions.boxForm = "horizontal";
-      
-        flOptions.position = "middleRight";
-      
-        flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
-      
-      new needShareButton('#needsharebutton-float', flOptions);
-    
-  </script>
-
 
     
 
