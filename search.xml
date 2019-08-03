@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[神经网络参数量(weights)计算]]></title>
     <url>%2F2019%2F08%2F03%2F%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%82%E6%95%B0%E9%87%8F-weights-%E8%AE%A1%E7%AE%97%2F</url>
-    <content type="text"><![CDATA[单位转换$1 bit = 2^8$$1 Byte = 8 bits = 2^8$$1 word = 2 Byte = 22^8$$1 char = 1 Byte = 2^8$$1 int = 4 Byte = 42^8$$1 float = 4 Byte = 4*2^8 $ Feather Map 大小计算以LeNet为例参考资料]]></content>
+    <content type="text"><![CDATA[单位转换1 bit = 2^81 Byte = 8 bits = 2^81 word = 2 Byte = 2x2^81 char = 1 Byte = 2^81 int = 4 Byte = 4x2^81 float = 4 Byte = 4x2^8 Feather Map 大小计算以LeNet为例参考资料]]></content>
       <categories>
         <category>AI</category>
       </categories>
