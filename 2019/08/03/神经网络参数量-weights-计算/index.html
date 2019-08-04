@@ -105,20 +105,20 @@
   };
 </script>
 
-  <meta name="description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Up">
+  <meta name="description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Ups">
 <meta name="keywords" content="AI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络参数量(weights)计算">
 <meta property="og:url" content="https://aimuch.com/2019/08/03/神经网络参数量-weights-计算/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Up">
+<meta property="og:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Ups">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://aimuch.com/2019/08/03/神经网络参数量-weights-计算/AlexNet.png">
 <meta property="og:image" content="https://aimuch.com/2019/08/03/神经网络参数量-weights-计算/AlexNet_60M.png">
-<meta property="og:updated_time" content="2019-08-04T05:07:48.000Z">
+<meta property="og:updated_time" content="2019-08-04T05:17:33.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络参数量(weights)计算">
-<meta name="twitter:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Up">
+<meta name="twitter:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Ups">
 <meta name="twitter:image" content="https://aimuch.com/2019/08/03/神经网络参数量-weights-计算/AlexNet.png">
 
 
@@ -442,7 +442,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-04 13:07:48" itemprop="dateModified" datetime="2019-08-04T13:07:48+08:00">2019-08-04</time>
+                <time title="修改时间：2019-08-04 13:17:33" itemprop="dateModified" datetime="2019-08-04T13:17:33+08:00">2019-08-04</time>
               </span>
             
           
@@ -491,8 +491,9 @@
       
 
       
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
+        <!-- <script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
 
 <p>最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。</p>
 <p><strong>参数量</strong>就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: <strong>卷积层</strong>、<strong>BN层</strong>、<strong>全连接层</strong>等。（注意: 激活函数层(relu等)和Maxpooling层、Upsample层是没有参数的，不需要学习，他们只是提供了一种非线性的变换）</p>
