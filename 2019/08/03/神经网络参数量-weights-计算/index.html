@@ -105,18 +105,22 @@
   };
 </script>
 
-  <meta name="description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。  **参数量**就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: **卷积层**、**BN层**、**全连接层**等。（注意: 激活函数层(relu">
+  <meta name="description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Ups">
 <meta name="keywords" content="AI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络参数量(weights)计算">
 <meta property="og:url" content="https://aimuch.com/2019/08/03/神经网络参数量-weights-计算/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。  **参数量**就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: **卷积层**、**BN层**、**全连接层**等。（注意: 激活函数层(relu">
+<meta property="og:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Ups">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-04T05:25:33.386Z">
+<meta property="og:image" content="http://chart.googleepis.com/chart?cht=tx&chl=\\(K_2 \times C_i \times C_o + C_o\\)">
+<meta property="og:image" content="https://aimuch.com/2019/08/03/神经网络参数量-weights-计算/AlexNet.png">
+<meta property="og:image" content="https://aimuch.com/2019/08/03/神经网络参数量-weights-计算/AlexNet_60M.png">
+<meta property="og:updated_time" content="2019-08-04T05:41:15.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络参数量(weights)计算">
-<meta name="twitter:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。  **参数量**就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: **卷积层**、**BN层**、**全连接层**等。（注意: 激活函数层(relu">
+<meta name="twitter:description" content="最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。 参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Ups">
+<meta name="twitter:image" content="http://chart.googleepis.com/chart?cht=tx&chl=\\(K_2 \times C_i \times C_o + C_o\\)">
 
 
 
@@ -439,7 +443,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-04 13:25:33" itemprop="dateModified" datetime="2019-08-04T13:25:33+08:00">2019-08-04</time>
+                <time title="修改时间：2019-08-04 13:41:15" itemprop="dateModified" datetime="2019-08-04T13:41:15+08:00">2019-08-04</time>
               </span>
             
           
@@ -488,44 +492,26 @@
       
 
       
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        <!-- <script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
 
-
-最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。
-
-**参数量**就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: **卷积层**、**BN层**、**全连接层**等。（注意: 激活函数层(relu等)和Maxpooling层、Upsample层是没有参数的，不需要学习，他们只是提供了一种非线性的变换）
-
-
-# 理论公式部分
-## 存储单位转换
-1 bit = 2^8
-1 Byte = 8 bits = 2^8
-1 word = 2 Byte = 2x2^8
-1 char = 1 Byte = 2^8
-1 int  = 4 Byte = 4x2^8
-**1 float = 4 Byte = 4x2^8**
-
-## 网络知识储备
-1. **卷积层**: \\(K_2 \times C_i \times C_o + C_o\\)
-其中 \\(K\\) 为卷积核大小， \\(C_i\\) 为输入channel数， \\(C_o\\) 为输出的channel数(也是filter的数量)，算式第二项是偏置项的参数量 。(虽然一般不写偏置项，因为不会影响总参数量的数量级，但是我们为了准确起见，把偏置项的参数量也考虑进来）
-
-2. **BN层**:  \\(2 \times C_i\\) ，其中 \\(C_i\\) 为输入的channel数（BN层有两个需要学习的参数，**平移因子**和**缩放因子**）
-
-3. **全连接层**:  \\(T_i \times T_o + T_o\\) ，其中 \\(T_i\\) 为输入向量的长度， \\(T_o\\) 为输出向量的长度，其中第二项为偏置项参数量。 (不过目前全连接层已经逐渐被Global Average Pooling层取代了)
-
-有了公式，是时候干一番大事业了哈哈。我们将以**AlexNet**为例，来实践一下参数量的计算。
-
-# 以AlexNet为例
-得到的结果为：
-
-![AlexNet](AlexNet.png)
-
-![AlexNet 60M](AlexNet_60M.png)
-
-根据上表计算得到的参数量大概为60M, **每个参数按每个`4 bytes`算**，总共有\\(60 \times 4 = 240\\)M, 这与实际上训练产生的model大小一致。
-
-</script>
-
+<p>最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。</p>
+<p><strong>参数量</strong>就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: <strong>卷积层</strong>、<strong>BN层</strong>、<strong>全连接层</strong>等。（注意: 激活函数层(relu等)和Maxpooling层、Upsample层是没有参数的，不需要学习，他们只是提供了一种非线性的变换）</p>
+<h1 id="理论公式部分"><a href="#理论公式部分" class="headerlink" title="理论公式部分"></a>理论公式部分</h1><h2 id="存储单位转换"><a href="#存储单位转换" class="headerlink" title="存储单位转换"></a>存储单位转换</h2><p>1 bit = 2^8<br>1 Byte = 8 bits = 2^8<br>1 word = 2 Byte = 2x2^8<br>1 char = 1 Byte = 2^8<br>1 int  = 4 Byte = 4x2^8<br><strong>1 float = 4 Byte = 4x2^8</strong></p>
+<h2 id="网络知识储备"><a href="#网络知识储备" class="headerlink" title="网络知识储备"></a>网络知识储备</h2><ol>
+<li><p><strong>卷积层</strong>: <img src="http://chart.googleepis.com/chart?cht=tx&chl=\\(K_2 \times C_i \times C_o + C_o\\)" style="border:none;"><br>其中 \(K\) 为卷积核大小， \(C_i\) 为输入channel数， \(C_o\) 为输出的channel数(也是filter的数量)，算式第二项是偏置项的参数量 。(虽然一般不写偏置项，因为不会影响总参数量的数量级，但是我们为了准确起见，把偏置项的参数量也考虑进来）</p>
+</li>
+<li><p><strong>BN层</strong>:  \(2 \times C_i\) ，其中 \(C_i\) 为输入的channel数（BN层有两个需要学习的参数，<strong>平移因子</strong>和<strong>缩放因子</strong>）</p>
+</li>
+<li><p><strong>全连接层</strong>:  \(T_i \times T_o + T_o\) ，其中 \(T_i\) 为输入向量的长度， \(T_o\) 为输出向量的长度，其中第二项为偏置项参数量。 (不过目前全连接层已经逐渐被Global Average Pooling层取代了)</p>
+</li>
+</ol>
+<p>有了公式，是时候干一番大事业了哈哈。我们将以<strong>AlexNet</strong>为例，来实践一下参数量的计算。</p>
+<h1 id="以AlexNet为例"><a href="#以AlexNet为例" class="headerlink" title="以AlexNet为例"></a>以AlexNet为例</h1><p>得到的结果为：</p>
+<p><img src="/2019/08/03/神经网络参数量-weights-计算/AlexNet.png" alt="AlexNet"></p>
+<p><img src="/2019/08/03/神经网络参数量-weights-计算/AlexNet_60M.png" alt="AlexNet 60M"></p>
+<p>根据上表计算得到的参数量大概为60M, <strong>每个参数按每个<code>4 bytes</code>算</strong>，总共有\(60 \times 4 = 240\)M, 这与实际上训练产生的model大小一致。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
 <p><a href="https://zhuanlan.zhihu.com/p/57437131" target="_blank" rel="noopener">神经网络参数量的计算: 以UNet为例</a><br><a href="https://blog.csdn.net/chaipp0607/article/details/72847422" target="_blank" rel="noopener">从AlexNet理解卷积神经网络的一般结构</a><br><a href="https://zhuanlan.zhihu.com/p/49842046" target="_blank" rel="noopener">经典神经网络参数的计算</a></p>
 </blockquote>
@@ -848,7 +834,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#理论公式部分"><span class="nav-number">1.</span> <span class="nav-text">理论公式部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储单位转换"><span class="nav-number">1.1.</span> <span class="nav-text">存储单位转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络知识储备"><span class="nav-number">1.2.</span> <span class="nav-text">网络知识储备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#以AlexNet为例"><span class="nav-number">2.</span> <span class="nav-text">以AlexNet为例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
