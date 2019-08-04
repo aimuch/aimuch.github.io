@@ -16,7 +16,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -171,7 +171,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -182,7 +182,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -424,13 +424,23 @@
                 
               
 
-              <time title="创建时间：2019-08-03 16:22:39 / 修改时间：17:09:36" itemprop="dateCreated datePublished" datetime="2019-08-03T16:22:39+08:00">2019-08-03</time>
+              <time title="创建时间：2019-08-03 16:22:39" itemprop="dateCreated datePublished" datetime="2019-08-03T16:22:39+08:00">2019-08-03</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-04 13:07:48" itemprop="dateModified" datetime="2019-08-04T13:07:48+08:00">2019-08-04</time>
+              </span>
             
           
 
@@ -481,12 +491,13 @@
         
           
             <p>
-              单位转换1 bit = 2^81 Byte = 8 bits = 2^81 word = 2 Byte = 2x2^81 char = 1 Byte = 2^81 int  = 4 Byte = 4x2^81 float = 4 Byte = 4x2^8
-Feather Map 大小计算以LeNet为例参考资料
-
-
-
               
+
+
+最近在估计往TDA4上移植模型的大小，ResNet18实际模型大小大概为44M，而我自己计算的只有11M左右？ 所以就想写一篇文章来讲一下如何计算网络的参数量。为了搞清楚参数量的计算，首先我们先搞清楚参数量的定义。
+参数量就是指，模型所有带参数的层的权重参数总量。视觉类网络组件中带参数的层，主要有: 卷积层、BN层、全连接层等。（注意: 激活函数层(relu等)和Maxpooling层、Upsample层是没有参数的，不需要学习，他们只是提供了一种非线性的变换）
+理论公式部分存储单位转换1 bit = 2^81 Byte = 8 bits = 2^81 word = 2 Byte = 2
+              ...
             </p>
           <!--noindex-->
           
@@ -599,13 +610,23 @@ Feather Map 大小计算以LeNet为例参考资料
                 
               
 
-              <time title="创建时间：2019-08-03 15:14:25 / 修改时间：16:25:27" itemprop="dateCreated datePublished" datetime="2019-08-03T15:14:25+08:00">2019-08-03</time>
+              <time title="创建时间：2019-08-03 15:14:25" itemprop="dateCreated datePublished" datetime="2019-08-03T15:14:25+08:00">2019-08-03</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-04 12:17:20" itemprop="dateModified" datetime="2019-08-04T12:17:20+08:00">2019-08-04</time>
+              </span>
             
           
 
@@ -656,7 +677,12 @@ Feather Map 大小计算以LeNet为例参考资料
         
           
             <p>
-              介绍万向锁通俗点讲就是有两个周重合了。
+              介绍万向锁通俗点讲就是有两个轴重合了。
+
+x: roll
+y: pich
+z: yaw
+
 
 
 
@@ -2319,7 +2345,7 @@ window.addEventListener("message", function(e) {
     $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
   }
 }, false);
-</script>
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
