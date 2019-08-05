@@ -25,7 +25,7 @@
   <entry>
     <title><![CDATA[Gimbal lock(万向锁)]]></title>
     <url>%2F2019%2F08%2F03%2FGimbal-lock-%E4%B8%87%E5%90%91%E9%94%81%2F</url>
-    <content type="text"><![CDATA[介绍万向锁通俗点讲就是有两个轴重合了。 x: roll y: pich z: yaw 参考资料 Gimbal lock YouTube]]></content>
+    <content type="text"><![CDATA[roll,pich,yaw角介绍 x: roll y: pich z: yaw 万向锁万向锁通俗点讲就是有两个轴重合了。 参考资料 Gimbal lock YouTube Airplane control - Roll, Pitch, Yaw]]></content>
       <categories>
         <category>图像处理</category>
       </categories>
