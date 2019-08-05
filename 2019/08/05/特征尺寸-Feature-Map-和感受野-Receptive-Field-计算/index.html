@@ -105,17 +105,18 @@
   };
 </script>
 
-  <meta name="description" content="Engineer. Runner. Music">
+  <meta name="description" content="Feature MapReceptive Field参考资料 如何计算感受野(Receptive Field)——原理特征图尺寸和感受野计算详解卷积神经网络中的感受野计算（译）">
 <meta name="keywords" content="AI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AIMUCH">
-<meta property="og:url" content="https://aimuch.com/archives/2019/07/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特征尺寸(Feature Map)和感受野(Receptive Field)计算">
+<meta property="og:url" content="https://aimuch.com/2019/08/05/特征尺寸-Feature-Map-和感受野-Receptive-Field-计算/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="Engineer. Runner. Music">
+<meta property="og:description" content="Feature MapReceptive Field参考资料 如何计算感受野(Receptive Field)——原理特征图尺寸和感受野计算详解卷积神经网络中的感受野计算（译）">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-05T01:27:25.556Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AIMUCH">
-<meta name="twitter:description" content="Engineer. Runner. Music">
+<meta name="twitter:title" content="特征尺寸(Feature Map)和感受野(Receptive Field)计算">
+<meta name="twitter:description" content="Feature MapReceptive Field参考资料 如何计算感受野(Receptive Field)——原理特征图尺寸和感受野计算详解卷积神经网络中的感受野计算（译）">
 
 
 
@@ -123,7 +124,7 @@
 
   
   
-  <link rel="canonical" href="https://aimuch.com/archives/2019/07/">
+  <link rel="canonical" href="https://aimuch.com/2019/08/05/特征尺寸-Feature-Map-和感受野-Receptive-Field-计算/">
 
 
 
@@ -134,7 +135,7 @@
 </script>
 
   
-  <title>归档 | AIMUCH</title>
+  <title>特征尺寸(Feature Map)和感受野(Receptive Field)计算 | AIMUCH</title>
   
 
 
@@ -182,7 +183,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-archive">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -296,7 +297,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -360,142 +361,243 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+      
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimuch.com/2019/08/05/特征尺寸-Feature-Map-和感受野-Receptive-Field-计算/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Liu">
+      <meta itemprop="description" content="Engineer. Runner. Music">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AIMUCH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">特征尺寸(Feature Map)和感受野(Receptive Field)计算
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-05 09:25:54 / 修改时间：09:27:25" itemprop="dateCreated datePublished" datetime="2019-08-05T09:25:54+08:00">2019-08-05</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      <span class="archive-page-counter">
-        
-        
+      
+
+      
+        <h1 id="Feature-Map"><a href="#Feature-Map" class="headerlink" title="Feature Map"></a>Feature Map</h1><h1 id="Receptive-Field"><a href="#Receptive-Field" class="headerlink" title="Receptive Field"></a>Receptive Field</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/31004121" target="_blank" rel="noopener">如何计算感受野(Receptive Field)——原理</a><br><a href="https://zhuanlan.zhihu.com/p/56940729" target="_blank" rel="noopener">特征图尺寸和感受野计算详解</a><br><a href="https://zhuanlan.zhihu.com/p/26663577" target="_blank" rel="noopener">卷积神经网络中的感受野计算（译）</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
         
           
         
-        嗯..! 目前共计 9 篇日志。 继续努力。
-      </span>
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
+          
+        </div>
       
 
       
+      
+        <div class="post-widgets">
+        
 
-        
-        
         
 
         
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
+          <div class="social_share">
+            
+              
+
+<script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.css">
+
+
+  
+
+
+<div class="likely">
+  
+    <div class="twitter">Tweet</div>
+  
+    <div class="facebook">Share</div>
+  
+    <div class="linkedin">Link</div>
+  
+    <div class="telegram">Send</div>
+  
+</div>
+
+            
+            
           </div>
         
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/elf-file/" itemprop="url">
-            
-              <span itemprop="name">ELF File</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T18:35:23+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        </div>
+      
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/28/Color-Filter-Array/" itemprop="url">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span itemprop="name">Color Filter Array</span>
+              <a href="/2019/08/03/神经网络参数量-weights-计算/" rel="next" title="神经网络参数量(weights)计算">
+                <i class="fa fa-chevron-left"></i> 神经网络参数量(weights)计算
+              </a>
             
-          </a>
-        
-      </h2>
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-28T14:46:38+08:00" content="2019-07-28">
-          07-28
-        </time>
-      </div>
+          <span class="post-nav-divider"></span>
 
-    </header>
-  </article>
-
-
-
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
-    </div>
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
           
+  
+
+
 
         </div>
         
@@ -515,8 +617,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -679,6 +790,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Feature-Map"><span class="nav-number">1.</span> <span class="nav-text">Feature Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Receptive-Field"><span class="nav-number">2.</span> <span class="nav-text">Receptive Field</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -827,6 +955,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   <script src="/js/next-boot.js?v=7.2.0"></script>
 
@@ -890,26 +1022,7 @@
   
 
   
-    
-      
-    
   
-  
-  
-    <script src="/lib/quicklink/quicklink.umd.js"></script>
-    <script>
-      
-        window.addEventListener('load', () => {
-      
-        quicklink({
-          timeout: 3000,
-          priority: true,
-          ignores: [uri => uri.includes('#'),uri => uri == 'https://aimuch.com/archives/2019/07/',]
-        });
-      
-        });
-      
-    </script>
   
 
 
@@ -919,7 +1032,7 @@
   <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
   <script>
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#更多");
   
   </script>
 
