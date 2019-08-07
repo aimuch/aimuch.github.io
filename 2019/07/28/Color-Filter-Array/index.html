@@ -126,7 +126,7 @@
 <meta property="og:image" content="https://aimuch.com/2019/07/28/Color-Filter-Array/rccc.png">
 <meta property="og:image" content="https://aimuch.com/2019/07/28/Color-Filter-Array/rccb.png">
 <meta property="og:image" content="https://aimuch.com/2019/07/28/Color-Filter-Array/monochrome.png">
-<meta property="og:updated_time" content="2019-07-29T12:15:10.828Z">
+<meta property="og:updated_time" content="2019-08-07T06:29:55.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Color Filter Array">
 <meta name="twitter:description" content="概述色彩滤波阵列，英文名 Color Filter Array 或 Color Filter Mosaic ，简称 CFA 或 CFM，是像素传感器上方的一层马赛克覆层，用于采集图像的色彩信息。一般的光电传感器只能感应光的强度，不能区分光的波长（色彩），因此图像传感器需要通过色彩滤波（Color Filter）以获取像素点的色彩信息。 Color Filter 根据波长对光线进行滤波，特定的 Co">
@@ -453,7 +453,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-29 20:15:10" itemprop="dateModified" datetime="2019-07-29T20:15:10+08:00">2019-07-29</time>
+                <time title="修改时间：2019-08-07 14:29:55" itemprop="dateModified" datetime="2019-08-07T14:29:55+08:00">2019-08-07</time>
               </span>
             
           
@@ -508,7 +508,7 @@
 <p>然而，以上过程只能产生灰度图片，不能识别色彩。如 <em>图 1</em> <strong><em>右</em></strong> 所示 Bayer Filter 叠加在感光点上方，只允许特定波长的光进入感光点。理论上，一般图像传感器的每个感光点只能采集三原色（ <strong><em>RGB</em></strong>）的一种颜色，从而丢弃另外 <strong><em>2/3</em></strong> 的光。因此，图像传感器需要通过还原算法，判断每个像素点上另外两种颜色光的强度，最后推算出该像素点的色值。</p>
 <p><img src="/2019/07/28/Color-Filter-Array/light_cavities.png" alt="图1. 感光点示意图"></p>
 <p>根据应用的特点，市场上可能存在不同的 CFA 配置（ <strong><em>Pattern</em></strong>）。在常见的车载前视（Front Camera）应用中，CFA采用 Red-Monochrome（ <strong><em>RCCC</em></strong> ）配置。这种配置中，CFA滤波器结构中包括 3 个空白（ <strong><em>Clear -C</em></strong> ）和 1 个 <strong><em>红光</em></strong> 滤波器。相比于 Bayer Filter 在处理过程中会丢弃 2/3 的光源，<strong><em>RCCC</em></strong> CFA 信号 <strong><em>灵敏度更高</em></strong>，同时通过红色光的强度也足以判断汽车前灯（白色）和尾灯（红色）等情况。</p>
-<h1 id="Bayer-Filter"><a href="#Bayer-Filter" class="headerlink" title="Bayer Filter"></a>Bayer Filter</h1><p>发明于 <strong><em>1976</em></strong> 年的 <strong><em>Bayer Filter</em></strong> 是目前市场上用途最广的CFA，Bayer Filter CFA 配置中包括 <strong><em>1</em></strong> 个浅红色文字：<font color="#ff0000">红</font>光、<strong><em>1</em></strong> 个<font color="#0000ff">蓝</font>光和 <strong><em>2</em></strong> 个<font color="#00ff00">绿</font>光滤波器（25% <font color="#ff0000">R</font>ed, 50% <font color="#00ff00">G</font>reen）, 25% Blu<font color="#0000ff">B</font>。由于人眼天生对于绿色比较敏感，Bayer Filter 设计绿色光通透性要好于其它两种颜色。这种处理方式相比于等同处理RGB三种颜色，它所还原出来的图像，在人眼看来，噪点更低，细节更加清晰。</p>
+<h1 id="Bayer-Filter"><a href="#Bayer-Filter" class="headerlink" title="Bayer Filter"></a>Bayer Filter</h1><p>发明于 <strong><em>1976</em></strong> 年的 <strong><em>Bayer Filter</em></strong> 是目前市场上用途最广的CFA，Bayer Filter CFA 配置中包括 <strong><em>1</em></strong> 个浅红色文字：<font color="#ff0000">红</font>光、<strong><em>2</em></strong> 个<font color="#00ff00">绿</font>光和 <strong><em>1</em></strong> 个<font color="#0000ff">蓝</font>光 滤波器（25% <font color="#ff0000">R</font>ed, 50% <font color="#00ff00">G</font>reen, 25% Blu<font color="#0000ff">B</font>）。由于人眼天生对于绿色比较敏感，Bayer Filter 设计绿色光通透性要好于其它两种颜色。这种处理方式相比于等同处理RGB三种颜色，它所还原出来的图像，在人眼看来，噪点更低，细节更加清晰。</p>
 <p><em>如图</em> <strong><em>2</em></strong> 所示 Bayer Filter 的结构中，两个绿色光滤波器处在对角线位置，它们和红色、蓝色滤波器形成 <strong><em>2x2</em></strong> 的矩阵。</p>
 <p><img src="/2019/07/28/Color-Filter-Array/bayer_filter_structure.png" alt="图2. Bayer Filter CFA结构图"></p>
 <p><em>图 3</em> 表示光源经过 <strong><em>Bayer Filter</em></strong> 后的发生的情况，只有特定颜色的光可以穿过相应颜色的滤波器。（图 <strong><em>1</em></strong> 与图 <strong><em>3</em></strong> 表述原理相近！）</p>
