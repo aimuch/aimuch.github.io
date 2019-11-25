@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[手撕图像仿射变换]]></title>
+    <url>%2F2019%2F11%2F25%2F%E6%89%8B%E6%92%95%E5%9B%BE%E5%83%8F%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2%2F</url>
+    <content type="text"><![CDATA[1234567891011121314151617181920212223242526272829303132333435363738394041424344454647// 功能: 采用双线性插值对图像进行尺寸变换// 参数: // Eigen::Matrix&lt;int, 3, 2&gt; srcPoint 原始图像中的三个不共面的点// Eigen::Matrix&lt;int, 3, 2&gt; dstPoint 目标图像中的三个不共面的点// cv::Mat srcImg 输入图像// cv::Mat dstImg 输出图像// 说明:// 这里需要借助opencv读图像，所以函数的两个参数是opencv的格式void warpAffine(Eigen::Matrix&lt;int, 3, 2&gt; srcPoint, Eigen::Matrix&lt;int, 3, 2&gt; dstPoint, cv::Mat srcImg, cv::Mat dstImg)&#123; // Y = translation x X Eigen::Matrix&lt;float, 3, 3&gt; Y; Eigen::Matrix&lt;float, 3, 3&gt; translation; Eigen::Matrix&lt;float, 3, 3&gt; X; Y &lt;&lt; dstPoint(0,0), dstPoint(1,0), dstPoint(2,0), dstPoint(0,1), dstPoint(1,1), dstPoint(2,1), 1, 1, 1; X &lt;&lt; srcPoint(0,0), srcPoint(1,0), srcPoint(2,0), srcPoint(0,1), srcPoint(1,1), srcPoint(2,1), 1, 1, 1; translation = X * Y.inverse(); // src -&gt; dst // translation = translation.inverse(); // dst - &gt;src // apply transform Eigen::Matrix&lt;float, 3, 1&gt; srcP; Eigen::Matrix&lt;float, 3, 1&gt; dstP; float x, y, tl, tr, dl, dr; int x_, y_; for(int row=0; row&lt;dstImg.rows; row++)&#123; for(int col=0; col&lt;dstImg.cols; col++)&#123; dstP &lt;&lt; row, col, 1; srcP = translation * dstP; x = srcP[0]; y = srcP[1]; x_ = int(x); y_ = int(y); cv::Vec3b val = (1-(x-x_))*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row, col) + (1-(x-x_))*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row, col+1) + (x-x_)*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row+1, col) + (x-x_)*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row+1, col+1); dstImg.at&lt;cv::Vec3b&gt;(row, col) = val; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>图像处理</category>
+      </categories>
+      <tags>
+        <tag>图像处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[手撕image resize]]></title>
     <url>%2F2019%2F11%2F25%2F%E6%89%8B%E6%92%95image-resize%2F</url>
     <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930// 功能: 采用双线性插值对图像进行尺寸变换// 参数: cv::Mat srcImg 输入图像// cv::Mat dstImg 输出图像// 说明:// 这里需要借助opencv读图像，所以函数的两个参数是opencv的格式void warpAffine(cv::Mat srcImg, cv::Mat dstImg)&#123; // apply transform Eigen::Matrix&lt;float, 3, 1&gt; srcP; Eigen::Matrix&lt;float, 3, 1&gt; dstP; float x, y, tl, tr, dl, dr; int x_, y_; for(int row=0; row&lt;dstImg.rows; row++)&#123; for(int col=0; col&lt;dstImg.cols; col++)&#123; dstP &lt;&lt; row, col, 1; srcP = translation * dstP; x = srcP[0]; y = srcP[1]; x_ = int(x); y_ = int(y); cv::Vec3b val = (1-(x-x_))*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row, col) + (1-(x-x_))*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row, col+1) + (x-x_)*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row+1, col) + (x-x_)*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row+1, col+1); dstImg.at&lt;cv::Vec3b&gt;(row, col) = val; &#125; &#125;&#125;]]></content>
@@ -129,8 +140,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>AI</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>
