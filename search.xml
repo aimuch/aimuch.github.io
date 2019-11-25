@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[手撕image resize]]></title>
     <url>%2F2019%2F11%2F25%2F%E6%89%8B%E6%92%95image-resize%2F</url>
-    <content type="text"><![CDATA[12345678910111213141516171819202122232425262728// 功能: 采用双线性插值对图像进行尺寸变换// 参数: cv::Mat srcImg 输入图像// cv::Mat dstImg 输出图像// 说明:// 这里需要借助opencv读图像，所以函数的两个参数是opencv的格式void warpAffine(cv::Mat srcImg, cv::Mat dstImg)&#123; // apply transform Eigen::Matrix&lt;float, 3, 1&gt; srcP; Eigen::Matrix&lt;float, 3, 1&gt; dstP; float x, y, tl, tr, dl, dr; int x_, y_; for(int row=0; row&lt;dstImg.rows; row++)&#123; for(int col=0; col&lt;dstImg.cols; col++)&#123; dstP &lt;&lt; row, col, 1; srcP = translation * dstP; x = srcP[0]; y = srcP[1]; x_ = int(x); y_ = int(y); cv::Vec3b val = (1-(x-x_))*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row, col) + (1-(x-x_))*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row, col+1) + (x-x_)*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row+1, col) + (x-x_)*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row+1, col+1); dstImg.at&lt;cv::Vec3b&gt;(row, col) = val; &#125; &#125;&#125;]]></content>
+    <content type="text"><![CDATA[123456789101112131415161718192021222324252627282930// 功能: 采用双线性插值对图像进行尺寸变换// 参数: cv::Mat srcImg 输入图像// cv::Mat dstImg 输出图像// 说明:// 这里需要借助opencv读图像，所以函数的两个参数是opencv的格式void warpAffine(cv::Mat srcImg, cv::Mat dstImg)&#123; // apply transform Eigen::Matrix&lt;float, 3, 1&gt; srcP; Eigen::Matrix&lt;float, 3, 1&gt; dstP; float x, y, tl, tr, dl, dr; int x_, y_; for(int row=0; row&lt;dstImg.rows; row++)&#123; for(int col=0; col&lt;dstImg.cols; col++)&#123; dstP &lt;&lt; row, col, 1; srcP = translation * dstP; x = srcP[0]; y = srcP[1]; x_ = int(x); y_ = int(y); cv::Vec3b val = (1-(x-x_))*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row, col) + (1-(x-x_))*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row, col+1) + (x-x_)*(1-(y-y_))*srcImg.at&lt;cv::Vec3b&gt;(row+1, col) + (x-x_)*(y-y_)*srcImg.at&lt;cv::Vec3b&gt;(row+1, col+1); dstImg.at&lt;cv::Vec3b&gt;(row, col) = val; &#125; &#125;&#125;]]></content>
       <categories>
         <category>图像处理</category>
       </categories>
@@ -129,8 +129,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>AI</tag>
         <tag>Caffe</tag>
+        <tag>AI</tag>
       </tags>
   </entry>
   <entry>
