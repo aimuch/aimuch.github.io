@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AI Model Optimization</title>
+    <url>/2019/11/26/AI-Model-Optimization/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>AI</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TensorRT Custom Plugin</title>
     <url>/2019/11/26/TensorRT-Custom-Plugin/</url>
     <content><![CDATA[<p><strong>NVIDIA</strong>官方关于<strong>TensorRT</strong>所有的文档: <a href="https://docs.nvidia.com/deeplearning/sdk/tensorrt-archived/index.html" target="_blank" rel="noopener">NVIDIA Deep Learning SDK TensorRT Archives</a></p>
