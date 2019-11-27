@@ -105,18 +105,18 @@
   };
 </script>
 
-  <meta name="description" content="已知旋转角度和旋转点和旋转后向量的模 计算向量的方向； 计算旋转后的角； 讲已知的旋转后向量的模向x和y两个方向投影 旋转点分别加上投影后的长度即可得到旋转后另一端点坐标  1234567891011121314151617181920def vectorTransform(p1, p2, p, angle, l):    &amp;quot;&amp;quot;&amp;quot;    Function:">
+  <meta name="description" content="已知旋转角度和旋转点和旋转后向量的模 计算向量的方向； 计算旋转后的角； 将已知的旋转后向量的模向x和y两个方向投影 旋转点分别加上投影后的长度即可得到旋转后另一端点坐标  1234567891011121314151617181920def vectorTransform(p1, p2, p, angle, l):    &amp;quot;&amp;quot;&amp;quot;    Function:">
 <meta name="keywords" content="图像处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="向量旋转平移">
 <meta property="og:url" content="https://aimuch.com/2019/11/27/向量旋转平移/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="已知旋转角度和旋转点和旋转后向量的模 计算向量的方向； 计算旋转后的角； 讲已知的旋转后向量的模向x和y两个方向投影 旋转点分别加上投影后的长度即可得到旋转后另一端点坐标  1234567891011121314151617181920def vectorTransform(p1, p2, p, angle, l):    &amp;quot;&amp;quot;&amp;quot;    Function:">
+<meta property="og:description" content="已知旋转角度和旋转点和旋转后向量的模 计算向量的方向； 计算旋转后的角； 将已知的旋转后向量的模向x和y两个方向投影 旋转点分别加上投影后的长度即可得到旋转后另一端点坐标  1234567891011121314151617181920def vectorTransform(p1, p2, p, angle, l):    &amp;quot;&amp;quot;&amp;quot;    Function:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-27T07:11:04.463Z">
+<meta property="og:updated_time" content="2019-11-27T07:58:14.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="向量旋转平移">
-<meta name="twitter:description" content="已知旋转角度和旋转点和旋转后向量的模 计算向量的方向； 计算旋转后的角； 讲已知的旋转后向量的模向x和y两个方向投影 旋转点分别加上投影后的长度即可得到旋转后另一端点坐标  1234567891011121314151617181920def vectorTransform(p1, p2, p, angle, l):    &amp;quot;&amp;quot;&amp;quot;    Function:">
+<meta name="twitter:description" content="已知旋转角度和旋转点和旋转后向量的模 计算向量的方向； 计算旋转后的角； 将已知的旋转后向量的模向x和y两个方向投影 旋转点分别加上投影后的长度即可得到旋转后另一端点坐标  1234567891011121314151617181920def vectorTransform(p1, p2, p, angle, l):    &amp;quot;&amp;quot;&amp;quot;    Function:">
 
 
 
@@ -424,7 +424,7 @@
                 
               
 
-              <time title="创建时间：2019-11-27 11:45:36 / 修改时间：15:11:04" itemprop="dateCreated datePublished" datetime="2019-11-27T11:45:36+08:00">2019-11-27</time>
+              <time title="创建时间：2019-11-27 11:45:36 / 修改时间：15:58:14" itemprop="dateCreated datePublished" datetime="2019-11-27T11:45:36+08:00">2019-11-27</time>
             </span>
           
 
@@ -481,7 +481,7 @@
         <h1 id="已知旋转角度和旋转点和旋转后向量的模"><a href="#已知旋转角度和旋转点和旋转后向量的模" class="headerlink" title="已知旋转角度和旋转点和旋转后向量的模"></a>已知旋转角度和旋转点和旋转后向量的模</h1><ol>
 <li>计算向量的方向；</li>
 <li>计算旋转后的角；</li>
-<li>讲已知的旋转后向量的模向x和y两个方向投影</li>
+<li>将已知的旋转后向量的模向x和y两个方向投影</li>
 <li>旋转点分别加上投影后的长度即可得到旋转后另一端点坐标</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def vectorTransform(p1, p2, p, angle, l):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    Function:</span><br><span class="line">        get the point by vector transform</span><br><span class="line">    Parameters:</span><br><span class="line">        p1: [x, y], the start point of vector</span><br><span class="line">        p2: [x, y], the end point of vector</span><br><span class="line">        p: [x, y], the start point of tansform</span><br><span class="line">        angle: radian , +:Counterclockwise, -:Clockwise</span><br><span class="line">        l: distance</span><br><span class="line">    Return:</span><br><span class="line">        transformed point</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    d_l2 = math.sqrt((p2[1]-p1[1])**2+(p2[0]-p1[0])**2)</span><br><span class="line">    unit_vector = [(p2[0]-p1[0])/d_l2, (p2[1]-p1[1])/d_l2]</span><br><span class="line">    vector_angle = math.atan(unit_vector[1]/(unit_vector[0]+1e-20))</span><br><span class="line">    lx = l*math.cos(vector_angle+angle)</span><br><span class="line">    ly = l*math.sin(vector_angle+angle)</span><br><span class="line"></span><br><span class="line">    return [int(p[0]+lx), int(p[1]+ly)]</span><br></pre></td></tr></table></figure>
