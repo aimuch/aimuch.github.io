@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>聚类算法</title>
+    <url>/2019/12/17/%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>向量旋转平移</title>
     <url>/2019/11/27/%E5%90%91%E9%87%8F%E6%97%8B%E8%BD%AC%E5%B9%B3%E7%A7%BB/</url>
     <content><![CDATA[<h1 id="已知旋转角度和旋转点和旋转后向量的模"><a href="#已知旋转角度和旋转点和旋转后向量的模" class="headerlink" title="已知旋转角度和旋转点和旋转后向量的模"></a>已知旋转角度和旋转点和旋转后向量的模</h1><ol>
@@ -501,7 +506,7 @@
 <p><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install7.png" alt="LEDE step7">    </p>
 <p>然后将<strong>option ipaddr 192.168.1.1</strong>改为<strong>option ipaddr 10.10.10.1</strong> :<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-install8.png" alt="LEDE step8">    </p>
 <p>然后重启LEDE虚拟机。    </p>
-<h2 id="LEDE的web端设置"><a href="#LEDE的web端设置" class="headerlink" title="LEDE的web端设置"></a>LEDE的web端设置</h2><p>电脑浏览器打开<strong>10.10.10.10</strong>，默认密码<code>koolshare</code>，进入iKuai的web客户端:<br>网络 -&gt; 接口 -&gt; 关闭WAN -&gt; 关闭WAN6 -&gt; 编辑LAN:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web1.png" alt="LEDE WEB1">    </p>
+<h2 id="LEDE的web端设置"><a href="#LEDE的web端设置" class="headerlink" title="LEDE的web端设置"></a>LEDE的web端设置</h2><p>电脑浏览器打开<strong>10.10.10.1</strong>，默认密码<code>koolshare</code>，进入iKuai的web客户端:<br>网络 -&gt; 接口 -&gt; 关闭WAN -&gt; 关闭WAN6 -&gt; 编辑LAN:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/LEDE-web1.png" alt="LEDE WEB1">    </p>
 <p>LAN -&gt; 物理接口 -&gt; 接口 -&gt; <strong>选中</strong>:   </p>
 <ul>
 <li>bond0</li>
@@ -819,8 +824,8 @@
         <category>Caffe</category>
       </categories>
       <tags>
-        <tag>Caffe</tag>
         <tag>AI</tag>
+        <tag>Caffe</tag>
       </tags>
   </entry>
   <entry>

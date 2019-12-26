@@ -105,18 +105,18 @@
   };
 </script>
 
-  <meta name="description" content="记录训练日志训练阶段需要加上-log_dir ./log/, 其中./log/为log文件存放文件文件夹：     1~/caffe/build/tools/caffe train --solver=~/caffe/examples/mydata/slot_classifier/solver.prototxt -log_dir ./log/  解析训练日志将caffe/tools/extra文件夹">
+  <meta name="description" content="Engineer. Runner. Music">
 <meta name="keywords" content="AI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Caffe模型训练数据可视化">
-<meta property="og:url" content="https://aimuch.com/2019/11/12/Caffe模型训练数据可视化/index.html">
+<meta property="og:title" content="聚类算法">
+<meta property="og:url" content="https://aimuch.com/2019/12/17/聚类算法/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="记录训练日志训练阶段需要加上-log_dir ./log/, 其中./log/为log文件存放文件文件夹：     1~/caffe/build/tools/caffe train --solver=~/caffe/examples/mydata/slot_classifier/solver.prototxt -log_dir ./log/  解析训练日志将caffe/tools/extra文件夹">
+<meta property="og:description" content="Engineer. Runner. Music">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-12T01:11:50.483Z">
+<meta property="og:updated_time" content="2019-12-17T09:51:24.075Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Caffe模型训练数据可视化">
-<meta name="twitter:description" content="记录训练日志训练阶段需要加上-log_dir ./log/, 其中./log/为log文件存放文件文件夹：     1~/caffe/build/tools/caffe train --solver=~/caffe/examples/mydata/slot_classifier/solver.prototxt -log_dir ./log/  解析训练日志将caffe/tools/extra文件夹">
+<meta name="twitter:title" content="聚类算法">
+<meta name="twitter:description" content="Engineer. Runner. Music">
 
 
 
@@ -124,7 +124,7 @@
 
   
   
-  <link rel="canonical" href="https://aimuch.com/2019/11/12/Caffe模型训练数据可视化/">
+  <link rel="canonical" href="https://aimuch.com/2019/12/17/聚类算法/">
 
 
 
@@ -135,7 +135,7 @@
 </script>
 
   
-  <title>Caffe模型训练数据可视化 | AIMUCH</title>
+  <title>聚类算法 | AIMUCH</title>
   
 
 
@@ -381,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aimuch.com/2019/11/12/Caffe模型训练数据可视化/">
+    <link itemprop="mainEntityOfPage" href="https://aimuch.com/2019/12/17/聚类算法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andy Liu">
@@ -398,7 +398,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Caffe模型训练数据可视化
+          <h1 class="post-title" itemprop="name headline">聚类算法
 
               
             
@@ -424,31 +424,12 @@
                 
               
 
-              <time title="创建时间：2019-11-12 09:10:26 / 修改时间：09:11:50" itemprop="dateCreated datePublished" datetime="2019-11-12T09:10:26+08:00">2019-11-12</time>
+              <time title="创建时间：2019-12-17 17:51:24" itemprop="dateCreated datePublished" datetime="2019-12-17T17:51:24+08:00">2019-12-17</time>
             </span>
           
 
           
-            
 
-            
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -478,33 +459,7 @@
       
 
       
-        <h1 id="记录训练日志"><a href="#记录训练日志" class="headerlink" title="记录训练日志"></a>记录训练日志</h1><p>训练阶段需要加上<code>-log_dir ./log/</code>, 其中<code>./log/</code>为log文件存放文件文件夹：    </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/caffe/build/tools/caffe train --solver=~/caffe/examples/mydata/slot_classifier/solver.prototxt -log_dir ./<span class="built_in">log</span>/</span><br></pre></td></tr></table></figure>
-
-<h1 id="解析训练日志"><a href="#解析训练日志" class="headerlink" title="解析训练日志"></a>解析训练日志</h1><p>将<code>caffe/tools/extra</code>文件夹下的<code>extract_seconds.py</code>, <code>parse_log.py</code>, <code>parse_log.sh</code>, <code>plot_training_log.py.example</code>拷贝到上述的<code>./log/</code>文件夹下.</p>
-<h2 id="分步法"><a href="#分步法" class="headerlink" title="分步法"></a>分步法</h2><ol>
-<li><p><del>修改日志文件名删除<code>caffe.hostname.username.log</code>之后的<code>.INFO.XXXX</code>，保存为<code>caffe.hostname.username.log</code>文件</del> 创建软连接<code>ln -s caffe.hostname.username.log</code>(<code>hostname</code>和<code>username</code>具体根据个人电脑, 下面依然)；    </p>
-</li>
-<li><p>执行: <code>/parse_log.sh caffe.hostname.username.log</code> , 这样就会在当前文件夹下生成一个<code>.train</code>文件和一个<code>.test</code>文件;    </p>
-</li>
-<li><p>执行:    </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./plot_training_log.py.example 0  save.png caffe.hostname.username.log</span><br></pre></td></tr></table></figure>
-
-<p>就可以生成训练过程中的<code>Test accuracy  vs. Iters</code> 曲线,其中<code>0</code>代表曲线类型， <code>save.png</code> 代表保存的图片名称, caffe中支持很多种曲线绘制，通过指定不同的类型参数即可，具体参数如下:    </p>
- <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Note<span class="variable">s:</span></span><br><span class="line">   <span class="number">1</span>. Supporting multiple logs.</span><br><span class="line">   <span class="number">2</span>. Log <span class="keyword">file</span> name must end with the lower-cased <span class="string">".log"</span>.</span><br><span class="line">Supported chart <span class="built_in">type</span><span class="variable">s:</span></span><br><span class="line">    <span class="number">0</span>: Test accuracy  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">1</span>: Test accuracy  <span class="keyword">vs</span>. Seconds</span><br><span class="line">    <span class="number">2</span>: Test loss  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">3</span>: Test loss  <span class="keyword">vs</span>. Seconds</span><br><span class="line">    <span class="number">4</span>: Train learning rate  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">5</span>: Train learning rate  <span class="keyword">vs</span>. Seconds</span><br><span class="line">    <span class="number">6</span>: Train loss  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">7</span>: Train loss  <span class="keyword">vs</span>. Seconds</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="一步法"><a href="#一步法" class="headerlink" title="一步法"></a>一步法</h2><ol>
-<li><p>创建软连接 <code>ln -s caffe.hostname.username.log</code> ( <code>hostname</code> 和 <code>username</code> 具体根据个人电脑, 下面依然)；</p>
-</li>
-<li><p>运行:   </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./plot_training_log.py  [数字选项] 图片名.png ./caffe.log</span><br></pre></td></tr></table></figure>
-
-<p>其中<strong>数字选项如下:</strong>   </p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Note<span class="variable">s:</span></span><br><span class="line">   <span class="number">1</span>. Supporting multiple logs.</span><br><span class="line">   <span class="number">2</span>. Log <span class="keyword">file</span> name must end with the lower-cased <span class="string">".log"</span>.</span><br><span class="line">Supported chart <span class="built_in">type</span><span class="variable">s:</span></span><br><span class="line">    <span class="number">0</span>: Test accuracy  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">1</span>: Test accuracy  <span class="keyword">vs</span>. Seconds</span><br><span class="line">    <span class="number">2</span>: Test loss  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">3</span>: Test loss  <span class="keyword">vs</span>. Seconds</span><br><span class="line">    <span class="number">4</span>: Train learning rate  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">5</span>: Train learning rate  <span class="keyword">vs</span>. Seconds</span><br><span class="line">    <span class="number">6</span>: Train loss  <span class="keyword">vs</span>. Iters</span><br><span class="line">    <span class="number">7</span>: Train loss  <span class="keyword">vs</span>. Seconds</span><br></pre></td></tr></table></figure></li>
-</ol>
-
+        
       
     </div>
 
@@ -532,15 +487,6 @@
     
 
     <footer class="post-footer">
-      
-        
-          
-        
-        <div class="post-tags">
-          
-            <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
-          
-        </div>
       
 
       
@@ -590,8 +536,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/12/GL-iNet-AR750-官方固件安装SSR-Plus-插件/" rel="next" title="GL-iNet AR750 官方固件安装SSR Plus 插件">
-                <i class="fa fa-chevron-left"></i> GL-iNet AR750 官方固件安装SSR Plus 插件
+              <a href="/2019/11/27/向量旋转平移/" rel="next" title="向量旋转平移">
+                <i class="fa fa-chevron-left"></i> 向量旋转平移
               </a>
             
           </div>
@@ -599,10 +545,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/19/NanoPi-R1烧写lede固件到eMMC/" rel="prev" title="NanoPi-R1烧写lede固件到eMMC">
-                NanoPi-R1烧写lede固件到eMMC <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -644,17 +586,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -822,23 +755,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#记录训练日志"><span class="nav-number">1.</span> <span class="nav-text">记录训练日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解析训练日志"><span class="nav-number">2.</span> <span class="nav-text">解析训练日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分步法"><span class="nav-number">2.1.</span> <span class="nav-text">分步法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一步法"><span class="nav-number">2.2.</span> <span class="nav-text">一步法</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
