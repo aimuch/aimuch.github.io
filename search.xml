@@ -443,6 +443,10 @@
 <li>电源: 技嘉12V</li>
 </ul>
 <h1 id="网络拓扑图"><a href="#网络拓扑图" class="headerlink" title="网络拓扑图"></a>网络拓扑图</h1><p><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/network-topology.png" alt="网络拓扑图">    </p>
+<ul>
+<li>第1个网口设置为后台管理口；    </li>
+<li>第6个网口为wan口    </li>
+</ul>
 <h1 id="ESXi"><a href="#ESXi" class="headerlink" title="ESXi"></a>ESXi</h1><h2 id="下载ESXi"><a href="#下载ESXi" class="headerlink" title="下载ESXi"></a>下载ESXi</h2><p>到VMWare官方网站<a href="https://my.vmware.com/cn/web/vmware/info/slug/datacenter_cloud_infrastructure/vmware_vsphere/6_7" target="_blank" rel="noopener">下载ESXi 6.7版本</a>，下载的时候需要注册账号，然后申请试用，序列号请自行购买正版(或Google)。</p>
 <h2 id="制作启动U盘"><a href="#制作启动U盘" class="headerlink" title="制作启动U盘"></a>制作启动U盘</h2><ul>
 <li><p><strong>用老毛桃工具</strong><br>到老毛桃官网下载<a href="http://www.laomaotao.org/" target="_blank" rel="noopener">装机版老毛桃软件</a>:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao.png" alt="下载装机版老毛桃"><br>然后用老毛桃烧写U盘:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao1.png" alt="老毛桃烧写U盘"><br>在烧写好的U盘根目录中创建一个名字为<strong>MYEXT</strong>的文件夹，将下载的ESXi的ISO镜像放入该文件夹下:<br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao2.png" alt="创建MYEXT文件夹"><br><img src="/2019/03/26/ESXi下安装iKuai和LEDE双软路由/laomaotao3.png" alt="MYEXT文件夹放入镜像">    </p>
