@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="介绍Model Garden for TensorFlow 是一个存储库, 其中包含许多针对 TensorFlow 用户的最新（SOTA）模型和建模解决方案的实现。 旨在演示建模的最佳实践, 以便 TensorFlow 用户可以充分利用 TensorFlow 进行研究和产品开发。 代码分为以下三部分:  official : 使用最新的 TensorFlow 2 的高级 API 的 SOTA 模型">
+<meta name="keywords" content="AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow models workflow">
+<meta property="og:url" content="https://aimuch.com/2020/06/24/Tensorflow-models-workflow/index.html">
+<meta property="og:site_name" content="AIMUCH">
+<meta property="og:description" content="介绍Model Garden for TensorFlow 是一个存储库, 其中包含许多针对 TensorFlow 用户的最新（SOTA）模型和建模解决方案的实现。 旨在演示建模的最佳实践, 以便 TensorFlow 用户可以充分利用 TensorFlow 进行研究和产品开发。 代码分为以下三部分:  official : 使用最新的 TensorFlow 2 的高级 API 的 SOTA 模型">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-11-26T08:07:24.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tensorflow models workflow">
+<meta name="twitter:description" content="介绍Model Garden for TensorFlow 是一个存储库, 其中包含许多针对 TensorFlow 用户的最新（SOTA）模型和建模解决方案的实现。 旨在演示建模的最佳实践, 以便 TensorFlow 用户可以充分利用 TensorFlow 进行研究和产品开发。 代码分为以下三部分:  official : 使用最新的 TensorFlow 2 的高级 API 的 SOTA 模型">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://aimuch.com/2020/06/24/Tensorflow-models-workflow/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>Tensorflow models workflow | AIMUCH</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AIMUCH</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">好记性不如烂笔头</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">12</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">24</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/aimuch" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aimuch.com/2020/06/24/Tensorflow-models-workflow/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andy Liu">
+      <meta itemprop="description" content="Engineer. Runner. Music">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AIMUCH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Tensorflow models workflow
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-24 21:53:32" itemprop="dateCreated datePublished" datetime="2020-06-24T21:53:32+08:00">2020-06-24</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-11-26 16:07:24" itemprop="dateModified" datetime="2020-11-26T16:07:24+08:00">2020-11-26</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><a href="https://github.com/tensorflow/models" target="_blank" rel="noopener">Model Garden for TensorFlow</a> 是一个存储库, 其中包含许多针对 <code>TensorFlow</code> 用户的最新（<code>SOTA</code>）模型和建模解决方案的实现。 旨在演示建模的最佳实践, 以便 <code>TensorFlow</code> 用户可以充分利用 <code>TensorFlow</code> 进行研究和产品开发。</p>
+<p>代码分为以下三部分:</p>
+<ul>
+<li><strong>official</strong> : 使用最新的 <code>TensorFlow 2</code> 的高级 <code>API</code> 的 <code>SOTA</code> 模型的示例实现示例集合, 由 <code>TensorFlow</code> 官方维护, 支持并保持最新的 <code>TensorFlow 2 API</code>, 经过合理优化的快速性能, 同时仍易于阅读;</li>
+<li><strong>research</strong> : 研究人员在 <code>TensorFlow 1</code> 或 <code>2</code> 中收集研究模型的实现, 由研究人员维护和支持;</li>
+<li><strong>community</strong> : 由 <code>TensorFlow 2</code> 提供支持的 <code>GitHub</code> 存储库的精选列表以及机器学习模型和实现.</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="使用-official"><a href="#使用-official" class="headerlink" title="使用 official"></a>使用 official</h2><p>具体使用可以到 <a href="https://github.com/tensorflow/models/tree/master/official" target="_blank" rel="noopener">official</a> 中找到与自己项目比较接近的参考安装和使用,  官方介绍的都很详细, 这里就不在啰嗦了.</p>
+<h2 id="使用-research"><a href="#使用-research" class="headerlink" title="使用 research"></a>使用 research</h2><p>这里以<strong>目标检测</strong>为例介绍。</p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><h4 id="安装以下Python库"><a href="#安装以下Python库" class="headerlink" title="安装以下Python库"></a>安装以下Python库</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Protobuf <span class="number">3.0</span>.<span class="number">0</span></span><br><span class="line">Python-tk</span><br><span class="line">Pillow <span class="number">1.0</span></span><br><span class="line">lxml</span><br><span class="line"><span class="keyword">tf</span>-slim (http<span class="variable">s:</span>//github.<span class="keyword">com</span>/google-research/<span class="keyword">tf</span>-slim)</span><br><span class="line">slim (which <span class="keyword">is</span> included in the <span class="string">"tensorflow/models/research/"</span> checkout)</span><br><span class="line">Jupyter notebook</span><br><span class="line">Matplotlib</span><br><span class="line">Tensorflow (<span class="number">1.15</span>.<span class="number">0</span>)</span><br><span class="line">Cython</span><br><span class="line">contextlib2</span><br><span class="line">cocoapi</span><br></pre></td></tr></table></figure>
+
+<h4 id="COCO-API"><a href="#COCO-API" class="headerlink" title="COCO API"></a>COCO API</h4><p>为了使用 <code>COCO</code> 数据集的评价指标，需要安装 <code>COCO</code> 数据集的 <code>API</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/cocodataset/cocoapi.git</span><br><span class="line">cd cocoapi/PythonAPI</span><br><span class="line">make</span><br><span class="line">cp -r pycocotools &lt;path_to_tensorflow&gt;/models/research/</span><br></pre></td></tr></table></figure>
+
+<p>或者直接运行以下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --user pycocotools</span><br></pre></td></tr></table></figure>
+
+<h4 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> From tensorflow/models/research/</span></span><br><span class="line">protoc object_detection/protos/*.proto --python_out=.</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置-PYTHONPATH"><a href="#设置-PYTHONPATH" class="headerlink" title="设置 PYTHONPATH"></a>设置 PYTHONPATH</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> From tensorflow/models/research/</span></span><br><span class="line">export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim</span><br></pre></td></tr></table></figure>
+
+<h4 id="验证安装是否成功"><a href="#验证安装是否成功" class="headerlink" title="验证安装是否成功"></a>验证安装是否成功</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> If using Tensorflow 1.X:</span></span><br><span class="line">python object_detection/builders/model_builder_tf1_test.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="推荐的训练和验证文件结构树"><a href="#推荐的训练和验证文件结构树" class="headerlink" title="推荐的训练和验证文件结构树"></a>推荐的训练和验证文件结构树</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+data</span><br><span class="line">  -label_map <span class="keyword">file</span></span><br><span class="line">  -train TFRecord <span class="keyword">file</span></span><br><span class="line">  -<span class="built_in">eval</span> TFRecord <span class="keyword">file</span></span><br><span class="line">+models</span><br><span class="line">  + model</span><br><span class="line">    -pipeline config <span class="keyword">file</span></span><br><span class="line">    +train</span><br><span class="line">    +<span class="built_in">eval</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> From the tensorflow/models/research/ directory</span></span><br><span class="line">PIPELINE_CONFIG_PATH=&#123;path to pipeline config file&#125;</span><br><span class="line">MODEL_DIR=&#123;path to model directory&#125;</span><br><span class="line">NUM_TRAIN_STEPS=50000</span><br><span class="line">SAMPLE_1_OF_N_EVAL_EXAMPLES=1</span><br><span class="line"></span><br><span class="line">python object_detection/model_main.py \</span><br><span class="line">    --pipeline_config_path=$&#123;PIPELINE_CONFIG_PATH&#125; \</span><br><span class="line">    --model_dir=$&#123;MODEL_DIR&#125; \</span><br><span class="line">    --num_train_steps=$&#123;NUM_TRAIN_STEPS&#125; \</span><br><span class="line">    --sample_1_of_n_eval_examples=$SAMPLE_1_OF_N_EVAL_EXAMPLES \</span><br><span class="line">    --alsologtostderr</span><br></pre></td></tr></table></figure>
+
+<p>where <code>${PIPELINE_CONFIG_PATH}</code> points to the pipeline config and <code>${MODEL_DIR}</code> points to the directory in which training checkpoints and events will be written to. Note that this binary will interleave both training and evaluation.</p>
+<ul>
+<li><p>目标检测的配置文件样例在: <code>models/research/object_detection/samples/configs/</code> 下；</p>
+</li>
+<li><p>若模型保存的数量不满足要求，则需要自己修改 <code>models/research/object_detection/model_main.py</code> 文件:</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copyright 2017 The TensorFlow Authors. All Rights Reserved.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Licensed under the Apache License, Version 2.0 (the "License");</span></span><br><span class="line"><span class="comment"># you may not use this file except in compliance with the License.</span></span><br><span class="line"><span class="comment"># You may obtain a copy of the License at</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#     http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment"># distributed under the License is distributed on an "AS IS" BASIS,</span></span><br><span class="line"><span class="comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="comment"># See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="comment"># limitations under the License.</span></span><br><span class="line"><span class="comment"># ==============================================================================</span></span><br><span class="line"><span class="string">"""Binary to run train and evaluation on object detection model."""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> absl <span class="keyword">import</span> flags</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow.compat.v1 <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> object_detection <span class="keyword">import</span> model_hparams</span><br><span class="line"><span class="keyword">from</span> object_detection <span class="keyword">import</span> model_lib</span><br><span class="line"></span><br><span class="line">flags.DEFINE_string(</span><br><span class="line">    <span class="string">'model_dir'</span>, <span class="keyword">None</span>, <span class="string">'Path to output model directory '</span></span><br><span class="line">    <span class="string">'where event and checkpoint files will be written.'</span>)</span><br><span class="line">flags.DEFINE_string(<span class="string">'pipeline_config_path'</span>, <span class="keyword">None</span>, <span class="string">'Path to pipeline config '</span></span><br><span class="line">                    <span class="string">'file.'</span>)</span><br><span class="line">flags.DEFINE_integer(<span class="string">'num_train_steps'</span>, <span class="keyword">None</span>, <span class="string">'Number of train steps.'</span>)</span><br><span class="line">flags.DEFINE_boolean(<span class="string">'eval_training_data'</span>, <span class="keyword">False</span>,</span><br><span class="line">                    <span class="string">'If training data should be evaluated for this job. Note '</span></span><br><span class="line">                    <span class="string">'that one call only use this in eval-only mode, and '</span></span><br><span class="line">                    <span class="string">'`checkpoint_dir` must be supplied.'</span>)</span><br><span class="line">flags.DEFINE_integer(<span class="string">'sample_1_of_n_eval_examples'</span>, <span class="number">1</span>, <span class="string">'Will sample one of '</span></span><br><span class="line">                    <span class="string">'every n eval input examples, where n is provided.'</span>)</span><br><span class="line">flags.DEFINE_integer(<span class="string">'sample_1_of_n_eval_on_train_examples'</span>, <span class="number">5</span>, <span class="string">'Will sample '</span></span><br><span class="line">                    <span class="string">'one of every n train input examples for evaluation, '</span></span><br><span class="line">                    <span class="string">'where n is provided. This is only used if '</span></span><br><span class="line">                    <span class="string">'`eval_training_data` is True.'</span>)</span><br><span class="line">flags.DEFINE_string(</span><br><span class="line">    <span class="string">'hparams_overrides'</span>, <span class="keyword">None</span>, <span class="string">'Hyperparameter overrides, '</span></span><br><span class="line">    <span class="string">'represented as a string containing comma-separated '</span></span><br><span class="line">    <span class="string">'hparam_name=value pairs.'</span>)</span><br><span class="line">flags.DEFINE_string(</span><br><span class="line">    <span class="string">'checkpoint_dir'</span>, <span class="keyword">None</span>, <span class="string">'Path to directory holding a checkpoint.  If '</span></span><br><span class="line">    <span class="string">'`checkpoint_dir` is provided, this binary operates in eval-only mode, '</span></span><br><span class="line">    <span class="string">'writing resulting metrics to `model_dir`.'</span>)</span><br><span class="line">flags.DEFINE_boolean(</span><br><span class="line">    <span class="string">'run_once'</span>, <span class="keyword">False</span>, <span class="string">'If running in eval-only mode, whether to run just '</span></span><br><span class="line">    <span class="string">'one round of eval vs running continuously (default).'</span></span><br><span class="line">)</span><br><span class="line">flags.DEFINE_integer(</span><br><span class="line">    <span class="string">'max_eval_retries'</span>, <span class="number">0</span>, <span class="string">'If running continuous eval, the maximum number of '</span></span><br><span class="line">    <span class="string">'retries upon encountering tf.errors.InvalidArgumentError. If negative, '</span></span><br><span class="line">    <span class="string">'will always retry the evaluation.'</span></span><br><span class="line">)</span><br><span class="line">FLAGS = flags.FLAGS</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(unused_argv)</span>:</span></span><br><span class="line">    flags.mark_flag_as_required(<span class="string">'model_dir'</span>)</span><br><span class="line">    flags.mark_flag_as_required(<span class="string">'pipeline_config_path'</span>)</span><br><span class="line">    config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir) <span class="comment"># 需要根据实际情况修改输入参数</span></span><br><span class="line"></span><br><span class="line">    train_and_eval_dict = model_lib.create_estimator_and_inputs(</span><br><span class="line">        run_config=config,</span><br><span class="line">        hparams=model_hparams.create_hparams(FLAGS.hparams_overrides),</span><br><span class="line">        pipeline_config_path=FLAGS.pipeline_config_path,</span><br><span class="line">        train_steps=FLAGS.num_train_steps,</span><br><span class="line">        sample_1_of_n_eval_examples=FLAGS.sample_1_of_n_eval_examples,</span><br><span class="line">        sample_1_of_n_eval_on_train_examples=(</span><br><span class="line">            FLAGS.sample_1_of_n_eval_on_train_examples))</span><br><span class="line">    estimator = train_and_eval_dict[<span class="string">'estimator'</span>]</span><br><span class="line">    train_input_fn = train_and_eval_dict[<span class="string">'train_input_fn'</span>]</span><br><span class="line">    eval_input_fns = train_and_eval_dict[<span class="string">'eval_input_fns'</span>]</span><br><span class="line">    eval_on_train_input_fn = train_and_eval_dict[<span class="string">'eval_on_train_input_fn'</span>]</span><br><span class="line">    predict_input_fn = train_and_eval_dict[<span class="string">'predict_input_fn'</span>]</span><br><span class="line">    train_steps = train_and_eval_dict[<span class="string">'train_steps'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> FLAGS.checkpoint_dir:</span><br><span class="line">        <span class="keyword">if</span> FLAGS.eval_training_data:</span><br><span class="line">        name = <span class="string">'training_data'</span></span><br><span class="line">        input_fn = eval_on_train_input_fn</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">        name = <span class="string">'validation_data'</span></span><br><span class="line">        <span class="comment"># The first eval input will be evaluated.</span></span><br><span class="line">        input_fn = eval_input_fns[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> FLAGS.run_once:</span><br><span class="line">        estimator.evaluate(input_fn,</span><br><span class="line">                            steps=<span class="keyword">None</span>,</span><br><span class="line">                            checkpoint_path=tf.train.latest_checkpoint(</span><br><span class="line">                                FLAGS.checkpoint_dir))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">        model_lib.continuous_eval(estimator, FLAGS.checkpoint_dir, input_fn,</span><br><span class="line">                                    train_steps, name, FLAGS.max_eval_retries)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        train_spec, eval_specs = model_lib.create_train_and_eval_specs(</span><br><span class="line">            train_input_fn,</span><br><span class="line">            eval_input_fns,</span><br><span class="line">            eval_on_train_input_fn,</span><br><span class="line">            predict_input_fn,</span><br><span class="line">            train_steps,</span><br><span class="line">            eval_on_train_data=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Currently only a single Eval Spec is allowed.</span></span><br><span class="line">        tf.estimator.train_and_evaluate(estimator, train_spec, eval_specs[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">tf.app.run()</span><br></pre></td></tr></table></figure>
+
+<p>  其中 <code>tf.estimator.RunConfig</code> 函数的定义如下:</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RunConfig</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="string">"""This class specifies the configurations for an `Estimator` run."""</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,</span></span></span><br><span class="line"><span class="function"><span class="params">            model_dir=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            tf_random_seed=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            save_summary_steps=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            save_checkpoints_steps=_USE_DEFAULT,</span></span></span><br><span class="line"><span class="function"><span class="params">            save_checkpoints_secs=_USE_DEFAULT,</span></span></span><br><span class="line"><span class="function"><span class="params">            session_config=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            keep_checkpoint_max=<span class="number">5</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            keep_checkpoint_every_n_hours=<span class="number">10000</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            log_step_count_steps=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            train_distribute=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            device_fn=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            protocol=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            eval_distribute=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            experimental_distribute=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            experimental_max_worker_delay_secs=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            session_creation_timeout_secs=<span class="number">7200</span>)</span>:</span></span><br><span class="line">    <span class="string">"""Constructs a RunConfig.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    All distributed training related properties `cluster_spec`, `is_chief`,</span></span><br><span class="line"><span class="string">    `master` , `num_worker_replicas`, `num_ps_replicas`, `task_id`, and</span></span><br><span class="line"><span class="string">    `task_type` are set based on the `TF_CONFIG` environment variable, if the</span></span><br><span class="line"><span class="string">    pertinent information is present. The `TF_CONFIG` environment variable is a</span></span><br><span class="line"><span class="string">    JSON object with attributes: `cluster` and `task`.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    `cluster` is a JSON serialized version of `ClusterSpec`'s Python dict from</span></span><br><span class="line"><span class="string">    `server_lib.py`, mapping task types (usually one of the `TaskType` enums) to</span></span><br><span class="line"><span class="string">    a list of task addresses.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    `task` has two attributes: `type` and `index`, where `type` can be any of</span></span><br><span class="line"><span class="string">    the task types in `cluster`. When `TF_CONFIG` contains said information,</span></span><br><span class="line"><span class="string">    the following properties are set on this class:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    * `cluster_spec` is parsed from `TF_CONFIG['cluster']`. Defaults to &#123;&#125;. If</span></span><br><span class="line"><span class="string">    present, must have one and only one node in the `chief` attribute of</span></span><br><span class="line"><span class="string">    `cluster_spec`.</span></span><br><span class="line"><span class="string">    * `task_type` is set to `TF_CONFIG['task']['type']`. Must set if</span></span><br><span class="line"><span class="string">    `cluster_spec` is present; must be `worker` (the default value) if</span></span><br><span class="line"><span class="string">    `cluster_spec` is not set.</span></span><br><span class="line"><span class="string">    * `task_id` is set to `TF_CONFIG['task']['index']`. Must set if</span></span><br><span class="line"><span class="string">    `cluster_spec` is present; must be 0 (the default value) if</span></span><br><span class="line"><span class="string">    `cluster_spec` is not set.</span></span><br><span class="line"><span class="string">    * `master` is determined by looking up `task_type` and `task_id` in the</span></span><br><span class="line"><span class="string">    `cluster_spec`. Defaults to ''.</span></span><br><span class="line"><span class="string">    * `num_ps_replicas` is set by counting the number of nodes listed</span></span><br><span class="line"><span class="string">    in the `ps` attribute of `cluster_spec`. Defaults to 0.</span></span><br><span class="line"><span class="string">    * `num_worker_replicas` is set by counting the number of nodes listed</span></span><br><span class="line"><span class="string">    in the `worker` and `chief` attributes of `cluster_spec`. Defaults to 1.</span></span><br><span class="line"><span class="string">    * `is_chief` is determined based on `task_type` and `cluster`.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    There is a special node with `task_type` as `evaluator`, which is not part</span></span><br><span class="line"><span class="string">    of the (training) `cluster_spec`. It handles the distributed evaluation job.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Example of non-chief node:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    cluster = &#123;'chief': ['host0:2222'],</span></span><br><span class="line"><span class="string">                'ps': ['host1:2222', 'host2:2222'],</span></span><br><span class="line"><span class="string">                'worker': ['host3:2222', 'host4:2222', 'host5:2222']&#125;</span></span><br><span class="line"><span class="string">    os.environ['TF_CONFIG'] = json.dumps(</span></span><br><span class="line"><span class="string">        &#123;'cluster': cluster,</span></span><br><span class="line"><span class="string">        'task': &#123;'type': 'worker', 'index': 1&#125;&#125;)</span></span><br><span class="line"><span class="string">    config = RunConfig()</span></span><br><span class="line"><span class="string">    assert config.master == 'host4:2222'</span></span><br><span class="line"><span class="string">    assert config.task_id == 1</span></span><br><span class="line"><span class="string">    assert config.num_ps_replicas == 2</span></span><br><span class="line"><span class="string">    assert config.num_worker_replicas == 4</span></span><br><span class="line"><span class="string">    assert config.cluster_spec == server_lib.ClusterSpec(cluster)</span></span><br><span class="line"><span class="string">    assert config.task_type == 'worker'</span></span><br><span class="line"><span class="string">    assert not config.is_chief</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Example of chief node:</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cluster = &#123;'chief': ['host0:2222'],</span></span><br><span class="line"><span class="string">                'ps': ['host1:2222', 'host2:2222'],</span></span><br><span class="line"><span class="string">                'worker': ['host3:2222', 'host4:2222', 'host5:2222']&#125;</span></span><br><span class="line"><span class="string">    os.environ['TF_CONFIG'] = json.dumps(</span></span><br><span class="line"><span class="string">        &#123;'cluster': cluster,</span></span><br><span class="line"><span class="string">        'task': &#123;'type': 'chief', 'index': 0&#125;&#125;)</span></span><br><span class="line"><span class="string">    config = RunConfig()</span></span><br><span class="line"><span class="string">    assert config.master == 'host0:2222'</span></span><br><span class="line"><span class="string">    assert config.task_id == 0</span></span><br><span class="line"><span class="string">    assert config.num_ps_replicas == 2</span></span><br><span class="line"><span class="string">    assert config.num_worker_replicas == 4</span></span><br><span class="line"><span class="string">    assert config.cluster_spec == server_lib.ClusterSpec(cluster)</span></span><br><span class="line"><span class="string">    assert config.task_type == 'chief'</span></span><br><span class="line"><span class="string">    assert config.is_chief</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Example of evaluator node (evaluator is not part of training cluster):</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cluster = &#123;'chief': ['host0:2222'],</span></span><br><span class="line"><span class="string">                'ps': ['host1:2222', 'host2:2222'],</span></span><br><span class="line"><span class="string">                'worker': ['host3:2222', 'host4:2222', 'host5:2222']&#125;</span></span><br><span class="line"><span class="string">    os.environ['TF_CONFIG'] = json.dumps(</span></span><br><span class="line"><span class="string">        &#123;'cluster': cluster,</span></span><br><span class="line"><span class="string">        'task': &#123;'type': 'evaluator', 'index': 0&#125;&#125;)</span></span><br><span class="line"><span class="string">    config = RunConfig()</span></span><br><span class="line"><span class="string">    assert config.master == ''</span></span><br><span class="line"><span class="string">    assert config.evaluator_master == ''</span></span><br><span class="line"><span class="string">    assert config.task_id == 0</span></span><br><span class="line"><span class="string">    assert config.num_ps_replicas == 0</span></span><br><span class="line"><span class="string">    assert config.num_worker_replicas == 0</span></span><br><span class="line"><span class="string">    assert config.cluster_spec == &#123;&#125;</span></span><br><span class="line"><span class="string">    assert config.task_type == 'evaluator'</span></span><br><span class="line"><span class="string">    assert not config.is_chief</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    N.B.: If `save_checkpoints_steps` or `save_checkpoints_secs` is set,</span></span><br><span class="line"><span class="string">    `keep_checkpoint_max` might need to be adjusted accordingly, especially in</span></span><br><span class="line"><span class="string">    distributed training. For example, setting `save_checkpoints_secs` as 60</span></span><br><span class="line"><span class="string">    without adjusting `keep_checkpoint_max` (defaults to 5) leads to situation</span></span><br><span class="line"><span class="string">    that checkpoint would be garbage collected after 5 minutes. In distributed</span></span><br><span class="line"><span class="string">    training, the evaluation job starts asynchronously and might fail to load or</span></span><br><span class="line"><span class="string">    find the checkpoint due to race condition.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Args:</span></span><br><span class="line"><span class="string">    model_dir: directory where model parameters, graph, etc are saved. If</span></span><br><span class="line"><span class="string">        `PathLike` object, the path will be resolved. If `None`, will use a</span></span><br><span class="line"><span class="string">        default value set by the Estimator.</span></span><br><span class="line"><span class="string">    tf_random_seed: Random seed for TensorFlow initializers.</span></span><br><span class="line"><span class="string">        Setting this value allows consistency between reruns.</span></span><br><span class="line"><span class="string">    save_summary_steps: Save summaries every this many steps.</span></span><br><span class="line"><span class="string">    save_checkpoints_steps: Save checkpoints every this many steps. Can not be</span></span><br><span class="line"><span class="string">        specified with `save_checkpoints_secs`.</span></span><br><span class="line"><span class="string">    save_checkpoints_secs: Save checkpoints every this many seconds. Can not</span></span><br><span class="line"><span class="string">        be specified with `save_checkpoints_steps`. Defaults to 600 seconds if</span></span><br><span class="line"><span class="string">        both `save_checkpoints_steps` and `save_checkpoints_secs` are not set</span></span><br><span class="line"><span class="string">        in constructor.  If both `save_checkpoints_steps` and</span></span><br><span class="line"><span class="string">        `save_checkpoints_secs` are `None`, then checkpoints are disabled.</span></span><br><span class="line"><span class="string">    session_config: a ConfigProto used to set session parameters, or `None`.</span></span><br><span class="line"><span class="string">    keep_checkpoint_max: The maximum number of recent checkpoint files to</span></span><br><span class="line"><span class="string">        keep. As new files are created, older files are deleted. If `None` or 0,</span></span><br><span class="line"><span class="string">        all checkpoint files are kept. Defaults to 5 (that is, the 5 most recent</span></span><br><span class="line"><span class="string">        checkpoint files are kept.)</span></span><br><span class="line"><span class="string">    keep_checkpoint_every_n_hours: Number of hours between each checkpoint</span></span><br><span class="line"><span class="string">        to be saved. The default value of 10,000 hours effectively disables</span></span><br><span class="line"><span class="string">        the feature.</span></span><br><span class="line"><span class="string">    log_step_count_steps: The frequency, in number of global steps, that the</span></span><br><span class="line"><span class="string">        global step and the loss will be logged during training.  Also controls</span></span><br><span class="line"><span class="string">        the frequency that the global steps / s will be logged (and written to</span></span><br><span class="line"><span class="string">        summary) during training.</span></span><br><span class="line"><span class="string">    train_distribute: An optional instance of `tf.distribute.Strategy`.</span></span><br><span class="line"><span class="string">        If specified, then Estimator will distribute the user's model during</span></span><br><span class="line"><span class="string">        training, according to the policy specified by that strategy. Setting</span></span><br><span class="line"><span class="string">        `experimental_distribute.train_distribute` is preferred.</span></span><br><span class="line"><span class="string">    device_fn: A callable invoked for every `Operation` that takes the</span></span><br><span class="line"><span class="string">        `Operation` and returns the device string. If `None`, defaults to</span></span><br><span class="line"><span class="string">        the device function returned by `tf.train.replica_device_setter`</span></span><br><span class="line"><span class="string">        with round-robin strategy.</span></span><br><span class="line"><span class="string">    protocol: An optional argument which specifies the protocol used when</span></span><br><span class="line"><span class="string">        starting server. `None` means default to grpc.</span></span><br><span class="line"><span class="string">    eval_distribute: An optional instance of `tf.distribute.Strategy`.</span></span><br><span class="line"><span class="string">        If specified, then Estimator will distribute the user's model during</span></span><br><span class="line"><span class="string">        evaluation, according to the policy specified by that strategy.</span></span><br><span class="line"><span class="string">        Setting `experimental_distribute.eval_distribute` is preferred.</span></span><br><span class="line"><span class="string">    experimental_distribute: An optional</span></span><br><span class="line"><span class="string">        `tf.contrib.distribute.DistributeConfig` object specifying</span></span><br><span class="line"><span class="string">        DistributionStrategy-related configuration. The `train_distribute` and</span></span><br><span class="line"><span class="string">        `eval_distribute` can be passed as parameters to `RunConfig` or set in</span></span><br><span class="line"><span class="string">        `experimental_distribute` but not both.</span></span><br><span class="line"><span class="string">    experimental_max_worker_delay_secs: An optional integer</span></span><br><span class="line"><span class="string">        specifying the maximum time a worker should wait before starting.</span></span><br><span class="line"><span class="string">        By default, workers are started at staggered times, with each worker</span></span><br><span class="line"><span class="string">        being delayed by up to 60 seconds. This is intended to reduce the risk</span></span><br><span class="line"><span class="string">        of divergence, which can occur when many workers simultaneously update</span></span><br><span class="line"><span class="string">        the weights of a randomly initialized model. Users who warm-start their</span></span><br><span class="line"><span class="string">        models and train them for short durations (a few minutes or less) should</span></span><br><span class="line"><span class="string">        consider reducing this default to improve training times.</span></span><br><span class="line"><span class="string">    session_creation_timeout_secs: Max time workers should wait for a session</span></span><br><span class="line"><span class="string">        to become available (on initialization or when recovering a session)</span></span><br><span class="line"><span class="string">        with MonitoredTrainingSession. Defaults to 7200 seconds, but users may</span></span><br><span class="line"><span class="string">        want to set a lower value to detect problems with variable / session</span></span><br><span class="line"><span class="string">        (re)-initialization more quickly.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Raises:</span></span><br><span class="line"><span class="string">    ValueError: If both `save_checkpoints_steps` and `save_checkpoints_secs`</span></span><br><span class="line"><span class="string">    are set.</span></span><br><span class="line"><span class="string">    """</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在 <code>model_main.py</code> 修改 <code>keep_checkpoint_max=500</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config = tf.estimator.RunConfig(model_dir=FLAGS.model_dir, keep_checkpoint_max=<span class="number">500</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>model_lib.py</code> 中 <strong>两处</strong> 修改 <code>max_to_keep=500</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">saver = tf.train.Saver(</span><br><span class="line">    variables_to_restore,</span><br><span class="line">    keep_checkpoint_every_n_hours=keep_checkpoint_every_n_hours,</span><br><span class="line">    max_to_keep=<span class="number">500</span>) <span class="comment"># &lt;= added max_to_keep argument here</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">saver = tf.train.Saver(</span><br><span class="line">    sharded=<span class="keyword">True</span>,</span><br><span class="line">    keep_checkpoint_every_n_hours=keep_checkpoint_every_n_hours,</span><br><span class="line">    save_relative_paths=<span class="keyword">True</span>,</span><br><span class="line">    max_to_keep=<span class="number">500</span>) <span class="comment"># &lt;= added max_to_keep argument here</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-Tensorboard"><a href="#使用-Tensorboard" class="headerlink" title="使用 Tensorboard"></a>使用 Tensorboard</h3><p>Progress for training and eval jobs can be inspected using Tensorboard. If using the recommended directory structure, Tensorboard can be run using the following command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --logdir=$&#123;MODEL_DIR&#125;</span><br></pre></td></tr></table></figure>
+
+<p>where <code>${MODEL_DIR</code>} points to the directory that contains the train and eval directories. Please note it may take Tensorboard a couple minutes to populate with data.</p>
+<h3 id="测试验证集"><a href="#测试验证集" class="headerlink" title="测试验证集"></a>测试验证集</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python object_detection/legacy/eval.py --checkpoint_dir /path/to/model  --eval_dir /path/to/store/eval_dir \</span><br><span class="line">--pipeline_config_path ~/tensorflow_models/research/object_detection/samples/configs/ssd_mobilenet_v2_coco.config</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong><br><code>.config</code> 文件里 <code>eval</code> 的配置数量要跟验证集样本适量一致。</p>
+<h3 id="Exporting-a-trained-model-for-inference"><a href="#Exporting-a-trained-model-for-inference" class="headerlink" title="Exporting a trained model for inference"></a>Exporting a trained model for inference</h3><p>After your model has been trained, you should export it to a Tensorflow<br>graph proto. A checkpoint will typically consist of three files:</p>
+<ul>
+<li>model.ckpt-${CHECKPOINT_NUMBER}.data-00000-of-00001</li>
+<li>model.ckpt-${CHECKPOINT_NUMBER}.index</li>
+<li>model.ckpt-${CHECKPOINT_NUMBER}.meta<br>After you’ve identified a candidate checkpoint to export, run the following<br>command from <code>tensorflow/models/research</code>:<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> From tensorflow/models/research/</span></span><br><span class="line">INPUT_TYPE=image_tensor</span><br><span class="line">PIPELINE_CONFIG_PATH=&#123;path to pipeline config file&#125;</span><br><span class="line">TRAINED_CKPT_PREFIX=&#123;path to model.ckpt&#125;</span><br><span class="line">EXPORT_DIR=&#123;path to folder that will be used for export&#125;</span><br><span class="line">python object_detection/export_inference_graph.py \</span><br><span class="line">    --input_type=$&#123;INPUT_TYPE&#125; \</span><br><span class="line">    --pipeline_config_path=$&#123;PIPELINE_CONFIG_PATH&#125; \</span><br><span class="line">    --trained_checkpoint_prefix=$&#123;TRAINED_CKPT_PREFIX&#125; \</span><br><span class="line">    --output_directory=$&#123;EXPORT_DIR&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>NOTE</strong>: We are configuring our exported model to ingest 4-D image tensors. We can also configure the exported model to take encoded images or serialized <code>tf.Examples</code>.</p>
+<p>After export, you should see the directory ${EXPORT_DIR} containing the following:</p>
+<ul>
+<li><code>saved_model/</code>, a directory containing the saved model format of the exported model</li>
+<li><code>frozen_inference_graph.pb</code>, the frozen graph format of the exported model</li>
+<li><code>model.ckpt.*</code>, the model checkpoints used for exporting</li>
+<li><code>checkpoint</code>, a file specifying to restore included checkpoint files</li>
+<li><code>pipeline.config</code>, pipeline config file for the exported model</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
+<ol>
+<li><a href="https://github.com/tensorflow/models" target="_blank" rel="noopener">Welcome to the Model Garden for TensorFlow</a></li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div class="social_share">
+            
+              
+
+<script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.css">
+
+
+  
+
+
+<div class="likely">
+  
+    <div class="twitter">Tweet</div>
+  
+    <div class="facebook">Share</div>
+  
+    <div class="linkedin">Link</div>
+  
+    <div class="telegram">Send</div>
+  
+</div>
+
+            
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/30/目标检测中的非最大值抑制-NMS/" rel="next" title="目标检测中的非最大值抑制 NMS">
+                <i class="fa fa-chevron-left"></i> 目标检测中的非最大值抑制 NMS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/02/2020-07-02-MobileNet-SSD-TensorRT-Deploy/" rel="prev" title="MobileNet SSD TensorRT Deploy">
+                MobileNet SSD TensorRT Deploy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Andy Liu">
+  
+  <p class="site-author-name" itemprop="name">Andy Liu</p>
+  <div class="site-description motion-element" itemprop="description">Engineer. Runner. Music</div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+  <div class="links-of-author motion-element">
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://github.com/aimuch" title="GitHub &rarr; https://github.com/aimuch" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="mailto:anetspace@gmail.com" title="E-Mail &rarr; mailto:anetspace@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://weibo.com/207896500" title="Weibo &rarr; https://weibo.com/207896500" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://twitter.com/liugreat" title="Twitter &rarr; https://twitter.com/liugreat" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://stackoverflow.com/aimuch" title="StackOverflow &rarr; https://stackoverflow.com/aimuch" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i></a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+      
+        
+      
+        <a href="https://instagram.com/liugreat" title="Instagram &rarr; https://instagram.com/liugreat" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i></a>
+      </span>
+    
+  </div>
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-official"><span class="nav-number">2.1.</span> <span class="nav-text">使用 official</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-research"><span class="nav-number">2.2.</span> <span class="nav-text">使用 research</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置"><span class="nav-number">2.2.1.</span> <span class="nav-text">环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装以下Python库"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">安装以下Python库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COCO-API"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">COCO API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Protobuf"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">Protobuf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-PYTHONPATH"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">设置 PYTHONPATH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证安装是否成功"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">验证安装是否成功</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推荐的训练和验证文件结构树"><span class="nav-number">2.2.2.</span> <span class="nav-text">推荐的训练和验证文件结构树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">2.2.3.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Tensorboard"><span class="nav-number">2.2.4.</span> <span class="nav-text">使用 Tensorboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试验证集"><span class="nav-number">2.2.5.</span> <span class="nav-text">测试验证集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exporting-a-trained-model-for-inference"><span class="nav-number">2.2.6.</span> <span class="nav-text">Exporting a trained model for inference</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy Liu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/pangu/dist/pangu.min.js?v=4.0.7"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.2.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['/lib/three/three-waves.min.js', '/lib/three/canvas_lines.min.js', '/lib/three/canvas_sphere.min.js'];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+
+  
+  
+
+  
+  
+
+  
+
+
+
+  
+  
+
+  
+
+  
+  
+  
+
+
+
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>

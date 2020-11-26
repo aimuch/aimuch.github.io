@@ -150,7 +150,7 @@
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/img7.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/matlab1.png">
 <meta property="og:image" content="https://aimuch.com/2019/03/17/搭建深度学习服务器环境/matlab2.png">
-<meta property="og:updated_time" content="2019-03-26T07:10:31.383Z">
+<meta property="og:updated_time" content="2019-03-26T07:10:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建深度学习服务器环境">
 <meta name="twitter:description" content="安装Ubuntu和Windows双系统详细的安装双系统就不过多介绍了，可以参考这篇文章，但是在安装过程中有几个问题需要说明：        安装Ubuntu之前首先要把BIOS的security boot关闭，否则会出现NVIDIA驱动安装完以后重启电脑会反复进入登录界面。  硬盘分区的时候可以只分为swap、UEFI、\和\home四个分区，不分\home也可以，在挂在\分区的时候会自动生成\h">
@@ -310,7 +310,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">10</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">12</span></a>
 
   </li>
         
@@ -328,7 +328,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">7</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
 
   </li>
         
@@ -346,7 +346,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">18</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">24</span></a>
 
   </li>
         
@@ -477,7 +477,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-26 15:10:31" itemprop="dateModified" datetime="2019-03-26T15:10:31+08:00">2019-03-26</time>
+                <time title="修改时间：2019-03-26 15:10:30" itemprop="dateModified" datetime="2019-03-26T15:10:30+08:00">2019-03-26</time>
               </span>
             
           
@@ -565,7 +565,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:graphics-drivers/ppa</span><br></pre></td></tr></table></figure>
 
 <p>之后刷新软件库并安装显卡驱动：   </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nvidia-418 nvidia-settings nvidia-prime  # CUDA 10.1</span><br><span class="line"><span class="meta">#</span>sudo apt-get install nvidia-390 nvidia-settings nvidia-prime  # cuda 8.0 或 CUDA 9.0</span><br><span class="line"><span class="meta">#</span>sudo apt-get install nvidia-415 nvidia-settings nvidia-prime  # CUDA 9.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nvidia-418 nvidia-settings nvidia-prime  # CUDA 10.1</span><br><span class="line"><span class="meta">#</span><span class="bash">sudo apt-get install nvidia-390 nvidia-settings nvidia-prime  <span class="comment"># cuda 8.0 或 CUDA 9.0</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">sudo apt-get install nvidia-415 nvidia-settings nvidia-prime  <span class="comment"># CUDA 9.0</span></span></span><br></pre></td></tr></table></figure>
 
 <p><strong>重启电脑</strong>，通过下面命令查看显卡信息：   </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-settings</span><br></pre></td></tr></table></figure>
@@ -1368,7 +1368,7 @@ ImportError:No module named caffe</module></stdin></td></tr></table>
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1399,7 +1399,11 @@ ImportError:No module named caffe</module></stdin></td></tr></table>
         
           
         
-        <span class="site-state-item-count">7</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1436,7 +1440,11 @@ ImportError:No module named caffe</module></stdin></td></tr></table>
         
           
         
-        <span class="site-state-item-count">10</span>
+          
+        
+          
+        
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1550,7 +1558,7 @@ ImportError:No module named caffe</module></stdin></td></tr></table>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">  <a href="http://www.beian.miit.gov.cn" rel="noopener" target="_blank">鲁ICP备17020933号-1 </a>&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
