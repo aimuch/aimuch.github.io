@@ -105,18 +105,21 @@
   };
 </script>
 
-  <meta name="description" content="代码这里用到的是 jkjung-avt 提供的源码 修改以下内容:  tensorrt_demos/ssd/build_engine.py   12&apos;num_classes&apos;: your_classes&apos;input_order&apos;: [0, 2, 1],  # order of loc_data, conf_data, priorbox_data  Patch /usr/local/lib/pyth">
-<meta name="keywords" content="AI">
+  <meta name="description" content="二维坐标逆时针旋转theta角后，新旧坐标转换公式:">
+<meta name="keywords" content="图像处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MobileNet SSD TensorRT Deploy">
-<meta property="og:url" content="https://aimuch.com/2020/07/02/2020-07-02-MobileNet-SSD-TensorRT-Deploy/index.html">
+<meta property="og:title" content="坐标系旋转">
+<meta property="og:url" content="https://aimuch.com/2020/12/03/坐标系旋转/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="代码这里用到的是 jkjung-avt 提供的源码 修改以下内容:  tensorrt_demos/ssd/build_engine.py   12&apos;num_classes&apos;: your_classes&apos;input_order&apos;: [0, 2, 1],  # order of loc_data, conf_data, priorbox_data  Patch /usr/local/lib/pyth">
+<meta property="og:description" content="二维坐标逆时针旋转theta角后，新旧坐标转换公式:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-11-26T08:12:21.245Z">
+<meta property="og:image" content="https://aimuch.com/2020/12/03/坐标系旋转/rotateCoordination.png">
+<meta property="og:image" content="https://aimuch.com/2020/12/03/坐标系旋转/rotateCoordinationMath.png">
+<meta property="og:updated_time" content="2020-12-03T08:33:47.525Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MobileNet SSD TensorRT Deploy">
-<meta name="twitter:description" content="代码这里用到的是 jkjung-avt 提供的源码 修改以下内容:  tensorrt_demos/ssd/build_engine.py   12&apos;num_classes&apos;: your_classes&apos;input_order&apos;: [0, 2, 1],  # order of loc_data, conf_data, priorbox_data  Patch /usr/local/lib/pyth">
+<meta name="twitter:title" content="坐标系旋转">
+<meta name="twitter:description" content="二维坐标逆时针旋转theta角后，新旧坐标转换公式:">
+<meta name="twitter:image" content="https://aimuch.com/2020/12/03/坐标系旋转/rotateCoordination.png">
 
 
 
@@ -124,7 +127,7 @@
 
   
   
-  <link rel="canonical" href="https://aimuch.com/2020/07/02/2020-07-02-MobileNet-SSD-TensorRT-Deploy/">
+  <link rel="canonical" href="https://aimuch.com/2020/12/03/坐标系旋转/">
 
 
 
@@ -135,7 +138,7 @@
 </script>
 
   
-  <title>MobileNet SSD TensorRT Deploy | AIMUCH</title>
+  <title>坐标系旋转 | AIMUCH</title>
   
 
 
@@ -381,7 +384,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aimuch.com/2020/07/02/2020-07-02-MobileNet-SSD-TensorRT-Deploy/">
+    <link itemprop="mainEntityOfPage" href="https://aimuch.com/2020/12/03/坐标系旋转/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andy Liu">
@@ -398,7 +401,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MobileNet SSD TensorRT Deploy
+          <h1 class="post-title" itemprop="name headline">坐标系旋转
 
               
             
@@ -424,23 +427,13 @@
                 
               
 
-              <time title="创建时间：2020-07-02 23:07:49" itemprop="dateCreated datePublished" datetime="2020-07-02T23:07:49+08:00">2020-07-02</time>
+              <time title="创建时间：2020-12-03 16:26:26 / 修改时间：16:33:47" itemprop="dateCreated datePublished" datetime="2020-12-03T16:26:26+08:00">2020-12-03</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-11-26 16:12:21" itemprop="dateModified" datetime="2020-11-26T16:12:21+08:00">2020-11-26</time>
-              </span>
             
           
 
@@ -453,7 +446,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/图像处理/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a></span>
 
                 
                 
@@ -488,26 +481,8 @@
       
 
       
-        <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>这里用到的是 <code>jkjung-avt</code> 提供的<a href="https://github.com/jkjung-avt/tensorrt_demos" target="_blank" rel="noopener">源码</a></p>
-<p>修改以下内容:</p>
-<ul>
-<li><p><code>tensorrt_demos/ssd/build_engine.py</code></p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'num_classes'</span>: your_classes</span><br><span class="line"><span class="string">'input_order'</span>: [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>],  <span class="comment"># order of loc_data, conf_data, priorbox_data</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Patch <code>/usr/local/lib/python3.?/dist-packages/graphsurgeon/node_manipulation.py</code> by adding the following line (around line <code>#42</code>):</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shape</span><span class="params">(node)</span>:</span></span><br><span class="line">    ......</span><br><span class="line">    node.name = name <span class="keyword">or</span> node.name</span><br><span class="line">    node.op = op <span class="keyword">or</span> node.op <span class="keyword">or</span> node.name</span><br><span class="line">+   node.attr[<span class="string">"dtype"</span>].type = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> key, val <span class="keyword">in</span> kwargs.items():</span><br><span class="line">    ......</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>tensorflow_models/research/object_detection/anchor_generators/multiple_grid_anchor_generator.py</code></p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> base_anchor_size <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        base_anchor_size = [<span class="number">1.0</span>, <span class="number">1.0</span>]</span><br><span class="line">+   base_anchor_size = tf.constant(base_anchor_size, dtype=tf.float32)</span><br><span class="line">    box_specs_list = []</span><br><span class="line">    <span class="keyword">if</span> scales <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> <span class="keyword">not</span> scales:</span><br><span class="line">        scales = [min_scale + (max_scale - min_scale) * i / (num_layers - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><blockquote>
-<ol>
-<li><a href="https://github.com/jkjung-avt/tensorrt_demos" target="_blank" rel="noopener">https://github.com/jkjung-avt/tensorrt_demos</a></li>
-<li><a href="https://github.com/AastaNV/TRT_object_detection" target="_blank" rel="noopener">https://github.com/AastaNV/TRT_object_detection</a></li>
-</ol>
-</blockquote>
+        <p><img src="/2020/12/03/坐标系旋转/rotateCoordination.png" alt="坐标系旋转"></p>
+<p>二维坐标逆时针旋转theta角后，新旧坐标转换公式:<br><img src="/2020/12/03/坐标系旋转/rotateCoordinationMath.png" alt="math"></p>
 
       
     </div>
@@ -542,7 +517,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/AI/" rel="tag"><i class="fa fa-tag"></i> AI</a>
+            <a href="/tags/图像处理/" rel="tag"><i class="fa fa-tag"></i> 图像处理</a>
           
         </div>
       
@@ -594,8 +569,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/24/Tensorflow-models-workflow/" rel="next" title="Tensorflow models workflow">
-                <i class="fa fa-chevron-left"></i> Tensorflow models workflow
+              <a href="/2020/12/03/git-cherry-pick-教程/" rel="next" title="git cherry-pick 教程">
+                <i class="fa fa-chevron-left"></i> git cherry-pick 教程
               </a>
             
           </div>
@@ -603,10 +578,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/12/03/git-cherry-pick-教程/" rel="prev" title="git cherry-pick 教程">
-                git cherry-pick 教程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -648,17 +619,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -834,23 +796,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署"><span class="nav-number">2.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
