@@ -105,18 +105,18 @@
   };
 </script>
 
-  <meta name="description" content="Engineer. Runner. Music">
-<meta name="keywords" content="AI">
+  <meta name="description" content="先介绍一下auto、const:  auto:在块作用域、命名作用域、循环初始化语句等等  中声明变量时，关键词auto用作类型指定符。 const: 修饰符  autoauto即 for(auto x:range)  这样会拷贝一份range元素，而不会改变range中元素；但是！(重点)  使用for(auto x:vector)时得到一个proxy class,操作时会改变vector本身元">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++中的auto&#x2F;auto &amp;&#x2F;const auto&#x2F;const auto&amp;">
 <meta property="og:url" content="https://aimuch.com/2020/12/23/C-中的auto-auto-const-auto-const-auto/index.html">
 <meta property="og:site_name" content="AIMUCH">
-<meta property="og:description" content="Engineer. Runner. Music">
+<meta property="og:description" content="先介绍一下auto、const:  auto:在块作用域、命名作用域、循环初始化语句等等  中声明变量时，关键词auto用作类型指定符。 const: 修饰符  autoauto即 for(auto x:range)  这样会拷贝一份range元素，而不会改变range中元素；但是！(重点)  使用for(auto x:vector)时得到一个proxy class,操作时会改变vector本身元">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-23T01:33:54.079Z">
+<meta property="og:updated_time" content="2020-12-23T01:46:17.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中的auto&#x2F;auto &amp;&#x2F;const auto&#x2F;const auto&amp;">
-<meta name="twitter:description" content="Engineer. Runner. Music">
+<meta name="twitter:description" content="先介绍一下auto、const:  auto:在块作用域、命名作用域、循环初始化语句等等  中声明变量时，关键词auto用作类型指定符。 const: 修饰符  autoauto即 for(auto x:range)  这样会拷贝一份range元素，而不会改变range中元素；但是！(重点)  使用for(auto x:vector)时得到一个proxy class,操作时会改变vector本身元">
 
 
 
@@ -272,7 +272,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">12</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">13</span></a>
 
   </li>
         
@@ -290,7 +290,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">9</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">10</span></a>
 
   </li>
         
@@ -424,12 +424,31 @@
                 
               
 
-              <time title="创建时间：2020-12-23 09:33:54" itemprop="dateCreated datePublished" datetime="2020-12-23T09:33:54+08:00">2020-12-23</time>
+              <time title="创建时间：2020-12-23 09:33:54 / 修改时间：09:46:17" itemprop="dateCreated datePublished" datetime="2020-12-23T09:33:54+08:00">2020-12-23</time>
             </span>
           
 
           
+            
 
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/编程/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -459,7 +478,22 @@
       
 
       
-        
+        <p>先介绍一下auto、const:</p>
+<ul>
+<li>auto:在块作用域、命名作用域、循环初始化语句等等  中声明变量时，关键词auto用作类型指定符。</li>
+<li>const: 修饰符</li>
+</ul>
+<h2 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h2><p>auto即 for(auto x:range)  这样会拷贝一份range元素，而不会改变range中元素；<br>但是！(重点)  使用for(auto x:vector<bool>)时得到一个proxy class,操作时会改变vector<bool>本身元素。应用:for(bool x:vector<bool>)</bool></bool></bool></p>
+<h2 id="auto-amp"><a href="#auto-amp" class="headerlink" title="auto &amp;"></a>auto &amp;</h2><p>当需要修改range中元素，用<code>for(auto&amp; x:range)</code><br>当<code>vector&lt;bool&gt;</code>返回临时对象，使用<code>auto&amp;</code>会编译错误，临时对象不能绑在 <code>non-const l-value reference</code> (左值引用)需使用<code>auto&amp;&amp;</code>,初始化右值时也可捕获</p>
+<h2 id="const-auto-amp"><a href="#const-auto-amp" class="headerlink" title="const auto&amp;"></a>const auto&amp;</h2><p>当只想读取range中元素时，使用<code>const auto&amp;</code>,如:<code>for(const auto&amp;x:range)</code>,它不会进行拷贝，也不会修改<code>range</code>       </p>
+<h2 id="const-aut"><a href="#const-aut" class="headerlink" title="const aut"></a>const aut</h2><p>当需要拷贝元素，但不可修改拷贝出来的值时，使用 <code>for(const auto x:range)</code>，避免拷贝开销    </p>
+<p>整理一下:</p>
+<ul>
+<li>想要拷贝元素: <code>for(auto x:range)</code>   </li>
+<li>想要修改元素: <code>for(auto &amp;x:range)</code>   </li>
+<li>想要只读元素: <code>for(const auto&amp; x:range)</code>   </li>
+</ul>
+
       
     </div>
 
@@ -487,6 +521,15 @@
     
 
     <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
       
 
       
@@ -586,8 +629,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -640,7 +692,9 @@
         
           
         
-        <span class="site-state-item-count">9</span>
+          
+        
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -681,7 +735,9 @@
         
           
         
-        <span class="site-state-item-count">12</span>
+          
+        
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -763,6 +819,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#auto"><span class="nav-number">1.</span> <span class="nav-text">auto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#auto-amp"><span class="nav-number">2.</span> <span class="nav-text">auto &amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-auto-amp"><span class="nav-number">3.</span> <span class="nav-text">const auto&amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-aut"><span class="nav-number">4.</span> <span class="nav-text">const aut</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
